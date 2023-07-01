@@ -27,11 +27,32 @@ main {
     background-color: aquamarine;
     flex: 1;
     /* göm skroller sedan */
-    /* overflow-y: scroll;  */
+    /* overflow-y: scr}oll;  */
+}
+
+.dropdown-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-div{
+    padding: 20px;
+}
+
+.dropdown-button{
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    width: 200px;
 }
 
 footer {
     bottom: 0px;
     height: 50px;
     background-color: blanchedalmond;
+}
+
+button{
+    cursor: pointer;
 }
