@@ -4,6 +4,7 @@ let currencyNames = [];
 let currencys = [];
 
 async function main() {
+  renderButtons();
   currencyNames = await getAllCurrencyNames();
   currencys = await getAllCurrencys();
   addEventListeners();
@@ -91,6 +92,25 @@ async function getAllCurrencys() {
 }
 
 
+function renderButtons() {
+
+  const dropdownDivFrom = document.querySelector(".dropdown-div-from");
+  const dropdownDivTo = document.querySelector(".dropdown-div-to");
+
+  const fromButton = document.createElement('button');
+  fromButton.classList.add("dropdown-button-from");
+  fromButton.textContent = "From";
+
+  const toButton = document.createElement('button');
+  toButton.classList.add("dropdown-button-to");
+  toButton.textContent = "To";
+
+  dropdownDivFrom.appendChild(fromButton);
+  dropdownDivTo.appendChild(toButton);
+
+}
+
+
 function renderDropdownElementsFromButton() {
   const dropdownDiv = document.querySelector("#dropdown-choices-from");
   currencyNames.forEach(currencyName => {
@@ -111,12 +131,14 @@ function renderDropdownElementsToButton() {
     optionElement.value = currencyName;
     optionElement.text = currencyName;
 
-    dropdownDiv.appendChild(optionElement);
+    dropdownDiv.prepend(optionElement);
 
   });
 
 }
 
-function getConvertedCurrency(currencyName, value){
-
+function getConvertedCurrency(currencyName, value) {
+  const currency = currencys.find(c => c.code == currencyName);
+  return currency.rate * value;
 }
+
