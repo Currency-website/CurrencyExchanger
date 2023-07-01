@@ -30,21 +30,41 @@ main {
     /* overflow-y: scr}oll;  */
 }
 
-.dropdown-container{
+.dropdown-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.dropdown-div{
+.dropdown-div {
     padding: 20px;
 }
 
-.dropdown-button{
+.dropdown-button-to, .dropdown-button-from {
     padding: 20px;
     font-size: 16px;
     border: none;
     width: 200px;
+}
+
+.dropdown-choices-none{
+    display: none;
+}
+
+.show-dropdown{
+    position: absolute;
+    display: block;
+    background-color: #f1f1f1;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.show-dropdown a{
+    position: relative;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
 footer {
@@ -53,6 +73,6 @@ footer {
     background-color: blanchedalmond;
 }
 
-button{
+button {
     cursor: pointer;
 }
