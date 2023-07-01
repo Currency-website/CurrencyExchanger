@@ -26,14 +26,27 @@ header {
 main {
     background-color: aquamarine;
     flex: 1;
+    display: flex;
+    flex-direction: column;
     /* göm skroller sedan */
     /* overflow-y: scr}oll;  */
 }
 
-.dropdown-container {
+
+.dropdown-container, .input-container {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.input-div{
+    padding: 20px;
+}
+.input-container input{
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    width: 200px;
 }
 
 .dropdown-div {

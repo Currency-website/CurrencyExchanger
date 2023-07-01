@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Currency Exchanger</title>
 </head>
+
 <body>
 
     <header>
@@ -15,17 +17,29 @@
 
     <main>
 
+        <div class="input-container">
+            <div class="input-div">
+                <input id="input-from" type="number" value="0.00" aria-label="input for money">
+            </div>
+            <div class="input-div">
+            <input id="input-to"  type="number" value="0.00" aria-label="input for money">
+        </div>
+        </div>
+
+
         <div class="dropdown-container">
 
             <div class="dropdown-div">
+
                 <button class="dropdown-button-from">From</button>
 
                 <div id="dropdown-choices-from" class="dropdown-choices-none">
                     <!-- här ska kod från js komma -->
                     <a href="#">Test</a>
                 </div>
+
             </div>
-    
+
             <div class="dropdown-div">
                 <button class="dropdown-button-to">To</button>
 
@@ -33,16 +47,18 @@
                     <!-- här ska kod från js komma -->
                     <a href="#">Test</a>
                 </div>
+
             </div>
-            
+
         </div>
-     
+
 
     </main>
 
     <footer>
 
     </footer>
-    
+
 </body>
+
 </html>
