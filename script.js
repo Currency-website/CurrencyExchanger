@@ -65,34 +65,38 @@ function addEventListenerForWhenChoosingCurrencyTo() {
     dropdownButtonto.textContent = chosenCurrency;
   });
 }
+
+
 async function addEventListenerForWhenSubmittingValue() {
   const formElement = document.querySelector('main');
-
   const inputElementFrom = document.querySelector('#input-from');
-
   const inputElementTo = document.querySelector('#input-to');
 
   formElement.addEventListener('submit', async (event) => {
     event.preventDefault();
-  
+
     const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
     const convertFromCurrency = dropdownButtonFrom.textContent;
     const currencys = await getAllCurrencys(convertFromCurrency);
-  
+
     const currencyFrom = currencys.find(c => c.code === convertFromCurrency);
-  
+
     const convertFromValue = inputElementFrom.value * currencyFrom.rate;
-  
+
     const dropdownButtonTo = document.querySelector('.dropdown-button-to');
     const convertToCurrency = dropdownButtonTo.textContent;
-  
+
     const currencyToConvertTo = currencys.find(c => c.code === convertToCurrency);
-  
+
     const convertedValue = convertFromValue * currencyToConvertTo.rate;
-  
+
     inputElementTo.value = convertedValue.toFixed(2);
   });
-  
+
+  inputElementFrom.addEventListener('input', async () => {
+    formElement.dispatchEvent(new Event('submit'));
+  });
+
   inputElementFrom.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
