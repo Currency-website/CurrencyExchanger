@@ -18,13 +18,20 @@ body {
 }
 
 header {
-    background-color: cornflowerblue;
+    background-color: rgb(211, 223, 245);
     margin-top: 0;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+h1{
+    font-size: 50px;
+    color: rgb(16, 16, 156);
 }
 
 main {
-    background-color: aquamarine;
+    background-color: rgb(214, 209, 209);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -77,7 +84,6 @@ main {
 
 .show-dropdown a{
     position: relative;
-    color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -86,12 +92,17 @@ main {
 footer {
     bottom: 0px;
     height: 50px;
-    background-color: blanchedalmond;
+    background-color: rgb(119, 218, 231);
 }
 
 button, a {
     cursor: pointer;
+    background-color: rgb(60, 60, 211);
+    color: azure;
 }
 button:hover, a:hover{
-    background-color: beige;
+    opacity: 0.9;
+}
+h1, h2, h3, p, text{
+    font-family: Arial, Helvetica, sans-serif;
 }
