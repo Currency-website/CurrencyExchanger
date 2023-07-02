@@ -7,6 +7,7 @@ async function main() {
   renderButtons();
   currencyNames = await getAllCurrencyNames();
   currencys = await getAllCurrencys();
+  console.log(currencys);
   addEventListeners();
 }
 
@@ -43,7 +44,73 @@ function addEventListeners() {
   dropdownChoicesTo.addEventListener('mouseleave', () => {
     dropdownChoicesTo.classList.remove('show-dropdown');
   });
+  
+  addEventListenerForWhenChoosingCurrencyFrom();
+  addEventListenerForWhenChoosingCurrencyTo();
+  addEventListenerForWhenSubmittingValue();
 }
+
+function addEventListenerForWhenChoosingCurrencyFrom() {
+  const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
+  dropdownChoicesFrom.addEventListener('click', (event) => {
+    const chosenCurrency = event.target.getAttribute("data-currency-code"); // Hämta vald valutakod från attribut
+    const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
+    dropdownButtonFrom.textContent = chosenCurrency;
+  });
+}
+
+
+function addEventListenerForWhenChoosingCurrencyTo() {
+  const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
+  dropdownChoicesTo.addEventListener('click', (event) => {
+    const chosenCurrency = event.target.getAttribute("data-currency-code"); // Hämta vald valutakod från attribut
+    const dropdownButtonto = document.querySelector('.dropdown-button-to');
+    dropdownButtonto.textContent = chosenCurrency;
+  });
+}
+function addEventListenerForWhenSubmittingValue() {
+  //först hitta from och till knappens valuta-namn värde
+  //sedan hitta currencyn på FROM och sen TILL 
+  const formElement = document.querySelector('main');
+
+  //tex 1
+  const inputElementFrom = document.querySelector('#input-from');
+
+  //0
+  const inputElementTo = document.querySelector('#input-to');
+
+  formElement.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
+    //tex SEK
+    const convertFromCurrency = dropdownButtonFrom.textContent;
+    const currencyFrom = currencys.find(c => c.code === convertFromCurrency);
+    const convertFromValue = inputElementFrom.value * currencyFrom.rate;
+    console.log("converted from value som ska v ara 0.9", convertFromValue);
+
+    const dropdownButtonTo = document.querySelector('.dropdown-button-to');
+    const convertToCurrency = dropdownButtonTo.textContent;
+
+    const currencyToConvertTo = currencys.find(c => c.code === convertToCurrency);
+
+    // const inputValueFrom = parseFloat(inputElementFrom.value);
+
+    const convertedValue = (convertFromValue * currencyToConvertTo.rate);
+    console.log("converted valkue ska vara typ 10..", convertedValue);
+
+    inputElementTo.value = convertedValue.toFixed(2);
+  });
+
+  inputElementFrom.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      formElement.dispatchEvent(new Event('submit'));
+    }
+  });
+}
+
+
 
 async function getAllCurrencyNames() {
   const apiUrl = "https://v6.exchangerate-api.com/v6/ddf6ee9624da92869f6b9028/latest/sek";
@@ -113,8 +180,10 @@ function renderButtons() {
 
 function renderDropdownElementsFromButton() {
   const dropdownDiv = document.querySelector("#dropdown-choices-from");
+  dropdownDiv.innerHTML = ""; 
   currencyNames.forEach(currencyName => {
     const optionElement = document.createElement("a");
+    optionElement.setAttribute("data-currency-code", currencyName);
     optionElement.value = currencyName;
     optionElement.text = currencyName;
 
@@ -126,8 +195,10 @@ function renderDropdownElementsFromButton() {
 
 function renderDropdownElementsToButton() {
   const dropdownDiv = document.querySelector("#dropdown-choices-to");
+  dropdownDiv.innerHTML = ""; 
   currencyNames.forEach(currencyName => {
     const optionElement = document.createElement("a");
+    optionElement.setAttribute("data-currency-code", currencyName);
     optionElement.value = currencyName;
     optionElement.text = currencyName;
 

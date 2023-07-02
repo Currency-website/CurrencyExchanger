@@ -89,6 +89,9 @@ footer {
     background-color: blanchedalmond;
 }
 
-button {
+button, a {
     cursor: pointer;
+}
+button:hover, a:hover{
+    background-color: beige;
 }
