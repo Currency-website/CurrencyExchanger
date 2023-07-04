@@ -210,8 +210,4 @@ function renderDropdownElementsToButton() {
 
 }
 
-function getConvertedCurrency(currencyName, value) {
-  const currency = currencys.find(c => c.code == currencyName);
-  return currency.rate * value;
-}
 
