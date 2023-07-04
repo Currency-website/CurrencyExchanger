@@ -10,10 +10,21 @@
 h1{
     font-size: 30px;
 }
-h2{
-    /* font-size: 15px; */
-    display: none;
-}
+
 .input-container{
     margin-top: 50px;
+}
+
+.currency-stats {
+    padding: 30px;
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+.currency-stats p {
+    font-size: 10px;
+}
+
+.currency-stats h2 {
+    font-size: 12px;
 }
