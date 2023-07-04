@@ -18,20 +18,24 @@ body {
 }
 
 header {
-    background-color: rgb(211, 223, 245);
+    background-color: rgba(0, 0, 0, 0.5); /* Ange en genomskinlig bakgrundsfärg (RGBA-format) */
     margin-top: 0;
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
+  
 h1{
-    font-size: 50px;
-    color: rgb(16, 16, 156);
+    font-family: 'Arial', sans-serif; /* Välj en passande typsnitt */
+    font-size: 46px; /* Justera storleken efter behov */
+    font-weight: bold; /* Fetstil om så önskas */
+    color: rgba(255, 255, 255, 0.8); /* Ange en genomskinlig färg (RGBA-format) */
+    padding: 20px; /* Justera inre utfyllnad efter behov */
 }
 
 main {
-    background-color: rgb(214, 209, 209);
+    background-color: rgb(221, 221, 221);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -39,7 +43,9 @@ main {
     /* overflow-y: scr}oll;  */
 }
 
-
+.input-container{
+    margin-top: 100px;
+}
 .dropdown-container, .input-container {
     display: flex;
     align-items: center;
@@ -55,9 +61,17 @@ main {
     border: none;
     width: 200px;
 }
+input:focus {
+    outline: none;
+  }
+  
+
+.arrow-div{
+    font-size: 30px;
+}
 
 .dropdown-div-from, .dropdown-div-to {
-    padding: 20px;
+    padding: 35px;
 }
 
 .dropdown-button-to, .dropdown-button-from {
@@ -92,12 +106,12 @@ main {
 footer {
     bottom: 0px;
     height: 50px;
-    background-color: rgb(7, 11, 12);
+    background-color: rgb(247, 249, 250);
 }
 
 button, a {
     cursor: pointer;
-    background-color: rgb(60, 60, 211);
+    background-color: rgb(92, 159, 236);
     color: azure;
 }
 button:hover, a:hover{
