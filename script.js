@@ -7,6 +7,7 @@ async function main() {
   renderButtons();
   currencyNames = await getAllCurrencyNames();
   addEventListeners();
+  await showTheStrongestAndWeakestCurrencys("USD");
 }
 
 function addEventListeners() {
@@ -106,8 +107,44 @@ async function addEventListenerForWhenSubmittingValue() {
   });
 }
 
-function getTheStrongestCurrency(){
-  
+async function showTheStrongestAndWeakestCurrencys(){
+  // const strongestCurrencyDiv = document.querySelector(".strongest-currency");
+  // const weakestCurrencyDiv = document.querySelector(".weakest-currency");
+  const strongestNameP = document.querySelector("#strongest-currency-name");
+  const strongestRateP = document.querySelector("#strongest-currency-rate");
+  const weakestNameP = document.querySelector("#weakest-currency-name");
+  const weakestRateP = document.querySelector("#weakest-currency-rate");
+
+  const currencys = await getTheStrongestAndWeakestCurrency();
+
+  strongestNameP.textContent = currencys.strongest.code;
+  strongestRateP.textContent = currencys.strongest.rate;
+  weakestNameP.textContent = currencys.weakest.code;
+  weakestRateP.textContent = currencys.weakest.rate;
+}
+
+
+async function getTheStrongestAndWeakestCurrency(baseCode = null) {
+  let strongest;
+  let weakest;
+
+  if(baseCode == null || baseCode == undefined)
+  {
+    baseCode = "USD";
+  }
+  const allCurrencys = await getAllCurrencys(baseCode);
+
+  // const baseCurrency = currencys.find(c => c.code == baseCode);
+
+  for (const currency of allCurrencys) {
+    if (!strongest || currency.rate > strongest.rate) {
+      strongest = currency;
+    }
+    else if (!weakest || currency.rate < weakest.rate) {
+      weakest = currency;
+    }
+  }
+  return { strongest, weakest };
 }
 
 
@@ -131,9 +168,13 @@ async function getAllCurrencyNames() {
 
 }
 
-async function getAllCurrencys(currencyCode) {
+async function getAllCurrencys(currencyCode = null) {
 
-  const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
+  let apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
+
+  if (currencyCode == null || currencyCode == undefined) {
+    apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}`;
+  }
 
   try {
     const response = await fetch(apiUrl);
