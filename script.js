@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', main);
+import config from './config.js';
 
 let currencyNames = [];
 
@@ -105,16 +106,21 @@ async function addEventListenerForWhenSubmittingValue() {
   });
 }
 
+function getTheStrongestCurrency(){
+  
+}
 
 
 async function getAllCurrencyNames() {
-  const apiUrl = "https://v6.exchangerate-api.com/v6/ddf6ee9624da92869f6b9028/latest/sek";
+  const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}`;
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    const currencyNames = Object.keys(data.conversion_rates);
+    const currencyRates = data.data;
+
+    const currencyNames = Object.keys(currencyRates);
 
     return currencyNames;
 
@@ -126,13 +132,14 @@ async function getAllCurrencyNames() {
 }
 
 async function getAllCurrencys(currencyCode) {
-  const apiUrl = "https://v6.exchangerate-api.com/v6/ddf6ee9624da92869f6b9028/latest/" + currencyCode;
+
+  const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    const currencyRates = data.conversion_rates;
+    const currencyRates = data.data;
     const currencys = [];
 
     for (const currencyCode in currencyRates) {
