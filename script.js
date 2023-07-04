@@ -2,12 +2,14 @@ document.addEventListener('DOMContentLoaded', main);
 import config from './config.js';
 
 let currencyNames = [];
+const currencys = [];
 
 async function main() {
+  getAllCurrencys();
   renderButtons();
-  currencyNames = await getAllCurrencyNames();
+  currencyNames = await getAllCurrencyNames()
   addEventListeners();
-  updateTheBaseCurrencyName("USD");
+  setTheBaseCurrencyName();
   await showTheStrongestAndWeakestCurrencys("USD");
 }
 
@@ -48,6 +50,7 @@ function addEventListeners() {
   addEventListenerForWhenChoosingCurrencyFrom();
   addEventListenerForWhenChoosingCurrencyTo();
   addEventListenerForWhenSubmittingValue();
+  changeBaseCurrency();
 }
 
 function addEventListenerForWhenChoosingCurrencyFrom() {
@@ -80,16 +83,16 @@ async function addEventListenerForWhenSubmittingValue() {
 
     const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
     const convertFromCurrency = dropdownButtonFrom.textContent;
-    const currencys = await getAllCurrencys(convertFromCurrency);
+    const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
 
-    const currencyFrom = currencys.find(c => c.code === convertFromCurrency);
+    const currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
 
     const convertFromValue = inputElementFrom.value * currencyFrom.rate;
 
     const dropdownButtonTo = document.querySelector('.dropdown-button-to');
     const convertToCurrency = dropdownButtonTo.textContent;
 
-    const currencyToConvertTo = currencys.find(c => c.code === convertToCurrency);
+    const currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
 
     const convertedValue = convertFromValue * currencyToConvertTo.rate;
 
@@ -108,19 +111,39 @@ async function addEventListenerForWhenSubmittingValue() {
   });
 }
 
-async function updateTheBaseCurrencyName(baseCode = null){
+function setTheBaseCurrencyName() {
   const baseCurrencyP = document.querySelector("#base-currency-name");
-  if(baseCode == null || baseCode == undefined)
-  {
-    baseCurrencyP.textContent = "USD";
-  }
-  else
-  {
-    baseCurrencyP.textContent = baseCode;
-  }
-
+  baseCurrencyP.textContent = "USD";
 }
-async function showTheStrongestAndWeakestCurrencys(){
+
+function updateTheBaseCurrencyName(direction){
+  const baseCurrencyElement = document.querySelector("#base-currency-name");
+  const currentBaseCurrency = baseCurrencyElement.textContent;
+  const index = currencys.findIndex(c => c.code == currentBaseCurrency);
+
+  if(direction == "right")
+  {
+    baseCurrencyElement.textContent = currencys[index + 1].code;
+  }
+  else if(direction == "left"){
+    baseCurrencyElement.textContent = currencys[index - 1].code;
+  }
+}
+
+function changeBaseCurrency() {
+  const arrowLeft = document.querySelector(".fa-chevron-circle-left");
+  const arrowRight = document.querySelector(".fa-chevron-circle-right");
+
+  arrowLeft.addEventListener("click", () => {
+    updateTheBaseCurrencyName("left");
+  });
+
+  arrowRight.addEventListener("click", () => {
+    updateTheBaseCurrencyName("right");
+  });
+}
+
+async function showTheStrongestAndWeakestCurrencys() {
   // const strongestCurrencyDiv = document.querySelector(".strongest-currency");
   // const weakestCurrencyDiv = document.querySelector(".weakest-currency");
   const strongestNameP = document.querySelector("#strongest-currency-name");
@@ -128,12 +151,12 @@ async function showTheStrongestAndWeakestCurrencys(){
   const weakestNameP = document.querySelector("#weakest-currency-name");
   const weakestRateP = document.querySelector("#weakest-currency-rate");
 
-  const currencys = await getTheStrongestAndWeakestCurrency();
+  const strongestAndWeakestCurrencys = await getTheStrongestAndWeakestCurrency();
 
-  strongestNameP.textContent = currencys.strongest.code;
-  strongestRateP.textContent = currencys.strongest.rate;
-  weakestNameP.textContent = currencys.weakest.code;
-  weakestRateP.textContent = currencys.weakest.rate;
+  strongestNameP.textContent = strongestAndWeakestCurrencys.strongest.code;
+  strongestRateP.textContent = strongestAndWeakestCurrencys.strongest.rate;
+  weakestNameP.textContent = strongestAndWeakestCurrencys.weakest.code;
+  weakestRateP.textContent = strongestAndWeakestCurrencys.weakest.rate;
 }
 
 
@@ -141,11 +164,10 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
   let strongest;
   let weakest;
 
-  if(baseCode == null || baseCode == undefined)
-  {
+  if (baseCode == null || baseCode == undefined) {
     baseCode = "USD";
   }
-  const allCurrencys = await getAllCurrencys(baseCode);
+  const allCurrencys = await getAllCurrencysWithBase(baseCode);
 
   // const baseCurrency = currencys.find(c => c.code == baseCode);
 
@@ -181,20 +203,15 @@ async function getAllCurrencyNames() {
 
 }
 
-async function getAllCurrencys(currencyCode = null) {
+async function getAllCurrencys() {
 
-  let apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
-
-  if (currencyCode == null || currencyCode == undefined) {
-    apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}`;
-  }
+  let apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}`;
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
     const currencyRates = data.data;
-    const currencys = [];
 
     for (const currencyCode in currencyRates) {
       if (currencyRates.hasOwnProperty(currencyCode)) {
@@ -205,7 +222,6 @@ async function getAllCurrencys(currencyCode = null) {
         currencys.push(currency);
       }
     }
-    return currencys;
 
   } catch (error) {
     console.log(error);
@@ -213,6 +229,38 @@ async function getAllCurrencys(currencyCode = null) {
   }
 
 }
+
+async function getAllCurrencysWithBase(currencyCode) {
+
+  let apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
+
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    const currencyRates = data.data;
+
+    const currencysToReturn = [];
+
+    for (const currencyCode in currencyRates) {
+      if (currencyRates.hasOwnProperty(currencyCode)) {
+        const currency = {
+          code: currencyCode,
+          rate: currencyRates[currencyCode]
+        };
+        currencysToReturn.push(currency);
+      }
+    }
+    return currencysToReturn;
+
+  } catch (error) {
+    console.log(error);
+    debugger;
+  }
+
+}
+
 
 
 function renderButtons() {
