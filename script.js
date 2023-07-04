@@ -7,6 +7,7 @@ async function main() {
   renderButtons();
   currencyNames = await getAllCurrencyNames();
   addEventListeners();
+  updateTheBaseCurrencyName("USD");
   await showTheStrongestAndWeakestCurrencys("USD");
 }
 
@@ -107,6 +108,18 @@ async function addEventListenerForWhenSubmittingValue() {
   });
 }
 
+async function updateTheBaseCurrencyName(baseCode = null){
+  const baseCurrencyP = document.querySelector("#base-currency-name");
+  if(baseCode == null || baseCode == undefined)
+  {
+    baseCurrencyP.textContent = "USD";
+  }
+  else
+  {
+    baseCurrencyP.textContent = baseCode;
+  }
+
+}
 async function showTheStrongestAndWeakestCurrencys(){
   // const strongestCurrencyDiv = document.querySelector(".strongest-currency");
   // const weakestCurrencyDiv = document.querySelector(".weakest-currency");
