@@ -128,30 +128,33 @@ function updateTheBaseCurrencyName(direction){
   else if(direction == "left"){
     baseCurrencyElement.textContent = currencys[index - 1].code;
   }
+  return baseCurrencyElement.textContent;
 }
 
 function changeBaseCurrency() {
   const arrowLeft = document.querySelector(".fa-chevron-circle-left");
   const arrowRight = document.querySelector(".fa-chevron-circle-right");
-
+  let baseCode;
+  
   arrowLeft.addEventListener("click", () => {
-    updateTheBaseCurrencyName("left");
+    baseCode = updateTheBaseCurrencyName("left");
+    showTheStrongestAndWeakestCurrencys(baseCode);
   });
 
   arrowRight.addEventListener("click", () => {
-    updateTheBaseCurrencyName("right");
+    baseCode = updateTheBaseCurrencyName("right");
+    showTheStrongestAndWeakestCurrencys(baseCode);
   });
 }
 
-async function showTheStrongestAndWeakestCurrencys() {
-  // const strongestCurrencyDiv = document.querySelector(".strongest-currency");
-  // const weakestCurrencyDiv = document.querySelector(".weakest-currency");
+async function showTheStrongestAndWeakestCurrencys(baseCode = null) {
+
   const strongestNameP = document.querySelector("#strongest-currency-name");
   const strongestRateP = document.querySelector("#strongest-currency-rate");
   const weakestNameP = document.querySelector("#weakest-currency-name");
   const weakestRateP = document.querySelector("#weakest-currency-rate");
 
-  const strongestAndWeakestCurrencys = await getTheStrongestAndWeakestCurrency();
+  const strongestAndWeakestCurrencys = await getTheStrongestAndWeakestCurrency(baseCode);
 
   strongestNameP.textContent = strongestAndWeakestCurrencys.strongest.code;
   strongestRateP.textContent = strongestAndWeakestCurrencys.strongest.rate;
