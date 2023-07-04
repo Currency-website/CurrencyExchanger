@@ -7,6 +7,11 @@
     width: 100px;
 }
 
+.dropdown-button-to,
+.dropdown-button-from a{
+    width: 100px;
+}
+
 h1{
     font-size: 30px;
 }
@@ -14,7 +19,13 @@ h1{
 .input-container{
     margin-top: 50px;
 }
-
+.dropdown-div-from, .dropdown-div-to {
+    padding: 35px;
+    padding-top: 5px;
+}
+.show-dropdown{
+    min-width: 100px;
+}
 .currency-stats {
     padding: 30px;
     border-radius: 10px;

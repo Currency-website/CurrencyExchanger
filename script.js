@@ -7,6 +7,7 @@ const currencys = [];
 async function main() {
   getAllCurrencys();
   renderButtons();
+  //kan skippas sedan och endast använda av currencys
   currencyNames = await getAllCurrencyNames()
   addEventListeners();
   setTheBaseCurrencyName();
@@ -135,7 +136,7 @@ function changeBaseCurrency() {
   const arrowLeft = document.querySelector(".fa-chevron-circle-left");
   const arrowRight = document.querySelector(".fa-chevron-circle-right");
   let baseCode;
-  
+
   arrowLeft.addEventListener("click", () => {
     baseCode = updateTheBaseCurrencyName("left");
     showTheStrongestAndWeakestCurrencys(baseCode);

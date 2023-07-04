@@ -73,6 +73,7 @@ input:focus {
 
 .dropdown-div-from, .dropdown-div-to {
     padding: 35px;
+    z-index: 1;
 }
 
 .dropdown-button-to, .dropdown-button-from {
