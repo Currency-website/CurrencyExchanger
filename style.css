@@ -72,7 +72,7 @@ input:focus {
 }
 
 .dropdown-div-from, .dropdown-div-to {
-    padding: 5px 35px;
+    padding: 5px 35px 55px;
     z-index: 1;
 }
 
