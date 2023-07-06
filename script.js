@@ -176,10 +176,10 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
   // const baseCurrency = currencys.find(c => c.code == baseCode);
 
   for (const currency of allCurrencys) {
-    if (!strongest || currency.rate > strongest.rate) {
+    if (!strongest || currency.rate < strongest.rate) {
       strongest = currency;
     }
-    else if (!weakest || currency.rate < weakest.rate) {
+    else if (!weakest || currency.rate > weakest.rate) {
       weakest = currency;
     }
   }
