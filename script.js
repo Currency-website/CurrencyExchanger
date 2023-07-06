@@ -112,13 +112,31 @@ async function addEventListenerForWhenSubmittingValue() {
     if (event.key === 'Enter') {
       event.preventDefault();
       formElement.dispatchEvent(new Event('submit'));
-      await renderExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
+      await renderExchangeResult();
     }
   });
 }
 
-async function renderExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue) {
-  const gain = await calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
+async function renderExchangeResult() {
+
+  const inputElementFrom = document.querySelector('#input-from');
+
+  const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
+  const convertFromCurrency = dropdownButtonFrom.textContent;
+  const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
+
+  const currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
+
+  const convertFromValue = inputElementFrom.value * currencyFrom.rate;
+
+  const dropdownButtonTo = document.querySelector('.dropdown-button-to');
+  const convertToCurrency = dropdownButtonTo.textContent;
+
+  const currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
+
+  const convertedValue = convertFromValue * currencyToConvertTo.rate;
+
+  const result = await calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
 
   //hämta diven och skapa en h2
   const exchangeResultDiv = document.querySelector(".exchange-result-div");
@@ -126,10 +144,10 @@ async function renderExchangeResult(currencyFrom, currencyToConvertTo, convertFr
   const h3Element = document.createElement("h3");
   let textToH3 = "";
 
-  if (gain > 0) {
-    textToH3 = Math.abs(gain) + " " + currencyFrom.code + " förlorade vid denna växling av valutor.";
-  } else if (gain < 0) {
-    textToH3 =  Math.abs(gain) + " " + currencyFrom.code + " i vinst vid denna växling av valutor.";
+  if (result.result === "loss") {
+    textToH3 = result.loss + " " + currencyFrom.code + " förlorade vid denna växling av valutor.";
+  } else if (result.result === "gain") {
+    textToH3 = result.gain + " " + currencyFrom.code + " i vinst vid denna växling av valutor.";
   } else {
     textToH3 = "Varken vinst eller förlust i denna växling av valutor.";
   }
@@ -137,18 +155,15 @@ async function renderExchangeResult(currencyFrom, currencyToConvertTo, convertFr
   exchangeResultDiv.appendChild(h3Element);
 }
 
-async function calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue){
-  //100 SEK - 9,13 USD (omvandlat till SEK baserat på växelkursen) = X SEK.
-  //100 sek: convertFromValue currencyFrom.code
-  // 9.13 USD : convertedValue currencyToConvertTo.rate
+async function calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue) {
 
-  const currencysWithConvertedBase = await getAllCurrencysWithBase(currencyToConvertTo.code);
-  const convertedBaseCurrency = currencysWithConvertedBase.find(c => c.code === currencyFrom.code);
+  const allCurrencies = await getAllCurrencysWithBase(currencyFrom.code);
 
-  const expectedConvertedValue = convertFromValue * (currencyToConvertTo.rate / convertedBaseCurrency.rate);
-  const gain = expectedConvertedValue - convertedValue;
-  return gain;
+  const currencyWeConvertedTo = allCurrencies.find(c => c.code == currencyToConvertTo.code);
+  const convertBaseAmountToCurrencyWeConvertTo = convertFromValue * (currencyWeConvertedTo.rate / currencyFrom.rate);
+  alert(convertBaseAmountToCurrencyWeConvertTo);
 }
+
 
 function setTheBaseCurrencyName() {
   const baseCurrencyP = document.querySelector("#base-currency-name");
