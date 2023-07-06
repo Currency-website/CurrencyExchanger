@@ -105,6 +105,14 @@ input:focus {
     display: block;
 }
 
+.exchange-result-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.exchange-result-div h3{
+    padding: 0px 0px 35px;
+}
 .currency-stats {
     display: flex;
     justify-content: space-between;

@@ -78,6 +78,10 @@ async function addEventListenerForWhenSubmittingValue() {
   const formElement = document.querySelector('main');
   const inputElementFrom = document.querySelector('#input-from');
   const inputElementTo = document.querySelector('#input-to');
+  let currencyFrom;
+  let currencyToConvertTo;
+  let convertFromValue;
+  let convertedValue;
 
   formElement.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -86,16 +90,16 @@ async function addEventListenerForWhenSubmittingValue() {
     const convertFromCurrency = dropdownButtonFrom.textContent;
     const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
 
-    const currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
+    currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
 
-    const convertFromValue = inputElementFrom.value * currencyFrom.rate;
+    convertFromValue = inputElementFrom.value * currencyFrom.rate;
 
     const dropdownButtonTo = document.querySelector('.dropdown-button-to');
     const convertToCurrency = dropdownButtonTo.textContent;
 
-    const currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
+    currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
 
-    const convertedValue = convertFromValue * currencyToConvertTo.rate;
+    convertedValue = convertFromValue * currencyToConvertTo.rate;
 
     inputElementTo.value = convertedValue.toFixed(2);
   });
@@ -104,12 +108,46 @@ async function addEventListenerForWhenSubmittingValue() {
     formElement.dispatchEvent(new Event('submit'));
   });
 
-  inputElementFrom.addEventListener('keydown', (event) => {
+  inputElementFrom.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       formElement.dispatchEvent(new Event('submit'));
+      await renderExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
     }
   });
+}
+
+async function renderExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue) {
+  const gain = await calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
+
+  //hämta diven och skapa en h2
+  const exchangeResultDiv = document.querySelector(".exchange-result-div");
+  exchangeResultDiv.innerHTML = "";
+  const h3Element = document.createElement("h3");
+  let textToH3 = "";
+
+  if (gain > 0) {
+    textToH3 = Math.abs(gain) + " " + currencyFrom.code + " förlorade vid denna växling av valutor.";
+  } else if (gain < 0) {
+    textToH3 =  Math.abs(gain) + " " + currencyFrom.code + " i vinst vid denna växling av valutor.";
+  } else {
+    textToH3 = "Varken vinst eller förlust i denna växling av valutor.";
+  }
+  h3Element.textContent = textToH3;
+  exchangeResultDiv.appendChild(h3Element);
+}
+
+async function calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue){
+  //100 SEK - 9,13 USD (omvandlat till SEK baserat på växelkursen) = X SEK.
+  //100 sek: convertFromValue currencyFrom.code
+  // 9.13 USD : convertedValue currencyToConvertTo.rate
+
+  const currencysWithConvertedBase = await getAllCurrencysWithBase(currencyToConvertTo.code);
+  const convertedBaseCurrency = currencysWithConvertedBase.find(c => c.code === currencyFrom.code);
+
+  const expectedConvertedValue = convertFromValue * (currencyToConvertTo.rate / convertedBaseCurrency.rate);
+  const gain = expectedConvertedValue - convertedValue;
+  return gain;
 }
 
 function setTheBaseCurrencyName() {
@@ -117,16 +155,15 @@ function setTheBaseCurrencyName() {
   baseCurrencyP.textContent = "USD";
 }
 
-function updateTheBaseCurrencyName(direction){
+function updateTheBaseCurrencyName(direction) {
   const baseCurrencyElement = document.querySelector("#base-currency-name");
   const currentBaseCurrency = baseCurrencyElement.textContent;
   const index = currencys.findIndex(c => c.code == currentBaseCurrency);
 
-  if(direction == "right")
-  {
+  if (direction == "right") {
     baseCurrencyElement.textContent = currencys[index + 1].code;
   }
-  else if(direction == "left"){
+  else if (direction == "left") {
     baseCurrencyElement.textContent = currencys[index - 1].code;
   }
   return baseCurrencyElement.textContent;
