@@ -118,77 +118,147 @@ async function addEventListenerForWhenSubmittingValue() {
   });
 }
 
-async function renderChart() {
-  const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=YLo6e3bz1GmSecvEg01DelPLhgcjv9GX9j8NFnjC&date_from=2022-06-30&date_to=2023-06-30`;
-  let data = [];
+// async function renderChart() {
+//   const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=YLo6e3bz1GmSecvEg01DelPLhgcjv9GX9j8NFnjC&date_from=2022-06-30&date_to=2023-06-30`;
+//   let data = [];
 
-  const canvas = document.getElementById('currencyChart');
+//   const canvas = document.getElementById('currencyChart');
+
+//   try {
+//     const response = await fetch(apiUrl);
+//     data = await response.json();
+//     const currencyRates = data.data;
+//     const dateList = Object.keys(data['data']);
+
+//     const dataset = dateList.map(date => ({
+//       x: new Date(date),
+//       y: currencyRates[date].SEK,
+//       title: "hej"
+//     }));
+
+//     const datasets = [{
+//       backgroundColor: "rgba(75, 192, 192, 0.2)",
+//       borderColor: "rgba(75, 192, 192, 1)",
+//       borderWidth: 2,
+//       pointBackgroundColor: "rgba(75, 192, 192, 1)",
+//       pointBorderColor: "rgba(255, 255, 255, 1)",
+//       pointRadius: 4,
+//       data: dataset
+//     }];
+
+//     const chart = new Chart(canvas, {
+//       type: "line",
+//       data: {
+//         datasets: datasets
+//       },
+//       options: {
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         scales: {
+//           x: {
+//             type: 'time',
+//             time: {
+//               unit: 'month',
+//               displayFormats: {
+//                 'month': 'MMM DD'
+//               }
+//             },
+//             ticks: {
+//             font: {
+//               family: "Arial, Helvetica, sans-serif",
+//               size: 12
+//             },
+//             color: "black"
+//           }
+//         },
+//         y: {
+//           ticks: {
+//             font: {
+//               family: "Arial, Helvetica, sans-serif",
+//               size: 12
+//             }
+//           }
+//         }
+//       }
+//     }
+//     });
+//   console.log("unit x:", chart.options.scales.x.time.unit);
+
+// }
+//   catch (error) {
+//   console.log(error);
+//   debugger;
+// }
+// }
+
+async function getAYearsDataForSpecificCurrency() {
+
+  const todaysDate = new Date();
+  const yesterDaysDate = new Date(todaysDate);
+  yesterDaysDate.setDate(todaysDate.getDate() - 1);
+
+  const formattedYesterdaysDate = yesterDaysDate.toISOString().split('T')[0];
+
+  const aYearFromYesterdaysDateDate = new Date(yesterDaysDate.getFullYear() - 1, yesterDaysDate.getMonth(), yesterDaysDate.getDate());
+  const formattedDateAYearFromYesterday = aYearFromYesterdaysDateDate.toISOString().split('T')[0];
+
+  const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=${config.API_KEY}&date_from=${formattedDateAYearFromYesterday}&date_to=${formattedYesterdaysDate}`;
+  let data = [];
 
   try {
     const response = await fetch(apiUrl);
     data = await response.json();
-    const currencyRates = data.data;
-    const dateList = Object.keys(data['data']);
+
+    const currencyRates = data.data;             // detta är y-axeln själva värderna
+    const dateList = Object.keys(data['data']);  //detta är ju x-axeln datumen
+    const currencyCode = Object.keys(data['data'][dateList[0]])[0];  //namnet på valutan
+    alert(currencyCode);
 
     const dataset = dateList.map(date => ({
       x: new Date(date),
-      y: currencyRates[date].SEK,
-      title: "hej"
+      y: currencyRates[date][currencyCode],
+      title: currencyCode
     }));
 
-    const datasets = [{
-      backgroundColor: "rgba(75, 192, 192, 0.2)",
-      borderColor: "rgba(75, 192, 192, 1)",
-      borderWidth: 2,
-      pointBackgroundColor: "rgba(75, 192, 192, 1)",
-      pointBorderColor: "rgba(255, 255, 255, 1)",
-      pointRadius: 4,
-      data: dataset
-    }];
-
-    const chart = new Chart(canvas, {
-      type: "line",
-      data: {
-        datasets: datasets
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            type: 'time',
-            time: {
-              unit: 'month',
-              displayFormats: {
-                'month': 'MMM DD'
-              }
-            },
-            ticks: {
-            font: {
-              family: "Arial, Helvetica, sans-serif",
-              size: 12
-            },
-            color: "black"
-          }
-        },
-        y: {
-          ticks: {
-            font: {
-              family: "Arial, Helvetica, sans-serif",
-              size: 12
-            }
-          }
-        }
-      }
-    }
-    });
-  console.log("unit x:", chart.options.scales.x.time.unit);
-
-}
+    return dataset;
+  }
   catch (error) {
-  console.log(error);
-  debugger;
+    console.log(error);
+    debugger;
+  }
 }
+
+async function renderChart() {
+
+  const dataset = await getAYearsDataForSpecificCurrency();
+
+  const chartTitle = dataset[0].title;
+  const canvas = document.getElementById('chartContainer');
+  var chart = new CanvasJS.Chart(canvas,
+    {
+
+      title: {
+        text: chartTitle
+      },
+      axisX: {
+        valueFormatString: "DD MMM YYYY",
+        interval: 30,
+        intervalType: "day"
+      },
+      axisY: {
+        includeZero: false
+
+      },
+      data: [
+        {
+          type: "line",
+
+          dataPoints: dataset
+        }
+      ]
+    });
+
+  chart.render();
 }
 
 

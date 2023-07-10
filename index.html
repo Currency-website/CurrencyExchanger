@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script> -->
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
     <script src="https://kit.fontawesome.com/34c1195b6e.js" crossorigin="anonymous"></script>
     <script src="config.js" type="module"></script>
@@ -98,9 +99,7 @@
             </div>
         </div>
 
-        <div class="chart-div">
-            <canvas id="currencyChart"></canvas>
-        </div>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 
     </main>
 
@@ -113,7 +112,7 @@
         </div>
 
         <div class="contact-div">
-            <b>Vid fel på sidan</b>
+            <b>Vid fel på sidan eller önskemål</b>
             <p>Anmäl till
             somemail@live.se</p>
         </div>

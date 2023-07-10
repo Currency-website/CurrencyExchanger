@@ -150,10 +150,6 @@ input:focus {
     align-content: center;
 }
 
-.currencyChart{
-    width: 300px;
-    height: 400px;
-}
 
 footer {
     bottom: 0px;
@@ -163,6 +159,7 @@ footer {
     align-items: center;
     justify-content: space-around;
 }
+
 .footer-links{
     display: flex;
     flex-direction: column;

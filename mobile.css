@@ -39,3 +39,7 @@ h1{
 .currency-stats h2 {
     font-size: 12px;
 }
+
+footer a, p, b{
+    font-size: 10px;
+}
