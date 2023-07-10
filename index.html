@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
     <script src="https://kit.fontawesome.com/34c1195b6e.js" crossorigin="anonymous"></script>
     <script src="config.js" type="module"></script>
     <script src="script.js" type="module"></script>
@@ -71,7 +74,7 @@
         </div>
 
         <div class="exchange-result-div">
-          
+
         </div>
 
         <div class="currency-stats">
@@ -95,11 +98,25 @@
             </div>
         </div>
 
-
+        <div class="chart-div">
+            <canvas id="currencyChart"></canvas>
+        </div>
 
     </main>
 
     <footer>
+
+        <div class="footer-links">
+            <a href="#">Om oss</a>
+            <a href="#">Miljömedvetenhet</a>
+            <a href="#">Källor</a>
+        </div>
+
+        <div class="contact-div">
+            <b>Vid fel på sidan</b>
+            <p>Anmäl till
+            somemail@live.se</p>
+        </div>
 
     </footer>
 

@@ -12,6 +12,7 @@ async function main() {
   addEventListeners();
   setTheBaseCurrencyName();
   await showTheStrongestAndWeakestCurrencys("USD");
+  await renderChart();
 }
 
 function addEventListeners() {
@@ -112,57 +113,132 @@ async function addEventListenerForWhenSubmittingValue() {
     if (event.key === 'Enter') {
       event.preventDefault();
       formElement.dispatchEvent(new Event('submit'));
-      await renderExchangeResult();
+      // await renderExchangeResult();
     }
   });
 }
 
-async function renderExchangeResult() {
+async function renderChart() {
+  const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=YLo6e3bz1GmSecvEg01DelPLhgcjv9GX9j8NFnjC&date_from=2022-06-30&date_to=2023-06-30`;
+  let data = [];
 
-  const inputElementFrom = document.querySelector('#input-from');
+  const canvas = document.getElementById('currencyChart');
 
-  const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
-  const convertFromCurrency = dropdownButtonFrom.textContent;
-  const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
+  try {
+    const response = await fetch(apiUrl);
+    data = await response.json();
+    const currencyRates = data.data;
+    const dateList = Object.keys(data['data']);
 
-  const currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
+    const dataset = dateList.map(date => ({
+      x: new Date(date),
+      y: currencyRates[date].SEK,
+      title: "hej"
+    }));
 
-  const convertFromValue = inputElementFrom.value * currencyFrom.rate;
+    const datasets = [{
+      backgroundColor: "rgba(75, 192, 192, 0.2)",
+      borderColor: "rgba(75, 192, 192, 1)",
+      borderWidth: 2,
+      pointBackgroundColor: "rgba(75, 192, 192, 1)",
+      pointBorderColor: "rgba(255, 255, 255, 1)",
+      pointRadius: 4,
+      data: dataset
+    }];
 
-  const dropdownButtonTo = document.querySelector('.dropdown-button-to');
-  const convertToCurrency = dropdownButtonTo.textContent;
+    const chart = new Chart(canvas, {
+      type: "line",
+      data: {
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'month',
+              displayFormats: {
+                'month': 'MMM DD'
+              }
+            },
+            ticks: {
+            font: {
+              family: "Arial, Helvetica, sans-serif",
+              size: 12
+            },
+            color: "black"
+          }
+        },
+        y: {
+          ticks: {
+            font: {
+              family: "Arial, Helvetica, sans-serif",
+              size: 12
+            }
+          }
+        }
+      }
+    }
+    });
+  console.log("unit x:", chart.options.scales.x.time.unit);
 
-  const currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
-
-  const convertedValue = convertFromValue * currencyToConvertTo.rate;
-
-  const result = await calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
-
-  //hämta diven och skapa en h2
-  const exchangeResultDiv = document.querySelector(".exchange-result-div");
-  exchangeResultDiv.innerHTML = "";
-  const h3Element = document.createElement("h3");
-  let textToH3 = "";
-
-  if (result.result === "loss") {
-    textToH3 = result.loss + " " + currencyFrom.code + " förlorade vid denna växling av valutor.";
-  } else if (result.result === "gain") {
-    textToH3 = result.gain + " " + currencyFrom.code + " i vinst vid denna växling av valutor.";
-  } else {
-    textToH3 = "Varken vinst eller förlust i denna växling av valutor.";
-  }
-  h3Element.textContent = textToH3;
-  exchangeResultDiv.appendChild(h3Element);
+}
+  catch (error) {
+  console.log(error);
+  debugger;
+}
 }
 
-async function calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue) {
 
-  const allCurrencies = await getAllCurrencysWithBase(currencyFrom.code);
+// async function renderExchangeResult() {
 
-  const currencyWeConvertedTo = allCurrencies.find(c => c.code == currencyToConvertTo.code);
-  const convertBaseAmountToCurrencyWeConvertTo = convertFromValue * (currencyWeConvertedTo.rate / currencyFrom.rate);
-  alert(convertBaseAmountToCurrencyWeConvertTo);
-}
+//   const inputElementFrom = document.querySelector('#input-from');
+
+//   const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
+//   const convertFromCurrency = dropdownButtonFrom.textContent;
+//   const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
+
+//   const currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
+
+//   const convertFromValue = inputElementFrom.value * currencyFrom.rate;
+
+//   const dropdownButtonTo = document.querySelector('.dropdown-button-to');
+//   const convertToCurrency = dropdownButtonTo.textContent;
+
+//   const currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
+
+//   const convertedValue = convertFromValue * currencyToConvertTo.rate;
+
+//   const result = await calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
+
+//   //hämta diven och skapa en h2
+//   const exchangeResultDiv = document.querySelector(".exchange-result-div");
+//   exchangeResultDiv.innerHTML = "";
+//   const h3Element = document.createElement("h3");
+//   let textToH3 = "";
+
+//   if (result.result === "loss") {
+//     textToH3 = result.loss + " " + currencyFrom.code + " förlorade vid denna växling av valutor.";
+//   } else if (result.result === "gain") {
+//     textToH3 = result.gain + " " + currencyFrom.code + " i vinst vid denna växling av valutor.";
+//   } else {
+//     textToH3 = "Varken vinst eller förlust i denna växling av valutor.";
+//   }
+//   h3Element.textContent = textToH3;
+//   exchangeResultDiv.appendChild(h3Element);
+// }
+
+// async function calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue) {
+
+//   const allCurrencies = await getAllCurrencysWithBase(currencyFrom.code);
+
+//   const currencyWeConvertedTo = allCurrencies.find(c => c.code == currencyToConvertTo.code);
+//   const convertBaseAmountToCurrencyWeConvertTo = convertFromValue * (currencyWeConvertedTo.rate / currencyFrom.rate);
+//   alert(convertBaseAmountToCurrencyWeConvertTo);
+
+// }
 
 
 function setTheBaseCurrencyName() {
