@@ -18,12 +18,15 @@ body {
 }
 
 header {
-    background-color: rgba(0, 0, 0, 0.5); /* Ange en genomskinlig bakgrundsfärg (RGBA-format) */
+    background-image: url("https://i.imgur.com/Ieims6A.png");
+    alt: "Vomx banner";
     margin-top: 0;
     height: 150px;
+    width: 2600px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    background-size: cover;
 }
   
 h1{
