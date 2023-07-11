@@ -2,13 +2,13 @@
     width: 100px;
 }
 
-.dropdown-button-to,
-.dropdown-button-from {
+.dropdown-input-to,
+.dropdown-input-from {
     width: 100px;
 }
 
-.dropdown-button-to,
-.dropdown-button-from a{
+.dropdown-input-to,
+.dropdown-input-from a{
     width: 100px;
 }
 

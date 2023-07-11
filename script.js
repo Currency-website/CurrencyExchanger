@@ -7,51 +7,47 @@ const currencys = [];
 async function main() {
   getAllCurrencys();
   renderButtons();
+  renderDropdownElementsFromButton();
+  renderDropdownElementsToButton();
   //kan skippas sedan och endast använda av currencys
-  currencyNames = await getAllCurrencyNames()
-  addEventListeners();
+  currencyNames = await getAllCurrencyNames();
+  await addEventListeners();
   setTheBaseCurrencyName();
   await showTheStrongestAndWeakestCurrencys("USD");
   await renderChart();
 }
 
-function addEventListeners() {
+async function addEventListeners() {
   const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
   const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
-  const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
-  const dropdownButtonTo = document.querySelector('.dropdown-button-to');
+  const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+  const dropdownInputTo = document.querySelector('.dropdown-input-to');
 
-  dropdownButtonFrom.addEventListener('mouseover', renderDropdownElementsFromButton);
-  dropdownButtonFrom.addEventListener('mouseover', () => {
+  dropdownInputFrom.addEventListener('click', () => {
+    dropdownInputFrom.value = "";
+    renderDropdownElementsFromButton();
     dropdownChoicesFrom.classList.add('show-dropdown');
   });
-  dropdownButtonFrom.addEventListener('mouseleave', () => {
-    dropdownChoicesFrom.classList.remove('show-dropdown');
+
+  dropdownInputTo.addEventListener('click', () => {
+    dropdownInputTo.value = "";
+    renderDropdownElementsToButton();
+    dropdownChoicesTo.classList.add('show-dropdown');
   });
-  dropdownChoicesFrom.addEventListener('mouseover', () => {
-    dropdownChoicesFrom.classList.add('show-dropdown');
-  });
+
   dropdownChoicesFrom.addEventListener('mouseleave', () => {
     dropdownChoicesFrom.classList.remove('show-dropdown');
   });
 
-  dropdownButtonTo.addEventListener('mouseover', renderDropdownElementsToButton);
-  dropdownButtonTo.addEventListener('mouseover', () => {
-    dropdownChoicesTo.classList.add('show-dropdown');
-  });
-  dropdownButtonTo.addEventListener('mouseleave', () => {
-    dropdownChoicesTo.classList.remove('show-dropdown');
-  });
-  dropdownChoicesTo.addEventListener('mouseover', () => {
-    dropdownChoicesTo.classList.add('show-dropdown');
-  });
   dropdownChoicesTo.addEventListener('mouseleave', () => {
     dropdownChoicesTo.classList.remove('show-dropdown');
   });
 
   addEventListenerForWhenChoosingCurrencyFrom();
   addEventListenerForWhenChoosingCurrencyTo();
-  addEventListenerForWhenSubmittingValue();
+  searchInDropdownFrom();
+  searchInDropdownTo();
+  await addEventListenerForWhenSubmittingValue();
   changeBaseCurrency();
 }
 
@@ -59,8 +55,9 @@ function addEventListenerForWhenChoosingCurrencyFrom() {
   const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
   dropdownChoicesFrom.addEventListener('click', (event) => {
     const chosenCurrency = event.target.getAttribute("data-currency-code"); // Hämta vald valutakod från attribut
-    const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
-    dropdownButtonFrom.textContent = chosenCurrency;
+    const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+    dropdownInputFrom.value = chosenCurrency;
+    dropdownChoicesFrom.classList.remove('show-dropdown'); // Ta bort klassen efter valet
   });
 }
 
@@ -69,8 +66,70 @@ function addEventListenerForWhenChoosingCurrencyTo() {
   const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
   dropdownChoicesTo.addEventListener('click', (event) => {
     const chosenCurrency = event.target.getAttribute("data-currency-code");
-    const dropdownButtonto = document.querySelector('.dropdown-button-to');
-    dropdownButtonto.textContent = chosenCurrency;
+    const dropdownInputto = document.querySelector('.dropdown-input-to');
+    dropdownInputto.value = chosenCurrency;
+    dropdownChoicesTo.classList.remove('show-dropdown'); // Ta bort klassen efter valet
+  });
+}
+
+function validateCurrencyName(currencyName) {
+  // Kontrollera om valutanamnet finns i listan currencyNames
+  return currencyNames.includes(currencyName);
+}
+function searchInDropdownFrom() {
+  const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
+  const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+  const formElement = document.querySelector('main');
+
+  formElement.addEventListener('submit', async (event) => {
+    event.preventDefault();
+  });
+
+  dropdownInputFrom.addEventListener('keyup', async () => {
+    const searchQuery = dropdownInputFrom.value.toUpperCase();
+
+    let foundCurrencyCodes = [];
+    currencyNames.forEach(name => {
+      if (name.includes(searchQuery)) {
+        foundCurrencyCodes.push(name);
+      }
+    });
+
+    renderDropdownElementsFromButton(foundCurrencyCodes);
+    dropdownChoicesFrom.classList.add('show-dropdown');
+  });
+
+  dropdownInputFrom.addEventListener('mouseover', () => {
+    dropdownChoicesFrom.classList.add('show-dropdown');
+  });
+}
+
+
+function searchInDropdownTo() {
+  const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
+  const dropdownInputTo = document.querySelector('.dropdown-input-to');
+  const formElement = document.querySelector('main');
+
+  formElement.addEventListener('submit', async (event) => {
+    event.preventDefault();
+  });
+
+  dropdownInputTo.addEventListener('keyup', async () => {
+    const searchQuery = dropdownInputTo.value.toUpperCase();
+
+    let foundCurrencyCodes = [];
+    currencyNames.forEach(name => {
+      if (name.includes(searchQuery)) {
+        foundCurrencyCodes.push(name);
+      }
+    });
+
+    renderDropdownElementsToButton(foundCurrencyCodes);
+    dropdownChoicesTo.classList.add('show-dropdown');
+  });
+
+  dropdownInputTo.addEventListener('mouseover', () => {
+    dropdownChoicesTo.classList.add('show-dropdown');
   });
 }
 
@@ -79,6 +138,13 @@ async function addEventListenerForWhenSubmittingValue() {
   const formElement = document.querySelector('main');
   const inputElementFrom = document.querySelector('#input-from');
   const inputElementTo = document.querySelector('#input-to');
+
+  const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+  const dropdownInputTo = document.querySelector('.dropdown-input-to');
+
+  const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
+  const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
+
   let currencyFrom;
   let currencyToConvertTo;
   let convertFromValue;
@@ -87,16 +153,25 @@ async function addEventListenerForWhenSubmittingValue() {
   formElement.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
-    const convertFromCurrency = dropdownButtonFrom.textContent;
+    const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+    const convertFromCurrency = dropdownInputFrom.value;
+
+    if (!validateCurrencyName(convertFromCurrency)) {
+      return;
+    }
+
     const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
 
     currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
 
     convertFromValue = inputElementFrom.value * currencyFrom.rate;
 
-    const dropdownButtonTo = document.querySelector('.dropdown-button-to');
-    const convertToCurrency = dropdownButtonTo.textContent;
+    const dropdownInputTo = document.querySelector('.dropdown-input-to');
+    const convertToCurrency = dropdownInputTo.value;
+
+    if (!validateCurrencyName(convertToCurrency)) {
+      return;
+    }
 
     currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
 
@@ -109,6 +184,38 @@ async function addEventListenerForWhenSubmittingValue() {
     formElement.dispatchEvent(new Event('submit'));
   });
 
+  dropdownInputFrom.addEventListener('click', () => {
+    dropdownInputFrom.value = "";
+    renderDropdownElementsFromButton();
+    dropdownChoicesFrom.classList.add('show-dropdown');
+  });
+
+  dropdownInputFrom.addEventListener('input', async () => {
+    formElement.dispatchEvent(new Event('submit'));
+  });
+
+  dropdownChoicesFrom.addEventListener('click', (event) => {
+    const chosenCurrency = event.target.getAttribute("data-currency-code");
+    dropdownInputFrom.value = chosenCurrency;
+    formElement.dispatchEvent(new Event('submit'));
+  });
+
+  dropdownInputTo.addEventListener('click', () => {
+    dropdownInputTo.value = "";
+    renderDropdownElementsToButton();
+    dropdownChoicesTo.classList.add('show-dropdown');
+  });
+
+  dropdownInputTo.addEventListener('input', async () => {
+    formElement.dispatchEvent(new Event('submit'));
+  });
+
+  dropdownChoicesTo.addEventListener('click', (event) => {
+    const chosenCurrency = event.target.getAttribute("data-currency-code");
+    dropdownInputTo.value = chosenCurrency;
+    formElement.dispatchEvent(new Event('submit'));
+  });
+
   inputElementFrom.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -116,80 +223,8 @@ async function addEventListenerForWhenSubmittingValue() {
       // await renderExchangeResult();
     }
   });
+
 }
-
-// async function renderChart() {
-//   const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=YLo6e3bz1GmSecvEg01DelPLhgcjv9GX9j8NFnjC&date_from=2022-06-30&date_to=2023-06-30`;
-//   let data = [];
-
-//   const canvas = document.getElementById('currencyChart');
-
-//   try {
-//     const response = await fetch(apiUrl);
-//     data = await response.json();
-//     const currencyRates = data.data;
-//     const dateList = Object.keys(data['data']);
-
-//     const dataset = dateList.map(date => ({
-//       x: new Date(date),
-//       y: currencyRates[date].SEK,
-//       title: "hej"
-//     }));
-
-//     const datasets = [{
-//       backgroundColor: "rgba(75, 192, 192, 0.2)",
-//       borderColor: "rgba(75, 192, 192, 1)",
-//       borderWidth: 2,
-//       pointBackgroundColor: "rgba(75, 192, 192, 1)",
-//       pointBorderColor: "rgba(255, 255, 255, 1)",
-//       pointRadius: 4,
-//       data: dataset
-//     }];
-
-//     const chart = new Chart(canvas, {
-//       type: "line",
-//       data: {
-//         datasets: datasets
-//       },
-//       options: {
-//         responsive: true,
-//         maintainAspectRatio: false,
-//         scales: {
-//           x: {
-//             type: 'time',
-//             time: {
-//               unit: 'month',
-//               displayFormats: {
-//                 'month': 'MMM DD'
-//               }
-//             },
-//             ticks: {
-//             font: {
-//               family: "Arial, Helvetica, sans-serif",
-//               size: 12
-//             },
-//             color: "black"
-//           }
-//         },
-//         y: {
-//           ticks: {
-//             font: {
-//               family: "Arial, Helvetica, sans-serif",
-//               size: 12
-//             }
-//           }
-//         }
-//       }
-//     }
-//     });
-//   console.log("unit x:", chart.options.scales.x.time.unit);
-
-// }
-//   catch (error) {
-//   console.log(error);
-//   debugger;
-// }
-// }
 
 async function getAYearsDataForSpecificCurrency() {
 
@@ -212,7 +247,6 @@ async function getAYearsDataForSpecificCurrency() {
     const currencyRates = data.data;             // detta är y-axeln själva värderna
     const dateList = Object.keys(data['data']);  //detta är ju x-axeln datumen
     const currencyCode = Object.keys(data['data'][dateList[0]])[0];  //namnet på valutan
-    alert(currencyCode);
 
     const dataset = dateList.map(date => ({
       x: new Date(date),
@@ -260,56 +294,6 @@ async function renderChart() {
 
   chart.render();
 }
-
-
-// async function renderExchangeResult() {
-
-//   const inputElementFrom = document.querySelector('#input-from');
-
-//   const dropdownButtonFrom = document.querySelector('.dropdown-button-from');
-//   const convertFromCurrency = dropdownButtonFrom.textContent;
-//   const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
-
-//   const currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
-
-//   const convertFromValue = inputElementFrom.value * currencyFrom.rate;
-
-//   const dropdownButtonTo = document.querySelector('.dropdown-button-to');
-//   const convertToCurrency = dropdownButtonTo.textContent;
-
-//   const currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
-
-//   const convertedValue = convertFromValue * currencyToConvertTo.rate;
-
-//   const result = await calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue);
-
-//   //hämta diven och skapa en h2
-//   const exchangeResultDiv = document.querySelector(".exchange-result-div");
-//   exchangeResultDiv.innerHTML = "";
-//   const h3Element = document.createElement("h3");
-//   let textToH3 = "";
-
-//   if (result.result === "loss") {
-//     textToH3 = result.loss + " " + currencyFrom.code + " förlorade vid denna växling av valutor.";
-//   } else if (result.result === "gain") {
-//     textToH3 = result.gain + " " + currencyFrom.code + " i vinst vid denna växling av valutor.";
-//   } else {
-//     textToH3 = "Varken vinst eller förlust i denna växling av valutor.";
-//   }
-//   h3Element.textContent = textToH3;
-//   exchangeResultDiv.appendChild(h3Element);
-// }
-
-// async function calculateExchangeResult(currencyFrom, currencyToConvertTo, convertFromValue, convertedValue) {
-
-//   const allCurrencies = await getAllCurrencysWithBase(currencyFrom.code);
-
-//   const currencyWeConvertedTo = allCurrencies.find(c => c.code == currencyToConvertTo.code);
-//   const convertBaseAmountToCurrencyWeConvertTo = convertFromValue * (currencyWeConvertedTo.rate / currencyFrom.rate);
-//   alert(convertBaseAmountToCurrencyWeConvertTo);
-
-// }
-
 
 function setTheBaseCurrencyName() {
   const baseCurrencyP = document.querySelector("#base-currency-name");
@@ -470,47 +454,76 @@ function renderButtons() {
   const dropdownDivFrom = document.querySelector(".dropdown-div-from");
   const dropdownDivTo = document.querySelector(".dropdown-div-to");
 
-  const fromButton = document.createElement('button');
-  fromButton.classList.add("dropdown-button-from");
-  fromButton.textContent = "From";
+  const fromInput = document.createElement('input');
+  fromInput.classList.add("dropdown-input-from");
+  fromInput.value = "SEK";
 
-  const toButton = document.createElement('button');
-  toButton.classList.add("dropdown-button-to");
-  toButton.textContent = "To";
+  const toInput = document.createElement('input');
+  toInput.classList.add("dropdown-input-to");
+  toInput.value = "USD";
 
-  dropdownDivFrom.appendChild(fromButton);
-  dropdownDivTo.appendChild(toButton);
+  dropdownDivFrom.appendChild(fromInput);
+  dropdownDivTo.appendChild(toInput);
 
 }
 
 
-function renderDropdownElementsFromButton() {
+function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
+
   const dropdownDiv = document.querySelector("#dropdown-choices-from");
   dropdownDiv.innerHTML = "";
-  currencyNames.forEach(currencyName => {
-    const optionElement = document.createElement("a");
-    optionElement.setAttribute("data-currency-code", currencyName);
-    optionElement.value = currencyName;
-    optionElement.text = currencyName;
 
-    dropdownDiv.appendChild(optionElement);
+  if (listOfSpecificCodes == null || listOfSpecificCodes == undefined) {
+    currencyNames.forEach(currencyName => {
+      const optionElement = document.createElement("a");
+      optionElement.setAttribute("data-currency-code", currencyName);
+      optionElement.value = currencyName;
+      optionElement.text = currencyName;
 
-  });
+      dropdownDiv.appendChild(optionElement);
+
+    });
+  }
+  else {
+    listOfSpecificCodes.forEach(code => {
+      const optionElement = document.createElement("a");
+      optionElement.setAttribute("data-currency-code", code);
+      optionElement.value = code;
+      optionElement.text = code;
+
+      dropdownDiv.appendChild(optionElement);
+
+    });
+  }
 
 }
 
-function renderDropdownElementsToButton() {
+function renderDropdownElementsToButton(listOfSpecificCodes = null) {
   const dropdownDiv = document.querySelector("#dropdown-choices-to");
   dropdownDiv.innerHTML = "";
-  currencyNames.forEach(currencyName => {
-    const optionElement = document.createElement("a");
-    optionElement.setAttribute("data-currency-code", currencyName);
-    optionElement.value = currencyName;
-    optionElement.text = currencyName;
 
-    dropdownDiv.prepend(optionElement);
+  if (listOfSpecificCodes == null || listOfSpecificCodes == undefined) {
+    currencyNames.forEach(currencyName => {
+      const optionElement = document.createElement("a");
+      optionElement.setAttribute("data-currency-code", currencyName);
+      optionElement.value = currencyName;
+      optionElement.text = currencyName;
 
-  });
+      dropdownDiv.prepend(optionElement);
+
+    });
+  } else {
+    listOfSpecificCodes.forEach(code => {
+      const optionElement = document.createElement("a");
+      optionElement.setAttribute("data-currency-code", code);
+      optionElement.value = code;
+      optionElement.text = code;
+
+      dropdownDiv.prepend(optionElement);
+
+    });
+  }
+
 
 }
 
