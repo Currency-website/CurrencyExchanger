@@ -77,11 +77,16 @@ input:focus {
     z-index: 1;
 }
 
-.dropdown-button-to, .dropdown-button-from {
+.dropdown-input-to, .dropdown-input-from {
     padding: 20px;
     font-size: 16px;
     border: none;
     width: 200px;
+    background-color: rgb(92, 159, 236);
+    color: azure;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
 }
 
 .dropdown-choices-none{
@@ -177,11 +182,6 @@ footer {
 button, a {
     cursor: pointer;
     text-decoration: none;
-}
-button{
-    background-color: rgb(92, 159, 236);
-    color: azure;
-    font-weight: bold;
 }
 
 button:hover, a:hover{
