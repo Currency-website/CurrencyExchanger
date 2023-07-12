@@ -355,8 +355,8 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
 
 
 async function getAllCurrencyNames() {
-    const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}`;
-
+    const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
+ 
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -376,7 +376,7 @@ async function getAllCurrencyNames() {
 
 async function getAllCurrencys() {
 
-    let apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}`;
+    let apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
 
     try {
         const response = await fetch(apiUrl);
@@ -403,7 +403,7 @@ async function getAllCurrencys() {
 
 async function getAllCurrencysWithBase(currencyCode) {
 
-    let apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
+    let apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
 
 
     try {
@@ -418,7 +418,7 @@ async function getAllCurrencysWithBase(currencyCode) {
             if (currencyRates.hasOwnProperty(currencyCode)) {
                 const currency = {
                     code: currencyCode,
-                    rate: currencyRates[currencyCode]
+                    rate: currencyRates[currencyCode].value
                 };
                 currencysToReturn.push(currency);
             }

@@ -22,15 +22,17 @@ header {
     height: 200px;
     width: 100%;
     display: flex;
+    background-image: linear-gradient(144deg, #161616, #212121 50%, #3a3a3a);
 }
 
 .banner {
     display: flex;
+    justify-content: space-evenly;
     width: 100%;
 }
 
 .banner img {
-    width: 100%;
+    
 }
 
 .material-symbols-outlined {
