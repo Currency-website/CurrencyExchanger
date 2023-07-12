@@ -34,23 +34,47 @@ async function addEventListeners() {
   const dropdownInputFrom = document.querySelector('.dropdown-input-from');
   const dropdownInputTo = document.querySelector('.dropdown-input-to');
 
+  let isDropdownOpen = false; // Håller reda på om dropdownen är öppen
+
   dropdownInputFrom.addEventListener('click', () => {
     dropdownInputFrom.value = "";
     renderDropdownElementsFromButton();
     dropdownChoicesFrom.classList.add('show-dropdown');
+    isDropdownOpen = true;
   });
 
   dropdownInputTo.addEventListener('click', () => {
     dropdownInputTo.value = "";
     renderDropdownElementsToButton();
     dropdownChoicesTo.classList.add('show-dropdown');
+    isDropdownOpen = true;
+  });
+
+  dropdownInputFrom.addEventListener('blur', (event) => {
+    if (!isMouseOverDropdown(event)) {
+      dropdownChoicesFrom.classList.remove('show-dropdown');
+    }
+  });
+
+  dropdownInputTo.addEventListener('blur', (event) => {
+    if (!isMouseOverDropdown(event)) {
+      dropdownChoicesTo.classList.remove('show-dropdown');
+    }
   });
 
   dropdownChoicesFrom.addEventListener('mouseleave', () => {
-    dropdownChoicesFrom.classList.remove('show-dropdown');
+    isDropdownOpen = false;
   });
 
   dropdownChoicesTo.addEventListener('mouseleave', () => {
+    isDropdownOpen = false;
+  });
+
+  const dropdownWrapper = document.querySelector('.dropdown-wrapper');
+
+  dropdownWrapper.addEventListener('mouseleave', () => {
+    isDropdownOpen = false;
+    dropdownChoicesFrom.classList.remove('show-dropdown');
     dropdownChoicesTo.classList.remove('show-dropdown');
   });
 

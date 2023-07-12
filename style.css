@@ -50,6 +50,12 @@ main {
     align-items: center;
     justify-content: center;
 }
+.dropdown-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
 
 .input-div{
     padding: 20px;

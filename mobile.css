@@ -12,6 +12,10 @@
     width: 100px;
 }
 
+.dropdown-wrapper{
+    width: 40px;
+}
+
 .input-container{
     margin-top: 50px;
 }
