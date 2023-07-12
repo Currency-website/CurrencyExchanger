@@ -136,7 +136,16 @@ input:focus {
     font-size: 20px;
     justify-content: center;
     line-height: 1em;
+    text-decoration: none;
 }
+/* för att ta bort uppp och ned pilarna i input fälten */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
 /* 
 .dropdown-input-to,
 .dropdown-input-from {
