@@ -5,14 +5,13 @@ export async function initChartRendering() {
 }
 
 async function renderChart() {
-
     const dataset = await getAYearsDataForSpecificCurrency();
 
     const chartTitle = dataset[0].title;
     const canvas = document.getElementById('chartContainer');
-    var chart = new CanvasJS.Chart(canvas,
-        {
 
+    try {
+        var chart = new CanvasJS.Chart(canvas, {
             title: {
                 text: chartTitle
             },
@@ -23,22 +22,29 @@ async function renderChart() {
             },
             axisY: {
                 includeZero: false
-
             },
-            data: [
-                {
-                    type: "line",
-
-                    dataPoints: dataset
-                }
-            ]
+            data: [{
+                type: "candlestick", // Ändra typen till "candlestick"
+                risingColor: "#008000", // Färg för stigande staplar (bättre valuta)
+                fallingColor: "	#FF0000", // Färg för fallande staplar (sämre valuta)
+                dataPoints: dataset.map(data => ({
+                    x: data.x,
+                    y: [data.y.open, data.y.high, data.y.low, data.y.close]
+                }))
+            }]
         });
 
-    chart.render();
+        chart.render();
+    }
+    catch {
+        console.log(error);
+        debugger;
+    }
+
 }
 
-async function getAYearsDataForSpecificCurrency() {
 
+async function getAYearsDataForSpecificCurrency() {
     const todaysDate = new Date();
     const yesterDaysDate = new Date(todaysDate);
     yesterDaysDate.setDate(todaysDate.getDate() - 1);
@@ -49,25 +55,39 @@ async function getAYearsDataForSpecificCurrency() {
     const formattedDateAYearFromYesterday = aYearFromYesterdaysDateDate.toISOString().split('T')[0];
 
     const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=${config.API_KEY}&date_from=${formattedDateAYearFromYesterday}&date_to=${formattedYesterdaysDate}`;
-    let data = [];
 
     try {
         const response = await fetch(apiUrl);
-        data = await response.json();
+        const data = await response.json();
 
-        const currencyRates = data.data;             // detta är y-axeln själva värderna
-        const dateList = Object.keys(data['data']);  //detta är ju x-axeln datumen
-        const currencyCode = Object.keys(data['data'][dateList[0]])[0];  //namnet på valutan
+        const currencyRates = data.data;
+        const dateList = Object.keys(data['data']);
+        const currencyCode = Object.keys(data['data'][dateList[0]])[0];
 
-        const dataset = dateList.map(date => ({
-            x: new Date(date),
-            y: currencyRates[date][currencyCode],
-            title: currencyCode
-        }));
+        const dataset = dateList.map((date, index) => {
+            const currencyData = currencyRates[date][currencyCode];
+            const open = index === 0 ? currencyData : currencyRates[dateList[index - 1]][currencyCode];
+            const lastIndex = dateList.length - 1;
+            const close = index === lastIndex ? currencyData : currencyRates[dateList[index + 1]][currencyCode];
+            const currencyValues = Object.values(currencyRates[date]);
+            const high = Math.max(open, ...currencyValues, close);
+            const low = Math.min(open, ...currencyValues, close);
+
+            return {
+                x: new Date(date),
+                y: {
+                    open,
+                    close,
+                    high,
+                    low
+                },
+                title: currencyCode
+            };
+        });
 
         return dataset;
-    }
-    catch (error) {
+
+    } catch (error) {
         console.log(error);
         debugger;
     }
