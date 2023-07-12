@@ -74,6 +74,9 @@ input:focus {
     padding: 5px 35px 55px;
     z-index: 1;
 }
+#input-from, #input-to{
+    opacity: 0.8;
+}
 
 .dropdown-input-to, .dropdown-input-from {
     padding: 20px;
