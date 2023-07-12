@@ -54,7 +54,11 @@ async function getAYearsDataForSpecificCurrency() {
     const aYearFromYesterdaysDateDate = new Date(yesterDaysDate.getFullYear() - 1, yesterDaysDate.getMonth(), yesterDaysDate.getDate());
     const formattedDateAYearFromYesterday = aYearFromYesterdaysDateDate.toISOString().split('T')[0];
 
-    const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=${config.API_KEY}&date_from=${formattedDateAYearFromYesterday}&date_to=${formattedYesterdaysDate}`;
+    // curl -G https://api.currencyapi.com/v3/historical?date=2022-01-01 \
+    // -H "apikey: YOUR-API-KEY"
+    //VI MÅSTE ÄNDRA HÄR DÅ RANGE INTE FUNKAR MED SMALL SUBSCRIPTION
+
+    const apiUrl = `https://api.forexrateapi.com/v1/timeframe?start_date=${formattedDateAYearFromYesterday}&end_date=${formattedYesterdaysDate}&currencies=SEK&api_key=${config.API_KEY}`;
 
     try {
         const response = await fetch(apiUrl);
