@@ -10,8 +10,7 @@ async function renderChart() {
     const chartTitle = dataset[0].title;
     const canvas = document.getElementById('chartContainer');
 
-    try
-    {
+    try {
         var chart = new CanvasJS.Chart(canvas, {
             title: {
                 text: chartTitle
@@ -34,14 +33,14 @@ async function renderChart() {
                 }))
             }]
         });
-    
+
         chart.render();
     }
-    catch{
+    catch {
         console.log(error);
         debugger;
     }
-  
+
 }
 
 
@@ -49,48 +48,47 @@ async function getAYearsDataForSpecificCurrency() {
     const todaysDate = new Date();
     const yesterDaysDate = new Date(todaysDate);
     yesterDaysDate.setDate(todaysDate.getDate() - 1);
-  
+
     const formattedYesterdaysDate = yesterDaysDate.toISOString().split('T')[0];
-  
+
     const aYearFromYesterdaysDateDate = new Date(yesterDaysDate.getFullYear() - 1, yesterDaysDate.getMonth(), yesterDaysDate.getDate());
     const formattedDateAYearFromYesterday = aYearFromYesterdaysDateDate.toISOString().split('T')[0];
-  
-    const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=${config.API_KEY}&date_from=${formattedDateAYearFromYesterday}&date_to=${formattedYesterdaysDate}`;
-  
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-  
-      const currencyRates = data.data;
-      const dateList = Object.keys(data['data']);
-      const currencyCode = Object.keys(data['data'][dateList[0]])[0];
-  
-      const dataset = dateList.map((date, index) => {
-        const currencyData = currencyRates[date][currencyCode];
-        const open = index === 0 ? currencyData : currencyRates[dateList[index - 1]][currencyCode];
-        const close = currencyData;
-        const high = currencyData;
-        const low = currencyData;
-  
 
-        console.log(open, close, high, low);
-  
-        return {
-          x: new Date(date),
-          y: {
-            open,
-            close,
-            high,
-            low
-          },
-          title: currencyCode
-        };
-      });
-  
-      return dataset;
+    const apiUrl = `https://api.freecurrencyapi.com/v1/historical?&currencies=SEK&apikey=${config.API_KEY}&date_from=${formattedDateAYearFromYesterday}&date_to=${formattedYesterdaysDate}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        const currencyRates = data.data;
+        const dateList = Object.keys(data['data']);
+        const currencyCode = Object.keys(data['data'][dateList[0]])[0];
+
+        const dataset = dateList.map((date, index) => {
+            const currencyData = currencyRates[date][currencyCode];
+            const open = index === 0 ? currencyData : currencyRates[dateList[index - 1]][currencyCode];
+            const lastIndex = dateList.length - 1;
+            const close = index === lastIndex ? currencyData : currencyRates[dateList[index + 1]][currencyCode];
+            const currencyValues = Object.values(currencyRates[date]);
+            const high = Math.max(open, ...currencyValues, close);
+            const low = Math.min(open, ...currencyValues, close);
+
+            return {
+                x: new Date(date),
+                y: {
+                    open,
+                    close,
+                    high,
+                    low
+                },
+                title: currencyCode
+            };
+        });
+
+        return dataset;
+
     } catch (error) {
-      console.log(error);
-      debugger;
+        console.log(error);
+        debugger;
     }
-  }
-  
+}
