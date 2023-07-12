@@ -15,7 +15,18 @@ async function main() {
   setTheBaseCurrencyName();
   await showTheStrongestAndWeakestCurrencys("USD");
   await renderChart();
+
+  const inputElementFrom = document.querySelector('#input-from');
+  inputElementFrom.value = 100;
+
+  await calculateExchange();
+
+  // const formElement = document.querySelector('main');
+  // formElement.dispatchEvent(new Event('submit'));
+
+  await addEventListenerForWhenSubmittingValue();
 }
+
 
 async function addEventListeners() {
   const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
@@ -43,11 +54,13 @@ async function addEventListeners() {
     dropdownChoicesTo.classList.remove('show-dropdown');
   });
 
+  renderDropdownElementsFromButton();
+  renderDropdownElementsToButton();
+
   addEventListenerForWhenChoosingCurrencyFrom();
   addEventListenerForWhenChoosingCurrencyTo();
   searchInDropdownFrom();
   searchInDropdownTo();
-  await addEventListenerForWhenSubmittingValue();
   changeBaseCurrency();
 }
 
@@ -137,7 +150,6 @@ function searchInDropdownTo() {
 async function addEventListenerForWhenSubmittingValue() {
   const formElement = document.querySelector('main');
   const inputElementFrom = document.querySelector('#input-from');
-  const inputElementTo = document.querySelector('#input-to');
 
   const dropdownInputFrom = document.querySelector('.dropdown-input-from');
   const dropdownInputTo = document.querySelector('.dropdown-input-to');
@@ -145,39 +157,9 @@ async function addEventListenerForWhenSubmittingValue() {
   const dropdownChoicesFrom = document.querySelector('#dropdown-choices-from');
   const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
 
-  let currencyFrom;
-  let currencyToConvertTo;
-  let convertFromValue;
-  let convertedValue;
-
   formElement.addEventListener('submit', async (event) => {
     event.preventDefault();
-
-    const dropdownInputFrom = document.querySelector('.dropdown-input-from');
-    const convertFromCurrency = dropdownInputFrom.value;
-
-    if (!validateCurrencyName(convertFromCurrency)) {
-      return;
-    }
-
-    const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
-
-    currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
-
-    convertFromValue = inputElementFrom.value * currencyFrom.rate;
-
-    const dropdownInputTo = document.querySelector('.dropdown-input-to');
-    const convertToCurrency = dropdownInputTo.value;
-
-    if (!validateCurrencyName(convertToCurrency)) {
-      return;
-    }
-
-    currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
-
-    convertedValue = convertFromValue * currencyToConvertTo.rate;
-
-    inputElementTo.value = convertedValue.toFixed(2);
+    await calculateExchange();
   });
 
   inputElementFrom.addEventListener('input', async () => {
@@ -224,6 +206,43 @@ async function addEventListenerForWhenSubmittingValue() {
     }
   });
 
+}
+
+async function calculateExchange() {
+
+  const inputElementFrom = document.querySelector('#input-from');
+  const inputElementTo = document.querySelector('#input-to');
+
+  let currencyFrom;
+  let currencyToConvertTo;
+  let convertFromValue;
+  let convertedValue;
+
+  const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+  const convertFromCurrency = dropdownInputFrom.value;
+
+  if (!validateCurrencyName(convertFromCurrency)) {
+    return;
+  }
+
+  const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
+
+  currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
+
+  convertFromValue = inputElementFrom.value * currencyFrom.rate;
+
+  const dropdownInputTo = document.querySelector('.dropdown-input-to');
+  const convertToCurrency = dropdownInputTo.value;
+
+  if (!validateCurrencyName(convertToCurrency)) {
+    return;
+  }
+
+  currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
+
+  convertedValue = convertFromValue * currencyToConvertTo.rate;
+
+  inputElementTo.value = convertedValue.toFixed(2);
 }
 
 async function getAYearsDataForSpecificCurrency() {
