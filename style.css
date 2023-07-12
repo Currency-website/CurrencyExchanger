@@ -24,14 +24,15 @@ header {
     display: flex;
 }
 
-.banner{
+.banner {
     display: flex;
     width: 100%;
 }
 
-.banner img{
+.banner img {
     width: 100%;
 }
+
 main {
     background-color: rgb(48, 46, 46);
     flex: 1;
@@ -42,43 +43,112 @@ main {
     /* overflow-y: scr}oll;  */
 }
 
-.input-container{
+.input-container {
     margin-top: 50px;
 }
-.dropdown-container, .input-container {
+
+.dropdown-container,
+.input-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.input-div{
+.dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+/* CSS */
+.dropdown-input-from, .dropdown-input-to {
+    align-items: center;
+    background-image: linear-gradient(144deg, #201926, #433b81 50%, #2d53bd);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 19px 24px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* .button-63:active,
+.button-63:hover {
+  outline: 0;
+} */
+
+@media (min-width: 768px) {
+    .button-63 {
+        font-size: 24px;
+        min-width: 196px;
+    }
+}
+
+.input-div {
     padding: 20px;
 }
-.input-container input{
+
+.input-container input {
     padding: 20px;
     font-size: 16px;
     border: none;
-    width: 200px;
+    /* width: 200px; */
 }
+
 input:focus {
     outline: none;
-  }
-  
+}
 
-.arrow-div{
+
+.arrow-div {
     font-size: 30px;
     opacity: 0.6;
 }
 
-.dropdown-div-from, .dropdown-div-to {
+.dropdown-div-from,
+.dropdown-div-to {
     padding: 5px 35px 55px;
     z-index: 1;
 }
-#input-from, #input-to{
+
+#input-from,
+#input-to {
     opacity: 0.8;
+    border-radius: 8px;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 19px 24px;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    text-decoration: none;
+}
+/* för att ta bort uppp och ned pilarna i input fälten */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
-.dropdown-input-to, .dropdown-input-from {
+/* 
+.dropdown-input-to,
+.dropdown-input-from {
     padding: 20px;
     font-size: 16px;
     border: none;
@@ -88,38 +158,72 @@ input:focus {
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-}
+} */
 
-.dropdown-choices-none{
+.dropdown-choices-none {
     display: none;
 }
 
-.show-dropdown{
+.show-dropdown {
     position: absolute;
     display: block;
     background-color: #f1f1f1;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    /* min-width: 200px; */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     max-height: calc(200px);
     overflow-y: scroll;
-    margin-top: 56px;
+    margin-top: 60px;
+    max-width: 100%;
+    padding: 19px 24px;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    border-radius: 8px;
+    background-color: #393064;
+    /* min-width: 290px; */
 }
+.show-dropdown::-webkit-scrollbar {
+    width: 8px; /* Justera bredden efter behov */
+  }
+  
+  .show-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .show-dropdown::-webkit-scrollbar-thumb {
+    background-color: #393064;
+    border-radius: 4px;
+  }
+  
+  .show-dropdown::-webkit-scrollbar-thumb:hover {
+    background-color: #675b89;
+  }
 
-.show-dropdown a{
-    position: relative;
+.show-dropdown a {
     padding: 12px 16px;
+    position: relative;
     text-decoration: none;
     display: block;
+    width: 100%;
+    color: #f1f1f1;
+    text-align: center;
+    min-width: 235px;
 }
 
-.exchange-result-div{
+.show-dropdown a:hover{
+    background-color: #675b89;
+}
+
+.exchange-result-div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.exchange-result-div h3{
+
+.exchange-result-div h3 {
     padding: 0px 0px 35px;
 }
+
 .currency-stats {
     display: flex;
     justify-content: space-between;
@@ -146,11 +250,12 @@ input:focus {
     flex: 1;
     margin: 0 10px;
 }
-.change-base-div{
+
+.change-base-div {
     display: flex;
 }
 
-.chart-div{
+.chart-div {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -166,32 +271,40 @@ footer {
     justify-content: space-around;
 }
 
-.footer-links{
+.footer-links {
     display: flex;
     flex-direction: column;
 }
-.footer-links a{
+
+.footer-links a {
     color: azure;
     opacity: 0.6;
     padding: 7px;
 }
-.contact-div b, .contact-div p{
+
+.contact-div b,
+.contact-div p {
     color: azure;
     opacity: 0.6;
     padding: 7px;
 }
-button, a {
+
+button,
+a {
     cursor: pointer;
     text-decoration: none;
 }
 
-button:hover, a:hover{
-    opacity: 0.9;
+button:hover,
+a:hover {
+    opacity: 0.7;
 }
-*{
+
+* {
     font-family: Arial, Helvetica, sans-serif;
 }
-i{
+
+i {
     padding-left: 4px;
     padding-right: 4px;
     cursor: pointer;
