@@ -1,0 +1,912 @@
+[
+    {
+        "date": "2023-01-12",
+        "currencyCode": "SEK",
+        "value": 10.408594
+    },
+    {
+        "date": "2023-01-13",
+        "currencyCode": "SEK",
+        "value": 10.403612
+    },
+    {
+        "date": "2023-01-14",
+        "currencyCode": "SEK",
+        "value": 10.403514
+    },
+    {
+        "date": "2023-01-15",
+        "currencyCode": "SEK",
+        "value": 10.367763
+    },
+    {
+        "date": "2023-01-16",
+        "currencyCode": "SEK",
+        "value": 10.41342
+    },
+    {
+        "date": "2023-01-17",
+        "currencyCode": "SEK",
+        "value": 10.43042
+    },
+    {
+        "date": "2023-01-18",
+        "currencyCode": "SEK",
+        "value": 10.331331
+    },
+    {
+        "date": "2023-01-19",
+        "currencyCode": "SEK",
+        "value": 10.312419
+    },
+    {
+        "date": "2023-01-20",
+        "currencyCode": "SEK",
+        "value": 10.294912
+    },
+    {
+        "date": "2023-01-21",
+        "currencyCode": "SEK",
+        "value": 10.295516
+    },
+    {
+        "date": "2023-01-22",
+        "currencyCode": "SEK",
+        "value": 10.287363
+    },
+    {
+        "date": "2023-01-23",
+        "currencyCode": "SEK",
+        "value": 10.238411
+    },
+    {
+        "date": "2023-01-24",
+        "currencyCode": "SEK",
+        "value": 10.211733
+    },
+    {
+        "date": "2023-01-25",
+        "currencyCode": "SEK",
+        "value": 10.196826
+    },
+    {
+        "date": "2023-01-26",
+        "currencyCode": "SEK",
+        "value": 10.268069
+    },
+    {
+        "date": "2023-01-27",
+        "currencyCode": "SEK",
+        "value": 10.308665
+    },
+    {
+        "date": "2023-01-28",
+        "currencyCode": "SEK",
+        "value": 10.30802
+    },
+    {
+        "date": "2023-01-29",
+        "currencyCode": "SEK",
+        "value": 10.31478
+    },
+    {
+        "date": "2023-01-30",
+        "currencyCode": "SEK",
+        "value": 10.398994
+    },
+    {
+        "date": "2023-01-31",
+        "currencyCode": "SEK",
+        "value": 10.441785
+    },
+    {
+        "date": "2023-02-01",
+        "currencyCode": "SEK",
+        "value": 10.31215
+    },
+    {
+        "date": "2023-02-02",
+        "currencyCode": "SEK",
+        "value": 10.384963
+    },
+    {
+        "date": "2023-02-03",
+        "currencyCode": "SEK",
+        "value": 10.537601
+    },
+    {
+        "date": "2023-02-04",
+        "currencyCode": "SEK",
+        "value": 10.548102
+    },
+    {
+        "date": "2023-02-05",
+        "currencyCode": "SEK",
+        "value": 10.532678
+    },
+    {
+        "date": "2023-02-06",
+        "currencyCode": "SEK",
+        "value": 10.615853
+    },
+    {
+        "date": "2023-02-07",
+        "currencyCode": "SEK",
+        "value": 10.573424
+    },
+    {
+        "date": "2023-02-08",
+        "currencyCode": "SEK",
+        "value": 10.587418
+    },
+    {
+        "date": "2023-02-09",
+        "currencyCode": "SEK",
+        "value": 10.343914
+    },
+    {
+        "date": "2023-02-10",
+        "currencyCode": "SEK",
+        "value": 10.557684
+    },
+    {
+        "date": "2023-02-11",
+        "currencyCode": "SEK",
+        "value": 10.478456
+    },
+    {
+        "date": "2023-02-12",
+        "currencyCode": "SEK",
+        "value": 10.453765
+    },
+    {
+        "date": "2023-02-13",
+        "currencyCode": "SEK",
+        "value": 10.372413
+    },
+    {
+        "date": "2023-02-14",
+        "currencyCode": "SEK",
+        "value": 10.358817
+    },
+    {
+        "date": "2023-02-15",
+        "currencyCode": "SEK",
+        "value": 10.419085
+    },
+    {
+        "date": "2023-02-16",
+        "currencyCode": "SEK",
+        "value": 10.458738
+    },
+    {
+        "date": "2023-02-17",
+        "currencyCode": "SEK",
+        "value": 10.455163
+    },
+    {
+        "date": "2023-02-18",
+        "currencyCode": "SEK",
+        "value": 10.451217
+    },
+    {
+        "date": "2023-02-19",
+        "currencyCode": "SEK",
+        "value": 10.462001
+    },
+    {
+        "date": "2023-02-20",
+        "currencyCode": "SEK",
+        "value": 10.346515
+    },
+    {
+        "date": "2023-02-21",
+        "currencyCode": "SEK",
+        "value": 10.375637
+    },
+    {
+        "date": "2023-02-22",
+        "currencyCode": "SEK",
+        "value": 10.421811
+    },
+    {
+        "date": "2023-02-23",
+        "currencyCode": "SEK",
+        "value": 10.430615
+    },
+    {
+        "date": "2023-02-24",
+        "currencyCode": "SEK",
+        "value": 10.503696
+    },
+    {
+        "date": "2023-02-25",
+        "currencyCode": "SEK",
+        "value": 10.505191
+    },
+    {
+        "date": "2023-02-26",
+        "currencyCode": "SEK",
+        "value": 10.486354
+    },
+    {
+        "date": "2023-02-27",
+        "currencyCode": "SEK",
+        "value": 10.389717
+    },
+    {
+        "date": "2023-02-28",
+        "currencyCode": "SEK",
+        "value": 10.47052
+    },
+    {
+        "date": "2023-03-01",
+        "currencyCode": "SEK",
+        "value": 10.435353
+    },
+    {
+        "date": "2023-03-02",
+        "currencyCode": "SEK",
+        "value": 10.506673
+    },
+    {
+        "date": "2023-03-03",
+        "currencyCode": "SEK",
+        "value": 10.456313
+    },
+    {
+        "date": "2023-03-04",
+        "currencyCode": "SEK",
+        "value": 10.455922
+    },
+    {
+        "date": "2023-03-05",
+        "currencyCode": "SEK",
+        "value": 10.484261
+    },
+    {
+        "date": "2023-03-06",
+        "currencyCode": "SEK",
+        "value": 10.448198
+    },
+    {
+        "date": "2023-03-07",
+        "currencyCode": "SEK",
+        "value": 10.731068
+    },
+    {
+        "date": "2023-03-08",
+        "currencyCode": "SEK",
+        "value": 10.725466
+    },
+    {
+        "date": "2023-03-09",
+        "currencyCode": "SEK",
+        "value": 10.727947
+    },
+    {
+        "date": "2023-03-10",
+        "currencyCode": "SEK",
+        "value": 10.703498
+    },
+    {
+        "date": "2023-03-11",
+        "currencyCode": "SEK",
+        "value": 10.708399
+    },
+    {
+        "date": "2023-03-12",
+        "currencyCode": "SEK",
+        "value": 10.660884
+    },
+    {
+        "date": "2023-03-13",
+        "currencyCode": "SEK",
+        "value": 10.609213
+    },
+    {
+        "date": "2023-03-14",
+        "currencyCode": "SEK",
+        "value": 10.474561
+    },
+    {
+        "date": "2023-03-15",
+        "currencyCode": "SEK",
+        "value": 10.604558
+    },
+    {
+        "date": "2023-03-16",
+        "currencyCode": "SEK",
+        "value": 10.506059
+    },
+    {
+        "date": "2023-03-17",
+        "currencyCode": "SEK",
+        "value": 10.4625
+    },
+    {
+        "date": "2023-03-18",
+        "currencyCode": "SEK",
+        "value": 10.639984
+    },
+    {
+        "date": "2023-03-19",
+        "currencyCode": "SEK",
+        "value": 10.509912
+    },
+    {
+        "date": "2023-03-20",
+        "currencyCode": "SEK",
+        "value": 10.370841
+    },
+    {
+        "date": "2023-03-21",
+        "currencyCode": "SEK",
+        "value": 10.338174
+    },
+    {
+        "date": "2023-03-22",
+        "currencyCode": "SEK",
+        "value": 10.299642
+    },
+    {
+        "date": "2023-03-23",
+        "currencyCode": "SEK",
+        "value": 10.334463
+    },
+    {
+        "date": "2023-03-24",
+        "currencyCode": "SEK",
+        "value": 10.656731
+    },
+    {
+        "date": "2023-03-25",
+        "currencyCode": "SEK",
+        "value": 10.656735
+    },
+    {
+        "date": "2023-03-26",
+        "currencyCode": "SEK",
+        "value": 10.407414
+    },
+    {
+        "date": "2023-03-27",
+        "currencyCode": "SEK",
+        "value": 10.368491
+    },
+    {
+        "date": "2023-03-28",
+        "currencyCode": "SEK",
+        "value": 10.357169
+    },
+    {
+        "date": "2023-03-29",
+        "currencyCode": "SEK",
+        "value": 10.399843
+    },
+    {
+        "date": "2023-03-30",
+        "currencyCode": "SEK",
+        "value": 10.358076
+    },
+    {
+        "date": "2023-03-31",
+        "currencyCode": "SEK",
+        "value": 10.378518
+    },
+    {
+        "date": "2023-04-01",
+        "currencyCode": "SEK",
+        "value": 10.378521
+    },
+    {
+        "date": "2023-04-02",
+        "currencyCode": "SEK",
+        "value": 10.424558
+    },
+    {
+        "date": "2023-04-03",
+        "currencyCode": "SEK",
+        "value": 10.365463
+    },
+    {
+        "date": "2023-04-04",
+        "currencyCode": "SEK",
+        "value": 10.274266
+    },
+    {
+        "date": "2023-04-05",
+        "currencyCode": "SEK",
+        "value": 10.415165
+    },
+    {
+        "date": "2023-04-06",
+        "currencyCode": "SEK",
+        "value": 10.427368
+    },
+    {
+        "date": "2023-04-07",
+        "currencyCode": "SEK",
+        "value": 10.472417
+    },
+    {
+        "date": "2023-04-08",
+        "currencyCode": "SEK",
+        "value": 10.472318
+    },
+    {
+        "date": "2023-04-09",
+        "currencyCode": "SEK",
+        "value": 10.468413
+    },
+    {
+        "date": "2023-04-10",
+        "currencyCode": "SEK",
+        "value": 10.51198
+    },
+    {
+        "date": "2023-04-11",
+        "currencyCode": "SEK",
+        "value": 10.446521
+    },
+    {
+        "date": "2023-04-12",
+        "currencyCode": "SEK",
+        "value": 10.335588
+    },
+    {
+        "date": "2023-04-13",
+        "currencyCode": "SEK",
+        "value": 10.266916
+    },
+    {
+        "date": "2023-04-14",
+        "currencyCode": "SEK",
+        "value": 10.331316
+    },
+    {
+        "date": "2023-04-15",
+        "currencyCode": "SEK",
+        "value": 10.331219
+    },
+    {
+        "date": "2023-04-16",
+        "currencyCode": "SEK",
+        "value": 10.337012
+    },
+    {
+        "date": "2023-04-17",
+        "currencyCode": "SEK",
+        "value": 10.354788
+    },
+    {
+        "date": "2023-04-18",
+        "currencyCode": "SEK",
+        "value": 10.308191
+    },
+    {
+        "date": "2023-04-19",
+        "currencyCode": "SEK",
+        "value": 10.356214
+    },
+    {
+        "date": "2023-04-20",
+        "currencyCode": "SEK",
+        "value": 10.308214
+    },
+    {
+        "date": "2023-04-21",
+        "currencyCode": "SEK",
+        "value": 10.290719
+    },
+    {
+        "date": "2023-04-22",
+        "currencyCode": "SEK",
+        "value": 10.290712
+    },
+    {
+        "date": "2023-04-23",
+        "currencyCode": "SEK",
+        "value": 10.304943
+    },
+    {
+        "date": "2023-04-24",
+        "currencyCode": "SEK",
+        "value": 10.24272
+    },
+    {
+        "date": "2023-04-25",
+        "currencyCode": "SEK",
+        "value": 10.307562
+    },
+    {
+        "date": "2023-04-26",
+        "currencyCode": "SEK",
+        "value": 10.318416
+    },
+    {
+        "date": "2023-04-27",
+        "currencyCode": "SEK",
+        "value": 10.29032
+    },
+    {
+        "date": "2023-04-28",
+        "currencyCode": "SEK",
+        "value": 10.262813
+    },
+    {
+        "date": "2023-04-29",
+        "currencyCode": "SEK",
+        "value": 10.262816
+    },
+    {
+        "date": "2023-04-30",
+        "currencyCode": "SEK",
+        "value": 10.260927
+    },
+    {
+        "date": "2023-05-01",
+        "currencyCode": "SEK",
+        "value": 10.335118
+    },
+    {
+        "date": "2023-05-02",
+        "currencyCode": "SEK",
+        "value": 10.30472
+    },
+    {
+        "date": "2023-05-03",
+        "currencyCode": "SEK",
+        "value": 10.256415
+    },
+    {
+        "date": "2023-05-04",
+        "currencyCode": "SEK",
+        "value": 10.23054
+    },
+    {
+        "date": "2023-05-05",
+        "currencyCode": "SEK",
+        "value": 10.219064
+    },
+    {
+        "date": "2023-05-06",
+        "currencyCode": "SEK",
+        "value": 10.21907
+    },
+    {
+        "date": "2023-05-07",
+        "currencyCode": "SEK",
+        "value": 10.176169
+    },
+    {
+        "date": "2023-05-08",
+        "currencyCode": "SEK",
+        "value": 10.173014
+    },
+    {
+        "date": "2023-05-09",
+        "currencyCode": "SEK",
+        "value": 10.192957
+    },
+    {
+        "date": "2023-05-10",
+        "currencyCode": "SEK",
+        "value": 10.218669
+    },
+    {
+        "date": "2023-05-11",
+        "currencyCode": "SEK",
+        "value": 10.332027
+    },
+    {
+        "date": "2023-05-12",
+        "currencyCode": "SEK",
+        "value": 10.490782
+    },
+    {
+        "date": "2023-05-13",
+        "currencyCode": "SEK",
+        "value": 10.473355
+    },
+    {
+        "date": "2023-05-14",
+        "currencyCode": "SEK",
+        "value": 10.387917
+    },
+    {
+        "date": "2023-05-15",
+        "currencyCode": "SEK",
+        "value": 10.348076
+    },
+    {
+        "date": "2023-05-16",
+        "currencyCode": "SEK",
+        "value": 10.41234
+    },
+    {
+        "date": "2023-05-17",
+        "currencyCode": "SEK",
+        "value": 10.448418
+    },
+    {
+        "date": "2023-05-18",
+        "currencyCode": "SEK",
+        "value": 10.564360968
+    },
+    {
+        "date": "2023-05-19",
+        "currencyCode": "SEK",
+        "value": 10.613892912
+    },
+    {
+        "date": "2023-05-20",
+        "currencyCode": "SEK",
+        "value": 10.613892716
+    },
+    {
+        "date": "2023-05-21",
+        "currencyCode": "SEK",
+        "value": 10.507667437
+    },
+    {
+        "date": "2023-05-22",
+        "currencyCode": "SEK",
+        "value": 10.565071828
+    },
+    {
+        "date": "2023-05-23",
+        "currencyCode": "SEK",
+        "value": 10.625807352
+    },
+    {
+        "date": "2023-05-24",
+        "currencyCode": "SEK",
+        "value": 10.716721229
+    },
+    {
+        "date": "2023-05-25",
+        "currencyCode": "SEK",
+        "value": 10.823219117
+    },
+    {
+        "date": "2023-05-26",
+        "currencyCode": "SEK",
+        "value": 10.812915352
+    },
+    {
+        "date": "2023-05-27",
+        "currencyCode": "SEK",
+        "value": 10.812917549
+    },
+    {
+        "date": "2023-05-28",
+        "currencyCode": "SEK",
+        "value": 10.80331742
+    },
+    {
+        "date": "2023-05-29",
+        "currencyCode": "SEK",
+        "value": 10.826892274
+    },
+    {
+        "date": "2023-05-30",
+        "currencyCode": "SEK",
+        "value": 10.866778619
+    },
+    {
+        "date": "2023-05-31",
+        "currencyCode": "SEK",
+        "value": 10.842366924
+    },
+    {
+        "date": "2023-06-01",
+        "currencyCode": "SEK",
+        "value": 10.808962664
+    },
+    {
+        "date": "2023-06-02",
+        "currencyCode": "SEK",
+        "value": 10.801121252
+    },
+    {
+        "date": "2023-06-03",
+        "currencyCode": "SEK",
+        "value": 10.80141605
+    },
+    {
+        "date": "2023-06-04",
+        "currencyCode": "SEK",
+        "value": 10.817716861
+    },
+    {
+        "date": "2023-06-05",
+        "currencyCode": "SEK",
+        "value": 10.851886153
+    },
+    {
+        "date": "2023-06-06",
+        "currencyCode": "SEK",
+        "value": 10.916179103
+    },
+    {
+        "date": "2023-06-07",
+        "currencyCode": "SEK",
+        "value": 10.893020357
+    },
+    {
+        "date": "2023-06-08",
+        "currencyCode": "SEK",
+        "value": 10.804813294
+    },
+    {
+        "date": "2023-06-09",
+        "currencyCode": "SEK",
+        "value": 10.827161972
+    },
+    {
+        "date": "2023-06-10",
+        "currencyCode": "SEK",
+        "value": 10.825715425
+    },
+    {
+        "date": "2023-06-11",
+        "currencyCode": "SEK",
+        "value": 10.823807035
+    },
+    {
+        "date": "2023-06-12",
+        "currencyCode": "SEK",
+        "value": 10.823916816
+    },
+    {
+        "date": "2023-06-13",
+        "currencyCode": "SEK",
+        "value": 10.691504787
+    },
+    {
+        "date": "2023-06-14",
+        "currencyCode": "SEK",
+        "value": 10.705618278
+    },
+    {
+        "date": "2023-06-15",
+        "currencyCode": "SEK",
+        "value": 10.605897034
+    },
+    {
+        "date": "2023-06-16",
+        "currencyCode": "SEK",
+        "value": 10.627264827
+    },
+    {
+        "date": "2023-06-17",
+        "currencyCode": "SEK",
+        "value": 10.627270866
+    },
+    {
+        "date": "2023-06-18",
+        "currencyCode": "SEK",
+        "value": 10.644711884
+    },
+    {
+        "date": "2023-06-19",
+        "currencyCode": "SEK",
+        "value": 10.741831096
+    },
+    {
+        "date": "2023-06-20",
+        "currencyCode": "SEK",
+        "value": 10.788484582
+    },
+    {
+        "date": "2023-06-21",
+        "currencyCode": "SEK",
+        "value": 10.65018377
+    },
+    {
+        "date": "2023-06-22",
+        "currencyCode": "SEK",
+        "value": 10.691914211
+    },
+    {
+        "date": "2023-06-23",
+        "currencyCode": "SEK",
+        "value": 10.67883592
+    },
+    {
+        "date": "2023-06-24",
+        "currencyCode": "SEK",
+        "value": 10.627576273
+    },
+    {
+        "date": "2023-06-25",
+        "currencyCode": "SEK",
+        "value": 10.722555979
+    },
+    {
+        "date": "2023-06-26",
+        "currencyCode": "SEK",
+        "value": 10.72279113
+    },
+    {
+        "date": "2023-06-27",
+        "currencyCode": "SEK",
+        "value": 10.728547032
+    },
+    {
+        "date": "2023-06-28",
+        "currencyCode": "SEK",
+        "value": 10.778450861
+    },
+    {
+        "date": "2023-06-29",
+        "currencyCode": "SEK",
+        "value": 10.863920889
+    },
+    {
+        "date": "2023-06-30",
+        "currencyCode": "SEK",
+        "value": 10.78721665
+    },
+    {
+        "date": "2023-07-01",
+        "currencyCode": "SEK",
+        "value": 10.787215873
+    },
+    {
+        "date": "2023-07-02",
+        "currencyCode": "SEK",
+        "value": 10.791917361
+    },
+    {
+        "date": "2023-07-03",
+        "currencyCode": "SEK",
+        "value": 10.8453194201
+    },
+    {
+        "date": "2023-07-04",
+        "currencyCode": "SEK",
+        "value": 10.8190096668
+    },
+    {
+        "date": "2023-07-05",
+        "currencyCode": "SEK",
+        "value": 10.9528193959
+    },
+    {
+        "date": "2023-07-06",
+        "currencyCode": "SEK",
+        "value": 10.9337273675
+    },
+    {
+        "date": "2023-07-07",
+        "currencyCode": "SEK",
+        "value": 10.8212194357
+    },
+    {
+        "date": "2023-07-08",
+        "currencyCode": "SEK",
+        "value": 10.821151145
+    },
+    {
+        "date": "2023-07-09",
+        "currencyCode": "SEK",
+        "value": 10.8336032106
+    },
+    {
+        "date": "2023-07-10",
+        "currencyCode": "SEK",
+        "value": 10.7600519018
+    },
+    {
+        "date": "2023-07-11",
+        "currencyCode": "SEK",
+        "value": 10.6601716927
+    },
+    {
+        "date": "2023-07-12",
+        "currencyCode": "SEK",
+        "value": 10.3711264067
+    }
+]
