@@ -1,5 +1,4 @@
 import config from './config.js';
-import { renderExclamationMarkPopup } from './popups.js';
 
 let currencyNames = [];
 const currencys = [];
@@ -33,18 +32,6 @@ export async function addEventListenersForCurrencyExchanger() {
     await showTheStrongestAndWeakestCurrencys("USD");
     await calculateExchange();
     await addEventListenerForWhenSubmittingValue();
-
-    addEventListenerForPopups();
-}
-
-function addEventListenerForPopups() {
-    const exclamationMarkIcons = document.querySelectorAll(".fa-circle-exclamation");
-
-    exclamationMarkIcons.forEach(icon => icon.addEventListener('click', event => {
-        const clickX = event.clientX;
-        const clickY = event.clientY;
-        renderExclamationMarkPopup(clickX, clickY);
-      }));
 }
 
 function addEventListenerForShowingDropdown() {
