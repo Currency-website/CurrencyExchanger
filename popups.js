@@ -25,8 +25,15 @@ async function renderExclamationMarkPopup(clickX, clickY) {
   const divElement = document.createElement('div');
   divElement.classList.add('exclamation-popup-div');
 
-  divElement.style.left = clickX + 200 + 'px';
-  divElement.style.top = clickY + 70 + 'px';
+  if (window.innerWidth <= 768) {
+    // Mobilstorlek - ändra positionen
+    divElement.style.left = clickX + 120 + 'px';
+    divElement.style.top = clickY + 50 + 'px';
+  } else {
+    // Annars använd tidigare positionering
+    divElement.style.left = clickX + 200 + 'px';
+    divElement.style.top = clickY + 70 + 'px';
+  }
 
   const popupHeader = document.createElement('div');
   popupHeader.classList.add('popup-header');
