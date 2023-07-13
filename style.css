@@ -22,7 +22,7 @@ header {
     height: 200px;
     width: 100%;
     display: flex;
-    background-image: linear-gradient(144deg, #161616, #212121 50%, #3a3a3a);
+    background-image: linear-gradient(144deg, #0b0b0b, #31233a 50%, #3a319d);
 }
 
 .banner {
