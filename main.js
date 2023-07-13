@@ -6,7 +6,6 @@ import { initChartRendering } from './chartRendering.js';
 
 
 async function main() {
-
   await initCurrencyExchanger();
   await addEventListenersForCurrencyExchanger();
   await initChartRendering();
