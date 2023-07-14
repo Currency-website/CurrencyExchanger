@@ -140,6 +140,14 @@ async function renderExclamationMarkPopup(clickX, clickY) {
   // icon.classList.add('fa', 'fa-window-close', 'popup-close-icon'); // Lägger till klassen 'popup-close-icon'
   // icon.setAttribute('aria-hidden', 'true');
 
+
+  //text för svagaste:
+  //När du växlar från {basvalutan} får du mindre av {den svagaste valutan}.
+
+  //text
+  //När du växlar från basvalutan får du mer av den starkaste valutan.
+
+
   const text = document.createElement('h4');
   text.classList.add('popup-title');
   text.innerHTML = "För tillfället hanterar vi inte alla valutor, för att se vilka som är med i beräkningen<br>vänligen se listan för knapparna ovan" ?? "Laddar text...";
