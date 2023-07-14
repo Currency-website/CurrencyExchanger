@@ -3,11 +3,16 @@ import config from './config.js';
 let currencyNames = [];
 const currencys = [];
 
+let lastUpdateCurrencyNames = null;
+let lastUpdateCurrenciesWithBase = null;
+let lastUpdateAllCurrencies = null;
+
+
 export async function initCurrencyExchanger() {
     const inputElementFrom = document.querySelector('#input-from');
     inputElementFrom.value = 100;
 
-    currencyNames = await getAllCurrencyNames();
+    await getAllCurrencyNames();
     //kan skippas sedan och endast använda av currencys
 }
 
@@ -343,22 +348,40 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
 
 async function getAllCurrencyNames() {
     const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
- 
+
+    const storedLastUpdateCurrencyNames = localStorage.getItem('lastUpdateCurrencyNames');
+    const storedCurrencyNames = localStorage.getItem('currencyNames');
+
     try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+        if (
+            storedLastUpdateCurrencyNames &&
+            Date.now() - parseInt(storedLastUpdateCurrencyNames) < 24 * 60 * 60 * 1000 &&
+            storedCurrencyNames
+        ) {
+            // Använd cachad data
+            alert('rätt');
+            currencyNames = JSON.parse(storedCurrencyNames);
 
-        const currencyRates = data.data;
+        } else {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
 
-        const currencyNames = Object.keys(currencyRates);
+            const currencyRates = data.data;
+            const foundCurrencyNames = Object.keys(currencyRates);
+            currencyNames = foundCurrencyNames;
 
-        return currencyNames;
+            // Uppdatera senaste uppdateringstidpunkt
+            lastUpdateCurrencyNames = Date.now();
 
+            localStorage.setItem('lastUpdateCurrencyNames', lastUpdateCurrencyNames.toString());
+            localStorage.setItem('currencyNames', JSON.stringify(currencyNames));
+
+            return currencyNames;
+        }
     } catch (error) {
         console.log(error);
         debugger;
     }
-
 }
 
 async function getAllCurrencys() {
