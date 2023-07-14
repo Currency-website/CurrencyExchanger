@@ -20,10 +20,27 @@ async function addEventListenerForPopups() {
     });
 
   }
-
   const closePopupIcons = document.querySelector('.popup-close-icon');
   closePopupIcons.addEventListener('click', closeExclamationPopup);
+
+  await addEventListenerForSendingFeedback();
 }
+
+// async function saveFeedback() {
+//   const inputElement = document.querySelector('.feedback-textarea');
+//   const feedback = inputElement.value;
+//   const feedbackData = { feedback };
+
+//   localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
+//   alert('Data saved to localStorage');
+//   await downloadFeedbackAsJSON();
+// }
+
+// async function downloadFeedbackAsJSON() {
+//   const googleFormsLink = 'https://docs.google.com/forms/d/e/your-form-id/viewform'; // Byt ut med din Google Forms-länk
+//   window.open(googleFormsLink, '_blank');
+// }
+
 
 async function toggleFeedbackPopup() {
 
@@ -37,6 +54,38 @@ async function toggleFeedbackPopup() {
   }
 }
 
+// async function renderFeedbackPopup() {
+//   const divElement = document.createElement('div');
+//   divElement.classList.add('feedback-popup-div');
+
+//   const popupHeader = document.createElement('div');
+//   popupHeader.classList.add('popup-header');
+
+//   const titleElement = document.createElement('h3');
+//   titleElement.classList.add('popup-date');
+//   titleElement.textContent = "Skicka gärna feedback till oss";
+
+//   const inputElement = document.createElement("textarea");
+//   inputElement.classList.add('feedback-textarea');
+
+
+//   const sendButton = document.createElement("button");
+//   sendButton.classList.add("send-mail-btn");
+//   sendButton.textContent = "Skicka";
+//   sendButton.addEventListener("click", await saveFeedback);
+
+//   const buttonDiv = document.createElement("div");
+//   buttonDiv.classList.add("flex-center");
+//   buttonDiv.appendChild(sendButton);
+
+//   divElement.appendChild(popupHeader);
+//   divElement.appendChild(titleElement);
+//   divElement.appendChild(inputElement);
+//   divElement.appendChild(buttonDiv);
+
+//   document.body.appendChild(divElement);
+// }
+
 async function renderFeedbackPopup() {
   const divElement = document.createElement('div');
   divElement.classList.add('feedback-popup-div');
@@ -48,21 +97,18 @@ async function renderFeedbackPopup() {
   titleElement.classList.add('popup-date');
   titleElement.textContent = "Skicka gärna feedback till oss";
 
-  const inputElement = document.createElement("textarea");
-  inputElement.classList.add('feedback-textarea');
+  const formLink = document.createElement("a");
+  formLink.classList.add("send-mail-btn");
+  formLink.innerHTML = "Till Google forms";
 
-
-  const sendButton = document.createElement("button");
-  sendButton.classList.add("send-mail-btn");
-  sendButton.textContent = "Skicka";
+  formLink.href = "https://docs.google.com/forms/d/1ce0VHPeDesKB6EHJ6vvnmQji77ocqcJTaRU1sGQz_D8/edit"; // Byt ut med din Google Forms-länk
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("flex-center");
-  buttonDiv.appendChild(sendButton);
+  buttonDiv.appendChild(formLink);
 
   divElement.appendChild(popupHeader);
   divElement.appendChild(titleElement);
-  divElement.appendChild(inputElement);
   divElement.appendChild(buttonDiv);
 
   document.body.appendChild(divElement);
@@ -119,7 +165,6 @@ async function toggleExclamationPopup(clickX, clickY) {
     isPopupOpen = true;
   }
 }
-
 
 function closeExclamationPopup() {
   const popUpDiv = document.querySelector('.exclamation-popup-div');

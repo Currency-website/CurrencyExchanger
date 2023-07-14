@@ -69,17 +69,17 @@ header {
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    top: 250px;
-    right: 0px;
+    top: 200px;
+    right: -50px;
     height: auto;
   }
 
-.feedback-popup-div textarea{
+/* .feedback-popup-div textarea{
     text-decoration: none;
     resize: none;
     font-size: 20px;
     height: 150px;
-  }
+  } */
 
   .send-mail-btn{
     background-image: linear-gradient(144deg, #544b5c, #635aa9 50%, #6b81c0);
@@ -91,10 +91,12 @@ header {
     font-size: 20px;
     justify-content: center;
     line-height: 1em;
-    max-width: 70px;
-    min-width: 40px;
-    padding: 15px 22px;
+    max-width: 100px;
+    min-width: 60px;
+    padding: 20px 30px;
     margin-top: 5px;
+    display: flex;
+    align-items: center;
   }
 
 main {
