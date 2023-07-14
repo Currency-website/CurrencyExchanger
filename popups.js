@@ -7,6 +7,9 @@ export async function initPopupRender() {
 async function addEventListenerForPopups() {
   const exclamationMarkIcons = document.querySelectorAll('.fa-circle-exclamation');
 
+  const feedbackBtn = document.querySelector("#feedback-btn");
+  feedbackBtn.addEventListener("click", await toggleFeedbackPopup);
+
   for (let i = 0; i < exclamationMarkIcons.length; i++) {
     const icon = exclamationMarkIcons[i];
     icon.addEventListener('click', async (event) => {
@@ -14,14 +17,39 @@ async function addEventListenerForPopups() {
       const clickY = event.clientY;
       await toggleExclamationPopup(clickX, clickY);
     });
+
   }
 
   const closePopupIcons = document.querySelector('.popup-close-icon');
   closePopupIcons.addEventListener('click', closeExclamationPopup);
 }
 
+async function toggleFeedbackPopup(){
+  const divElement = document.createElement('div');
+  divElement.classList.add('feedback-popup-div');
+
+  const popupHeader = document.createElement('div');
+  popupHeader.classList.add('popup-header');
+
+  const titleElement = document.createElement('h3');
+  titleElement.classList.add('popup-date');
+  titleElement.textContent = "Skicka gärna feedback till oss";
+
+  const inputElement = document.createElement("textarea");
+  inputElement.classList.add('feedback-textarea');
+
+  const sendButton = document.createElement("button");
+  sendButton.classList.add("send-mail-btn");
+
+  divElement.appendChild(popupHeader);
+  divElement.appendChild(titleElement);
+  divElement.appendChild(inputElement);
+  divElement.appendChild(sendButton);
+
+  document.body.appendChild(divElement);
+}
+
 async function renderExclamationMarkPopup(clickX, clickY) {
-  debugger;
   const divElement = document.createElement('div');
   divElement.classList.add('exclamation-popup-div');
 
