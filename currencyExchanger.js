@@ -359,7 +359,6 @@ async function getAllCurrencyNames() {
             storedCurrencyNames
         ) {
             // Använd cachad data
-            alert('rätt');
             currencyNames = JSON.parse(storedCurrencyNames);
 
         } else {
