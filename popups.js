@@ -38,13 +38,19 @@ async function toggleFeedbackPopup(){
   const inputElement = document.createElement("textarea");
   inputElement.classList.add('feedback-textarea');
 
+  
   const sendButton = document.createElement("button");
   sendButton.classList.add("send-mail-btn");
+  sendButton.textContent = "Skicka";
+  
+  const buttonDiv = document.createElement("div");
+  buttonDiv.classList.add("flex-center");
+  buttonDiv.appendChild(sendButton);
 
   divElement.appendChild(popupHeader);
   divElement.appendChild(titleElement);
   divElement.appendChild(inputElement);
-  divElement.appendChild(sendButton);
+  divElement.appendChild(buttonDiv);
 
   document.body.appendChild(divElement);
 }
