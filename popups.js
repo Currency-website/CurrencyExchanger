@@ -1,4 +1,5 @@
 let isPopupOpen = false;
+let isFeedbackOpen = false;
 
 export async function initPopupRender() {
   addEventListenerForPopups();
@@ -24,7 +25,19 @@ async function addEventListenerForPopups() {
   closePopupIcons.addEventListener('click', closeExclamationPopup);
 }
 
-async function toggleFeedbackPopup(){
+async function toggleFeedbackPopup() {
+
+  if (isFeedbackOpen) {
+    const popUpDiv = document.querySelector('.feedback-popup-div');
+    popUpDiv.remove(); // Stäng popupen om den är öppen
+    isFeedbackOpen = false;
+  } else {
+    await renderFeedbackPopup();
+    isFeedbackOpen = true;
+  }
+}
+
+async function renderFeedbackPopup() {
   const divElement = document.createElement('div');
   divElement.classList.add('feedback-popup-div');
 
@@ -38,11 +51,11 @@ async function toggleFeedbackPopup(){
   const inputElement = document.createElement("textarea");
   inputElement.classList.add('feedback-textarea');
 
-  
+
   const sendButton = document.createElement("button");
   sendButton.classList.add("send-mail-btn");
   sendButton.textContent = "Skicka";
-  
+
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("flex-center");
   buttonDiv.appendChild(sendButton);
