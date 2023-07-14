@@ -1,6 +1,7 @@
-.banner{
+.banner {
     justify-content: flex-start;
 }
+
 .banner img {
     max-width: 200px;
     max-height: 100px;
@@ -8,7 +9,6 @@
 
 .material-symbols-outlined {
     font-size: 2em;
-    opacity: 0.8;
 }
 
 .input-container input {

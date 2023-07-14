@@ -54,6 +54,7 @@ header {
     color: #ffffff;
     cursor: pointer;
     font-size: 3.5em;
+    opacity: 0.8;
 }
 
 .feedback-popup-div{
