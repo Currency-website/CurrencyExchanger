@@ -1,24 +1,18 @@
 import config from './config.js';
 
 let currencyNames = [];
-const currencys = [];
-
-let lastUpdateCurrencyNames = null;
-let lastUpdateCurrenciesWithBase = null;
-let lastUpdateAllCurrencies = null;
-
+let currencys = [];
+let lastUpdatedCurrencies = null;
 
 export async function initCurrencyExchanger() {
     const inputElementFrom = document.querySelector('#input-from');
     inputElementFrom.value = 100;
-
-    await getAllCurrencyNames();
-    //kan skippas sedan och endast använda av currencys
+    await getAllCurrenciesAndNames();
 }
 
 export async function addEventListenersForCurrencyExchanger() {
 
-    getAllCurrencys();
+    // getAllCurrencys();
     renderButtons();
     renderDropdownElementsFromButton();
     renderDropdownElementsToButton();
@@ -88,7 +82,6 @@ function addEventListenerForShowingDropdown() {
         dropdownChoicesFrom.classList.remove('show-dropdown');
         dropdownChoicesTo.classList.remove('show-dropdown');
     });
-
 }
 
 function addEventListenerForWhenChoosingCurrencyFrom() {
@@ -100,7 +93,6 @@ function addEventListenerForWhenChoosingCurrencyFrom() {
         dropdownChoicesFrom.classList.remove('show-dropdown'); // Ta bort klassen efter valet
     });
 }
-
 
 function addEventListenerForWhenChoosingCurrencyTo() {
     const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
@@ -144,7 +136,6 @@ function searchInDropdownFrom() {
     });
 }
 
-
 function searchInDropdownTo() {
     const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
     const dropdownInputTo = document.querySelector('.dropdown-input-to');
@@ -172,7 +163,6 @@ function searchInDropdownTo() {
         dropdownChoicesTo.classList.add('show-dropdown');
     });
 }
-
 
 async function addEventListenerForWhenSubmittingValue() {
     const formElement = document.querySelector('main');
@@ -232,7 +222,6 @@ async function addEventListenerForWhenSubmittingValue() {
             // await renderExchangeResult();
         }
     });
-
 }
 
 async function calculateExchange() {
@@ -253,9 +242,7 @@ async function calculateExchange() {
     }
 
     const currencysToConvert = await getAllCurrencysWithBase(convertFromCurrency);
-
     currencyFrom = currencysToConvert.find(c => c.code === convertFromCurrency);
-
     convertFromValue = inputElementFrom.value * currencyFrom.rate;
 
     const dropdownInputTo = document.querySelector('.dropdown-input-to');
@@ -264,11 +251,8 @@ async function calculateExchange() {
     if (!validateCurrencyName(convertToCurrency)) {
         return;
     }
-
     currencyToConvertTo = currencysToConvert.find(c => c.code === convertToCurrency);
-
     convertedValue = convertFromValue * currencyToConvertTo.rate;
-
     inputElementTo.value = convertedValue.toFixed(2);
 }
 
@@ -322,7 +306,6 @@ async function showTheStrongestAndWeakestCurrencys(baseCode = null) {
     weakestRateP.textContent = strongestAndWeakestCurrencys.weakest.rate;
 }
 
-
 async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     let strongest;
     let weakest;
@@ -331,8 +314,6 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
         baseCode = "USD";
     }
     const allCurrencys = await getAllCurrencysWithBase(baseCode);
-
-    // const baseCurrency = currencys.find(c => c.code == baseCode);
 
     for (const currency of allCurrencys) {
         if (!strongest || currency.rate < strongest.rate) {
@@ -345,21 +326,22 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     return { strongest, weakest };
 }
 
-
-async function getAllCurrencyNames() {
+async function getAllCurrenciesAndNames() {
     const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
 
-    const storedLastUpdateCurrencyNames = localStorage.getItem('lastUpdateCurrencyNames');
+    const storedlastUpdatedCurrencies = localStorage.getItem('lastUpdatedCurrencies');
     const storedCurrencyNames = localStorage.getItem('currencyNames');
+    const storedAllCurrencies = localStorage.getItem('currencys');
 
     try {
         if (
-            storedLastUpdateCurrencyNames &&
-            Date.now() - parseInt(storedLastUpdateCurrencyNames) < 24 * 60 * 60 * 1000 &&
+            storedlastUpdatedCurrencies &&
+            Date.now() - parseInt(storedlastUpdatedCurrencies) < 24 * 60 * 60 * 1000 &&
             storedCurrencyNames
         ) {
             // Använd cachad data
             currencyNames = JSON.parse(storedCurrencyNames);
+            currencys = JSON.parse(storedAllCurrencies);
 
         } else {
             const response = await fetch(apiUrl);
@@ -369,13 +351,22 @@ async function getAllCurrencyNames() {
             const foundCurrencyNames = Object.keys(currencyRates);
             currencyNames = foundCurrencyNames;
 
+            for (const currencyCode in currencyRates) {
+                if (currencyRates.hasOwnProperty(currencyCode)) {
+                    const currency = {
+                        code: currencyCode,
+                        rate: currencyRates[currencyCode]
+                    };
+                    currencys.push(currency);
+                }
+            }
             // Uppdatera senaste uppdateringstidpunkt
-            lastUpdateCurrencyNames = Date.now();
+            lastUpdatedCurrencies = Date.now();
 
-            localStorage.setItem('lastUpdateCurrencyNames', lastUpdateCurrencyNames.toString());
+            localStorage.setItem('lastUpdateCurrencyNames', lastUpdatedCurrencies.toString());
             localStorage.setItem('currencyNames', JSON.stringify(currencyNames));
 
-            return currencyNames;
+            localStorage.setItem('lastUpdatedAllCurrencies', JSON.stringify(currencys));
         }
     } catch (error) {
         console.log(error);
@@ -383,37 +374,56 @@ async function getAllCurrencyNames() {
     }
 }
 
-async function getAllCurrencys() {
 
-    let apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
+// async function getAllCurrencysWithBase(currencyCode) {
+//     const storedCurrenciesWithBase = localStorage.getItem('currenciesWithBase');
+//     const storedLastUpdatedCurrenciesWithBase = localStorage.getItem('lastUpdatedCurrenciesWithBase');
 
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+//     try {
+//         if (
+//             storedCurrenciesWithBase &&
+//             storedLastUpdatedCurrenciesWithBase &&
+//             Date.now() - parseInt(storedLastUpdatedCurrenciesWithBase) < 24 * 60 * 60 * 1000 &&
+//             currencyCode in JSON.parse(storedCurrenciesWithBase)
+//         ) {
+//             // Använd cachad data
+//             return JSON.parse(storedCurrenciesWithBase)[currencyCode];
+//         } else {
+//             const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
+//             const response = await fetch(apiUrl);
+//             const data = await response.json();
+//             const currencyRates = data.data;
 
-        const currencyRates = data.data;
+//             const currenciesToReturn = [];
 
-        for (const currencyCode in currencyRates) {
-            if (currencyRates.hasOwnProperty(currencyCode)) {
-                const currency = {
-                    code: currencyCode,
-                    rate: currencyRates[currencyCode]
-                };
-                currencys.push(currency);
-            }
-        }
+//             for (const currencyCode in currencyRates) {
+//                 if (currencyRates.hasOwnProperty(currencyCode)) {
+//                     const currency = {
+//                         code: currencyCode,
+//                         rate: currencyRates[currencyCode].value
+//                     };
+//                     currenciesToReturn.push(currency);
+//                 }
+//             }
 
-    } catch (error) {
-        console.log(error);
-        debugger;
-    }
+//             const currenciesWithBase = JSON.parse(storedCurrenciesWithBase) || {};
+//             currenciesWithBase[currencyCode] = currenciesToReturn;
 
-}
+//             localStorage.setItem('currenciesWithBase', JSON.stringify(currenciesWithBase));
+//             localStorage.setItem('lastUpdatedCurrenciesWithBase', Date.now().toString());
+
+//            return currenciesToReturn;
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         debugger;
+//     }
+// }
+
 
 async function getAllCurrencysWithBase(currencyCode) {
 
     let apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
-
 
     try {
         const response = await fetch(apiUrl);
@@ -438,7 +448,6 @@ async function getAllCurrencysWithBase(currencyCode) {
         console.log(error);
         debugger;
     }
-
 }
 
 function renderButtons() {
@@ -458,7 +467,6 @@ function renderButtons() {
     dropdownDivTo.appendChild(toInput);
 
 }
-
 
 function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
 
@@ -487,7 +495,6 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
 
         });
     }
-
 }
 
 function renderDropdownElementsToButton(listOfSpecificCodes = null) {
@@ -515,6 +522,4 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
 
         });
     }
-
-
 }
