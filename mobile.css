@@ -1,16 +1,36 @@
+.banner{
+    justify-content: flex-start;
+}
 .banner img {
     max-width: 200px;
     max-height: 100px;
 }
 
-
 .material-symbols-outlined {
-    font-size: 1em;
+    font-size: 2em;
+    opacity: 0.8;
 }
 
 .input-container input {
     width: 100px;
 }
+
+.feedback-popup-div {
+    font-size: 15px;
+    padding: 15px;
+    top: 200px;
+    right: -100px;
+}
+
+.send-mail-btn {
+    font-size: 15px;
+    text-align: center;
+    max-width: 80px;
+    min-width: 40px;
+    padding: 10px 20px;
+    margin-top: 5px;
+}
+
 
 #input-from,
 #input-to,
