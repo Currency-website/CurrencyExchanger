@@ -2,6 +2,8 @@ let isStrongestPopupOpen = false;
 let isWeakestPopupOpen = false;
 let isFeedbackOpen = false;
 
+import { strongestNameP, strongestRateP, weakestNameP, weakestRateP, baseCode } from "./currencyExchanger.js";
+
 export async function initPopupRender() {
   addEventListenerForPopups();
 }
@@ -38,7 +40,7 @@ async function addEventListenerForPopups() {
   // const closePopupIcons = document.querySelector('.popup-close-icon');
   // closePopupIcons.addEventListener('click', closePopup(popUpDiv));
 
- 
+
 }
 
 // async function saveFeedback() {
@@ -153,7 +155,7 @@ async function renderExclamationMarkPopup(clickX, clickY, icon) {
 
     const text = document.createElement('h4');
     text.classList.add('popup-title');
-    text.innerHTML = "När du växlar från {basvalutan} får du mindre av {den svagaste valutan}.";
+    text.innerHTML = `För 1 ${baseCode} får du ${weakestRateP.textContent} ${weakestNameP.textContent}.`;
     popupHeader.appendChild(titleElement);
     // popupHeader.appendChild(icon);
 
@@ -177,7 +179,7 @@ async function renderExclamationMarkPopup(clickX, clickY, icon) {
 
     const text = document.createElement('h4');
     text.classList.add('popup-title');
-    text.innerHTML = "När du växlar från basvalutan får du mer av den starkaste valutan.";
+    text.innerHTML = `För 1 ${baseCode} får du ${strongestRateP.textContent} ${strongestNameP.textContent}.`;
     popupHeader.appendChild(titleElement);
     // popupHeader.appendChild(icon);
 
