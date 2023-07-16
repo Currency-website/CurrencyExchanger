@@ -4,6 +4,12 @@ let currencyNames = [];
 let currencys = [];
 let lastUpdatedCurrencies = null;
 
+export let strongestNameP = null;
+export let strongestRateP = null;
+export let weakestNameP = null;
+export let weakestRateP = null;
+export let baseCode = "USD";
+
 export async function initCurrencyExchanger() {
     const inputElementFrom = document.querySelector('#input-from');
     inputElementFrom.value = 100;
@@ -272,31 +278,31 @@ function updateTheBaseCurrencyName(direction) {
     else if (direction == "left") {
         baseCurrencyElement.textContent = currencys[index - 1].code;
     }
-    return baseCurrencyElement.textContent;
+    baseCode = baseCurrencyElement.textContent;
 }
 
 function changeBaseCurrency() {
     const arrowLeft = document.querySelector(".fa-chevron-circle-left");
     const arrowRight = document.querySelector(".fa-chevron-circle-right");
-    let baseCode;
+    // let baseCode;
 
     arrowLeft.addEventListener("click", () => {
-        baseCode = updateTheBaseCurrencyName("left");
+        updateTheBaseCurrencyName("left");
         showTheStrongestAndWeakestCurrencys(baseCode);
     });
 
     arrowRight.addEventListener("click", () => {
-        baseCode = updateTheBaseCurrencyName("right");
+        updateTheBaseCurrencyName("right");
         showTheStrongestAndWeakestCurrencys(baseCode);
     });
 }
 
 async function showTheStrongestAndWeakestCurrencys(baseCode = null) {
 
-    const strongestNameP = document.querySelector("#strongest-currency-name");
-    const strongestRateP = document.querySelector("#strongest-currency-rate");
-    const weakestNameP = document.querySelector("#weakest-currency-name");
-    const weakestRateP = document.querySelector("#weakest-currency-rate");
+    strongestNameP = document.querySelector("#strongest-currency-name");
+    strongestRateP = document.querySelector("#strongest-currency-rate");
+    weakestNameP = document.querySelector("#weakest-currency-name");
+    weakestRateP = document.querySelector("#weakest-currency-rate");
 
     const strongestAndWeakestCurrencys = await getTheStrongestAndWeakestCurrency(baseCode);
 
@@ -310,7 +316,7 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     let strongest;
     let weakest;
 
-    if (baseCode == null || baseCode == undefined) {
+    if (baseCode === null || baseCode === undefined) {
         baseCode = "USD";
     }
     const allCurrencys = await getAllCurrencysWithBase(baseCode);

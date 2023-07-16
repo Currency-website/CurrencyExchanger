@@ -1,3 +1,12 @@
 .banner img {
     width: 100%;
 }
+
+.exclamation-weakest-popup-div{
+    top: 470px; /* Justera detta värde för att ändra vertikal position */
+    left: 480px; /* Justera detta värde för att ändra horisontell position */
+  }
+  .exclamation-strongest-popup-div{
+    top: 470px; /* Justera detta värde för att ändra vertikal position */
+    left: 140px; /* Justera detta värde för att ändra horisontell position */
+  }

@@ -308,12 +308,12 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0 10px;
 }
 
-.exclamation-popup-div {
+.exclamation-weakest-popup-div, .exclamation-strongest-popup-div {
     position: fixed;
     font-family: "Helvetica", Arial, sans-serif;
     color: rgb(255, 255, 255);
     transform: translate(-50%, -50%);
-    background-color: rgba(150, 144, 255, 0.9);
+    background-color: rgba(77, 72, 177, 0.9);
     border-radius: 8px;
     font-size: 14px;
     padding: 20px;
@@ -321,6 +321,18 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 9999;
     display: flex;
     flex-direction: column;
+  }
+  .exclamation-weakest-popup-div{
+    position: absolute;
+    top: 460px; /* Justera detta värde för att ändra vertikal position */
+    left: 800px; /* Justera detta värde för att ändra horisontell position */
+    transform: translate(-50%, -50%);
+  }
+  .exclamation-strongest-popup-div{
+    position: absolute;
+    top: 460px; /* Justera detta värde för att ändra vertikal position */
+    left: 300px; /* Justera detta värde för att ändra horisontell position */
+    transform: translate(-50%, -50%);
   }
 
   .flex-center{
