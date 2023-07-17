@@ -112,6 +112,7 @@ async function renderFeedbackPopup() {
 
   const titleElement = document.createElement('h3');
   titleElement.classList.add('popup-date');
+  titleElement.classList.add('popup-date');
   titleElement.textContent = "Skicka gärna feedback till oss";
 
   const formLink = document.createElement("a");
