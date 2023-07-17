@@ -1,9 +1,13 @@
 import config from "./config.js";
 
-const news = [];
+let news = [];
 
 export async function initNews() {
     await get5LatestNewsFromApi();
+}
+
+async function renderNews(){
+    
 }
 
 async function get5LatestNewsFromApi() {
@@ -18,7 +22,6 @@ async function get5LatestNewsFromApi() {
             Date.now() - parseInt(storedlastUpdatedNews) < 24 * 60 * 60 * 1000 &&
             storedNews
         ) {
-            // Använd cachad data
             news = JSON.parse(storedNews);
 
         } else {
