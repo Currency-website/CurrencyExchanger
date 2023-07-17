@@ -4,10 +4,30 @@ let news = [];
 
 export async function initNews() {
     await get5LatestNewsFromApi();
+    await renderNews();
 }
 
-async function renderNews(){
-    
+async function renderNews() {
+    const newsUl = document.querySelector("#news-list");
+
+    news.forEach(article => {
+        let newsLi = document.createElement("li");
+        let aElement = document.createElement("a");
+        aElement.classList.add("news-links");
+        // const title = article.title;
+        // const author = article.author;
+        // const publishedDate = new Date(article.published_utc).toLocaleString();
+        aElement.setAttribute('href', article.article_url);
+        aElement.textContent = article.title;
+
+        // console.log("Title:", title);
+        // console.log("Author:", author);
+        // console.log("Published Date:", publishedDate);
+        // console.log("Article URL:", articleUrl);
+        newsLi.appendChild(aElement);
+        newsUl.appendChild(newsLi);
+    });
+
 }
 
 async function get5LatestNewsFromApi() {
@@ -28,19 +48,7 @@ async function get5LatestNewsFromApi() {
             const response = await fetch(apiUrl);
             const data = await response.json();
 
-            const news = data.results;
-
-            news.forEach(article => {
-                const title = article.title;
-                const author = article.author;
-                const publishedDate = new Date(article.published_utc).toLocaleString();
-                const articleUrl = article.article_url;
-
-                console.log("Title:", title);
-                console.log("Author:", author);
-                console.log("Published Date:", publishedDate);
-                console.log("Article URL:", articleUrl);
-            });
+            news = data.results;
 
             const lastUpdatesNews = Date.now();
 
