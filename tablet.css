@@ -36,7 +36,9 @@
 #currencies-list li {
   margin: 6px;
   padding: 6px;
+  font-size: 18px;
 }
+
 
 #chartContainer {
   height: 200px !important;

@@ -244,6 +244,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .three-div-container {
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 20px;
+    max-height: auto;
 }
 
 .present-news-div{
@@ -290,6 +292,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .present-currencies-div p,
 .present-marketstatus-div p{
     padding: 10px;
+    font-size: 25px;
 }
 
 #news-list, #marketstatus-list, #currencies-list {
@@ -311,6 +314,7 @@ input[type="number"]::-webkit-outer-spin-button {
     list-style: none;
     margin: 10px;
     padding: 10px;
+    font-size: 25px;
 }
 
 .news-links, .marketStatusLinks{
@@ -324,6 +328,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .chartContainer{
-    height: 300px; 
+    height: 250px !important;
     width: 100%;
 }
