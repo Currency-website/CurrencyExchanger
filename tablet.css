@@ -22,7 +22,7 @@
   width: 200px;
   font-size: 15px;
   padding: 15px 20px;
-  max-height: 200px;
+  max-height: auto;
 }
 
 .present-news-div p,
@@ -36,4 +36,9 @@
 #currencies-list li {
   margin: 6px;
   padding: 6px;
+}
+
+#chartContainer {
+  height: 200px !important;
+  width: 100%;
 }

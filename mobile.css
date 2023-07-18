@@ -14,7 +14,10 @@
 .input-container {
     margin-top: 20px !important;
 }
-.input-to, .input-from,.dropdown-input-from,
+
+.input-to,
+.input-from,
+.dropdown-input-from,
 .dropdown-input-to {
     border-radius: 8px;
     font-size: 15px;
@@ -143,33 +146,46 @@
     /* Justera detta värde för att ändra horisontell position */
 }
 
+.three-div-container {
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 
-.present-news-div,
-.present-currencies-div,
-.present-marketstatus-div {
-    width: 100px;
+.hide-presentations {
+    width: 250px;
+    margin-left: 5px;
     font-size: 10px;
-    padding: 10px 15px;
-    max-height: 150px;
+    padding: 15px 20px;
+    max-height: 50px;
 }
 
-.present-news-div p,
-.present-currencies-div p,
-.present-marketstatus-div p {
-    padding: 6px;
+.hide-presentations p{
+    font-size: 15px;
 }
 
-#news-list li,
-#marketstatus-list li,
-#currencies-list li {
-    margin: 6px;
-    padding: 6px;
+.show-presentations {
+    width: 250px;
+    margin-left: 10px;
+    font-size: 12px;
+    padding: 15px 20px;
+    max-height: 250px;
+}
+
+.show-presentations p {
+    padding: 8px;
+    font-size: 15px;
+}
+
+.show-presentations li {
+    margin: 2px;
+    padding: 4px;
 }
 
 #chartContainer {
     height: 100px !important;
     width: 100%;
-  }
+}
 
 footer a,
 p,
