@@ -1,6 +1,7 @@
 import config from "./config.js";
 
 let marketStatus = [];
+
 const isStockExchangeOpenNow = isStockExchangeOpen();
 
 export async function initMarketStatus() {
@@ -8,15 +9,51 @@ export async function initMarketStatus() {
 }
 
 async function renderSwedenOpenHours() {
+
+    const now = new Date();
+    const dayOfWeek = now.getDay();
+    const hour = now.getHours();
+    const minutes = now.getMinutes();
+
+    // Helgdagar och speciella avvikande dagar
+    const holidays = [
+        { date: new Date(now.getFullYear(), 0, 5), name: "Trettondagsafton (Halvdag)" },
+        { date: new Date(now.getFullYear(), 0, 6), name: "Trettondagen (Stängt)" },
+        { date: new Date(now.getFullYear(), 3, 6), name: "Skärtorsdagen (Halvdag)" },
+        { date: new Date(now.getFullYear(), 3, 7), name: "Långfredagen (Stängt)" },
+        { date: new Date(now.getFullYear(), 3, 10), name: "Annandag påsk (Stängt)" },
+        { date: new Date(now.getFullYear(), 4, 1), name: "Första maj (Stängt)" },
+        { date: new Date(now.getFullYear(), 4, 17), name: "Dag före röd dag (Halvdag)" },
+        { date: new Date(now.getFullYear(), 4, 18), name: "Kristi himmelsfärd (Stängt)" },
+        { date: new Date(now.getFullYear(), 5, 6), name: "Sveriges nationaldag (Stängt)" },
+        { date: new Date(now.getFullYear(), 5, 23), name: "Midsommarafton (Stängt)" },
+        { date: new Date(now.getFullYear(), 10, 3), name: "Allhelgonaafton (Halvdag)" },
+        { date: new Date(now.getFullYear(), 11, 25), name: "Juldagen (Stängt)" },
+        { date: new Date(now.getFullYear(), 11, 26), name: "Annandag jul (Stängt)" }
+    ];
+
     const marketStatusUl = document.querySelector("#marketstatus-list");
 
     let marketStatusLi = document.createElement("li");
+    let marketOpenHours = document.createElement("li");
+    let marketHolidaysTitle = document.createElement("li");
 
-    marketStatusLi.textContent = `Stockholmsbörsen idag: ${isStockExchangeOpenNow.result}`;
+    marketStatusLi.textContent = `Stockholmsbörsen just nu: ${isStockExchangeOpenNow.result}`;
+    marketOpenHours.textContent = `Öppettider: vardagar 9-17:30`;
+
     marketStatusUl.appendChild(marketStatusLi);
+    marketStatusUl.appendChild(marketOpenHours);
 
+    marketHolidaysTitle.textContent = "Avvikande öppettider:";
 
-    marketStatusUl.appendChild(marketStatusLi);
+    marketStatusUl.appendChild(marketHolidaysTitle);
+
+    holidays.forEach(holiday => {
+        let holidayLi = document.createElement("li");
+        holidayLi.textContent = `${holiday.name}`;
+        marketStatusUl.appendChild(holidayLi);
+    });
+
 }
 
 
@@ -117,25 +154,26 @@ function isStockExchangeOpen() {
 
     // Helgdagar och speciella avvikande dagar
     const holidays = [
-        { date: new Date(now.getFullYear(), 0, 5), name: "Halvdag" },
+        { date: new Date(now.getFullYear(), 0, 5), name: "Trettondagsafton (Halvdag)" },
         { date: new Date(now.getFullYear(), 0, 6), name: "Trettondagen" },
-        { date: new Date(now.getFullYear(), 3, 6), name: "Halvdag" },
+        { date: new Date(now.getFullYear(), 3, 6), name: "Skärtorsdagen (Halvdag)" },
         { date: new Date(now.getFullYear(), 3, 7), name: "Långfredagen" },
         { date: new Date(now.getFullYear(), 3, 10), name: "Annandag påsk" },
         { date: new Date(now.getFullYear(), 4, 1), name: "Första maj" },
-        { date: new Date(now.getFullYear(), 4, 17), name: "Halvdag" },
+        { date: new Date(now.getFullYear(), 4, 17), name: "Dag före röd dag (Halvdag)" },
         { date: new Date(now.getFullYear(), 4, 18), name: "Kristi himmelsfärd" },
         { date: new Date(now.getFullYear(), 5, 6), name: "Sveriges nationaldag" },
         { date: new Date(now.getFullYear(), 5, 23), name: "Midsommarafton" },
-        { date: new Date(now.getFullYear(), 10, 3), name: "Halvdag" },
+        { date: new Date(now.getFullYear(), 10, 3), name: "Allhelgonaafton (Halvdag)" },
         { date: new Date(now.getFullYear(), 11, 25), name: "Juldagen" },
         { date: new Date(now.getFullYear(), 11, 26), name: "Annandag jul" }
     ];
 
+
     // Kontrollera om det är helgdag eller avvikande dag
     for (const holiday of holidays) {
         if (now.getTime() === holiday.date.getTime()) {
-            if (holiday.name === "Halvdag" && hour < 12) {
+            if (holiday.name.contains("Halvdag") && hour < 12) {
                 return { result: "Halvdag" }; // Börsen öppen halvdag
             } else {
                 return { result: "Stängt" }; // Börsen stängd helgdag eller avvikande dag

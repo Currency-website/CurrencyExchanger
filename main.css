@@ -254,14 +254,14 @@ input[type="number"]::-webkit-outer-spin-button {
     background-image: url('stock2.png');
     filter: brightness(0.7);
 }
-.present-stocks-div{
+.present-marketstatus-div{
     background-image: url('stock3.png');
     filter: brightness(0.7);
 }
 
 .present-news-div,
 .present-currencies-div,
-.present-stocks-div {
+.present-marketstatus-div{
     align-items: center;
     justify-content: center;
     width: 400px;
@@ -288,11 +288,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .present-news-div p,
 .present-currencies-div p,
-.present-stocks-div p{
+.present-marketstatus-div p{
     padding: 10px;
 }
 
-#news-list, #marketstatus-list {
+#news-list, #marketstatus-list, #currencies-list {
     /* display: flex;
     flex-direction: column; */
     display: block;
@@ -302,7 +302,7 @@ input[type="number"]::-webkit-outer-spin-button {
     overflow: auto;
 }
 
-#news-list li, #marketstatus-list li {
+#news-list li, #marketstatus-list li, #currencies-list li {
     background-color: rgba(26, 25, 28, 0.5);
     border-radius: 8px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -310,6 +310,7 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #FFFFFF;
     list-style: none;
     margin: 10px;
+    padding: 10px;
 }
 .news-links, .marketStatusLinks{
     color: white;
