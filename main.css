@@ -249,7 +249,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .present-news-div,
 .present-currencies-div,
 .present-stocks-div {
-    background-color: #474181;
+    background-color: hsl(263, 30%, 40%);
     align-items: center;
     justify-content: center;
     width: 400px;
@@ -291,7 +291,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #news-list li {
-    background-color: #7974a4;
+    background-image: linear-gradient(rgba(96, 72, 134, 0.5), rgba(96, 72, 134, 0.5)), url('depositphotos_54749199-stock-photo-glitter-vintage-lights-background-abstract.jpg');
     border-radius: 8px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
     box-sizing: border-box;
