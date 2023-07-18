@@ -281,9 +281,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #news-list {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    display: block;
     justify-content: space-evenly;
+    align-items: flex-start; 
     flex-grow: 1;
     overflow: auto;
 }
