@@ -180,6 +180,7 @@
 .show-presentations li {
     margin: 2px;
     padding: 4px;
+    font-size: 13px !important;
 }
 
 #chartContainer {

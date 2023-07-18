@@ -1,7 +1,7 @@
 /* här är allt som har med ENDAST footer att göra */
 footer {
     bottom: 0px;
-    height: auto;
+    max-height: auto;
     background-color: rgb(18, 17, 17);
     display: flex;
     align-items: center;
