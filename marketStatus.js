@@ -6,6 +6,26 @@ const isStockExchangeOpenNow = isStockExchangeOpen();
 
 export async function initMarketStatus() {
     renderSwedenOpenHours();
+
+    const marketStatusContainer = document.getElementById('marketstatus-container');
+    const marketStatusHeader = document.getElementById('marketstatus-header');
+
+    const newsContainer = document.getElementById('news-container');
+    const newsHeader = document.getElementById('news-header');
+
+    const currenciesContainer = document.getElementById('currencies-container');
+    const currenciesHeader = document.getElementById('currencies-header');
+
+    marketStatusHeader.addEventListener('click', function () {
+        marketStatusContainer.classList.toggle('show-presentations');
+    });
+    newsHeader.addEventListener('click', function () {
+        newsContainer.classList.toggle('show-presentations');
+    });
+    currenciesHeader.addEventListener('click', function () {
+        currenciesContainer.classList.toggle('show-presentations');
+    });
+
 }
 
 async function renderSwedenOpenHours() {
