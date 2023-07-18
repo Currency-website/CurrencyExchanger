@@ -1,12 +1,39 @@
 .banner img {
-    width: 100%;
+  width: 100%;
 }
 
-.exclamation-weakest-popup-div{
-    top: 470px; /* Justera detta värde för att ändra vertikal position */
-    left: 480px; /* Justera detta värde för att ändra horisontell position */
-  }
-  .exclamation-strongest-popup-div{
-    top: 470px; /* Justera detta värde för att ändra vertikal position */
-    left: 140px; /* Justera detta värde för att ändra horisontell position */
-  }
+.exclamation-weakest-popup-div {
+  top: 470px;
+  /* Justera detta värde för att ändra vertikal position */
+  left: 480px;
+  /* Justera detta värde för att ändra horisontell position */
+}
+
+.exclamation-strongest-popup-div {
+  top: 470px;
+  /* Justera detta värde för att ändra vertikal position */
+  left: 140px;
+  /* Justera detta värde för att ändra horisontell position */
+}
+
+.present-news-div,
+.present-currencies-div,
+.present-marketstatus-div {
+  width: 200px;
+  font-size: 15px;
+  padding: 15px 20px;
+  max-height: 200px;
+}
+
+.present-news-div p,
+.present-currencies-div p,
+.present-marketstatus-div p {
+  padding: 6px;
+}
+
+#news-list li,
+#marketstatus-list li,
+#currencies-list li {
+  margin: 6px;
+  padding: 6px;
+}
