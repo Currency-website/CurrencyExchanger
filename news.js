@@ -17,7 +17,7 @@ async function renderNews() {
         // const title = article.title;
         // const author = article.author;
         // const publishedDate = new Date(article.published_utc).toLocaleString();
-        aElement.setAttribute('href', article.article_url);
+        aElement.setAttribute('href', article.url);
         aElement.textContent = article.title;
 
         // console.log("Title:", title);
@@ -31,7 +31,7 @@ async function renderNews() {
 }
 
 async function get5LatestNewsFromApi() {
-    const apiUrl = `https://api.polygon.io/v2/reference/news?apiKey=${config.API_KEY_POLYGON}&limit=5`;
+    const apiUrl = `https://newsapi.org/v2/everything?q=ekonomi%20OR%20aktier%20OR%20valuta%20OR%20finans&apiKey=${config.API_KEY_NEWSAPI}&language=sv`;
 
     const storedlastUpdatedNews = localStorage.getItem('lastUpdatedNews');
     const storedNews = localStorage.getItem('news');
@@ -48,7 +48,7 @@ async function get5LatestNewsFromApi() {
             const response = await fetch(apiUrl);
             const data = await response.json();
 
-            news = data.results;
+            news = data.articles.slice(0, 5);
 
             const lastUpdatesNews = Date.now();
 
