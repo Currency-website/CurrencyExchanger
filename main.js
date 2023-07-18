@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', main);
-import config from './config.js';
 import { initCurrencyExchanger } from './currencyExchanger.js';
 import { addEventListenersForCurrencyExchanger } from './currencyExchanger.js';
 import { initChartRendering } from './chartRendering.js';
 import { initPopupRender } from './popups.js';
+import { initNews } from './news.js';
+import { initMarketStatus } from './marketStatus.js';
 
 
 async function main() {
@@ -11,6 +12,8 @@ async function main() {
   await addEventListenersForCurrencyExchanger();
   await initChartRendering();
   await initPopupRender();
+  await initNews();
+  await initMarketStatus();
 }
 
 

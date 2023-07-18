@@ -240,6 +240,82 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
 }
 
+/* här är allt för de tre kolumner, nyheter osv... */
+.three-div-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.present-news-div{
+    background-image: url('stock1.png');
+    filter: brightness(0.7);
+}
+.present-currencies-div{
+    background-image: url('stock2.png');
+    filter: brightness(0.7);
+}
+.present-marketstatus-div{
+    background-image: url('stock3.png');
+    filter: brightness(0.7);
+}
+
+.present-news-div,
+.present-currencies-div,
+.present-marketstatus-div{
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+    line-height: 1em;
+    padding: 19px 24px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    /* white-space: nowrap; */
+    text-align: center;
+    overflow: auto;
+    max-height: 300px;
+}
+
+.present-news-div p,
+.present-currencies-div p,
+.present-marketstatus-div p{
+    padding: 10px;
+}
+
+#news-list, #marketstatus-list, #currencies-list {
+    /* display: flex;
+    flex-direction: column; */
+    display: block;
+    justify-content: space-evenly;
+    align-items: flex-start; 
+    flex-grow: 1;
+    overflow: auto;
+}
+
+#news-list li, #marketstatus-list li, #currencies-list li {
+    background-color: rgba(26, 25, 28, 0.5);
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+}
+.news-links, .marketStatusLinks{
+    color: white;
+}
+
 .chart-div {
     display: flex;
     justify-content: center;
