@@ -246,10 +246,22 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: space-evenly;
 }
 
+.present-news-div{
+    background-image: url('stock1.png');
+    filter: brightness(0.7);
+}
+.present-currencies-div{
+    background-image: url('stock2.png');
+    filter: brightness(0.7);
+}
+.present-stocks-div{
+    background-image: url('stock3.png');
+    filter: brightness(0.7);
+}
+
 .present-news-div,
 .present-currencies-div,
 .present-stocks-div {
-    background-color: hsl(263, 30%, 40%);
     align-items: center;
     justify-content: center;
     width: 400px;
@@ -280,7 +292,7 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 10px;
 }
 
-#news-list {
+#news-list, #marketstatus-list {
     /* display: flex;
     flex-direction: column; */
     display: block;
@@ -290,8 +302,8 @@ input[type="number"]::-webkit-outer-spin-button {
     overflow: auto;
 }
 
-#news-list li {
-    background-image: linear-gradient(rgba(96, 72, 134, 0.5), rgba(96, 72, 134, 0.5)), url('depositphotos_54749199-stock-photo-glitter-vintage-lights-background-abstract.jpg');
+#news-list li, #marketstatus-list li {
+    background-image: linear-gradient(rgba(96, 72, 134, 0.5), rgba(96, 72, 134, 0.5)), url('569676-blue-purple.jpg');
     border-radius: 8px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
     box-sizing: border-box;
@@ -299,7 +311,7 @@ input[type="number"]::-webkit-outer-spin-button {
     list-style: none;
     margin: 10px;
 }
-.news-links{
+.news-links, .marketStatusLinks{
     color: white;
 }
 

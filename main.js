@@ -4,6 +4,7 @@ import { addEventListenersForCurrencyExchanger } from './currencyExchanger.js';
 import { initChartRendering } from './chartRendering.js';
 import { initPopupRender } from './popups.js';
 import { initNews } from './news.js';
+import { initMarketStatus } from './marketStatus.js';
 
 
 async function main() {
@@ -12,6 +13,7 @@ async function main() {
   await initChartRendering();
   await initPopupRender();
   await initNews();
+  await initMarketStatus();
 }
 
 
