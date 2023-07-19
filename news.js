@@ -48,19 +48,21 @@ async function get5LatestNewsFromApi() {
 
             let counter = 0;
 
-            for (const article of data.articles) {
-                if (counter == 5) {
-                    break;
+            if (data.articles) {
+                for (const article of data.articles) {
+                    if (counter === 5) {
+                        break;
+                    }
+                    save5latestNews.push(article);
+                    counter++;
                 }
-                save5latestNews.push(article);
-                counter++;
+                news = save5latestNews;
+
+                const lastUpdatesNews = Date.now();
+
+                localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
+                localStorage.setItem('news', JSON.stringify(news));
             }
-            news = save5latestNews;
-
-            const lastUpdatesNews = Date.now();
-
-            localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
-            localStorage.setItem('news', JSON.stringify(news));
 
         }
     } catch (error) {
