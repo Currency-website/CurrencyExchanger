@@ -47,7 +47,8 @@ async function get5LatestNewsFromApi() {
             let save5latestNews = [];
 
             let counter = 0;
-            for (let article of data.articles) {
+
+            for (const article of data.articles) {
                 if (counter == 5) {
                     break;
                 }
