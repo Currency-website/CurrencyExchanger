@@ -323,13 +323,15 @@ input[type="number"]::-webkit-outer-spin-button {
     color: white;
 }
 
-.chart-div {
+/* .chart-div {
     display: flex;
     justify-content: center;
     align-content: center;
-}
+} */
 
-.chartContainer{
-    height: 250px !important;
-    width: 100%;
+#chartContainer{
+    /* height: 250px !important;
+    width: 100%; */
+    margin-bottom: 20px !important;
+    margin-top: 20px !important;
 }
