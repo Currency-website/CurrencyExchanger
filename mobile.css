@@ -153,12 +153,18 @@
     margin-top: 15px;
 }
 
+.marketstatus-header, .currencies-header, .news-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .hide-presentations {
     width: 250px;
     margin-left: 5px;
     font-size: 10px;
     /* padding: 15px 20px; */
-    max-height: 50px;
+   max-height: 50px;
 }
 
 .hide-presentations p{
@@ -176,7 +182,7 @@
 }
 
 .show-presentations p {
-    padding: 0px;
+    padding: 15px 20px;
     font-size: 15px;
 }
 
