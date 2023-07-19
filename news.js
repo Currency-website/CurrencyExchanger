@@ -48,13 +48,13 @@ async function get5LatestNewsFromApi() {
             const response = await fetch(apiUrl);
             const data = await response.json();
 
-            news = data.articles.slice(0, 5);
+            if (data.articles && data.articles.length > 0) {
+                news = data.articles.slice(0, 5);
 
-            const lastUpdatesNews = Date.now();
-
-            localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
-            localStorage.setItem('news', JSON.stringify(news));
-
+                const lastUpdatedNews = Date.now();
+                localStorage.setItem('lastUpdatedNews', lastUpdatedNews.toString());
+                localStorage.setItem('news', JSON.stringify(news));
+            }
 
         }
     } catch (error) {
