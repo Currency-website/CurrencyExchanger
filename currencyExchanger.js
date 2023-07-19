@@ -454,7 +454,7 @@ async function getAllCurrenciesAndNames() {
 // }
 
 
-async function getAllCurrencysWithBase(currencyCode) {
+async function getAllCurrencysWithBase(currencyCode, isCrypto = false) {
 
     let apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}&base_currency=${currencyCode}`;
 
@@ -468,11 +468,17 @@ async function getAllCurrencysWithBase(currencyCode) {
 
         for (const currencyCode in currencyRates) {
             if (currencyRates.hasOwnProperty(currencyCode)) {
-                const currency = {
-                    code: currencyCode,
-                    rate: currencyRates[currencyCode].value
-                };
-                currencysToReturn.push(currency);
+                //om det inte är krypto - ta bara med om currencyCode matchar namnen i currencyNames
+                if (!isCrypto || isCrypto === undefined ){
+                    if(currencyNames.includes(currencyCode))
+                    {
+                        const currency = {
+                            code: currencyCode,
+                            rate: currencyRates[currencyCode].value
+                        };
+                        currencysToReturn.push(currency);
+                    }
+                }
             }
         }
         return currencysToReturn;
