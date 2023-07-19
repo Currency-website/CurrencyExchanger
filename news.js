@@ -25,7 +25,7 @@ async function renderNews() {
 }
 
 async function get5LatestNewsFromApi() {
-    const apiUrl = `https://newsapi.org/v2/everything?q=ekonomi%20OR%20aktier%20OR%20valuta%20OR%20finans&apiKey=${config.API_KEY_NEWSAPI}&language=sv`;
+    const apiUrl = `https://newsapi.org/v2/everything?q=ekonomi%20OR%20aktier%20OR%20valuta%20OR%20finans%20OR%20krypto&apiKey=${config.API_KEY_NEWSAPI}&language=sv`;
 
     const storedlastUpdatedNews = localStorage.getItem('lastUpdatedNews');
     const storedNews = localStorage.getItem('news');
@@ -42,13 +42,24 @@ async function get5LatestNewsFromApi() {
             const response = await fetch(apiUrl);
             const data = await response.json();
 
-            news = data.articles.slice(0, 5);
+            // news = data.articles;
+
+            let save5latestNews = [];
+
+            let counter = 0;
+            for (let article of data.articles) {
+                if (counter == 5) {
+                    break;
+                }
+                save5latestNews.push(article);
+                counter++;
+            }
+            news = save5latestNews;
 
             const lastUpdatesNews = Date.now();
 
             localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
             localStorage.setItem('news', JSON.stringify(news));
-
 
         }
     } catch (error) {
