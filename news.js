@@ -25,7 +25,7 @@ async function renderNews() {
 }
 
 async function get5LatestNewsFromApi() {
-    const apiUrl = `https://newsapi.org/v2/everything?q=ekonomi%20OR%20aktier%20OR%20valuta%20OR%20finans%20OR%20krypto&apiKey=${config.API_KEY_NEWSAPI}&language=sv`;
+    const apiUrl = `https://gnews.io/api/v4/search?q=inflation%20OR%20stockmarket%20OR%20crypto%20OR%20currency&lang=en&country=sv&max=10&apikey=${config.API_KEY_GNEWS}`;
 
     const storedlastUpdatedNews = localStorage.getItem('lastUpdatedNews');
     const storedNews = localStorage.getItem('news');
