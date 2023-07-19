@@ -78,7 +78,8 @@
     padding: 12px 16px;
     font-size: 15px;
     line-height: 1em;
-    z-index: 2;
+    max-height: calc(200px);
+    min-width: 50px;
 }
 
 .show-dropdown a {
@@ -156,30 +157,33 @@
     width: 250px;
     margin-left: 5px;
     font-size: 10px;
-    padding: 15px 20px;
+    /* padding: 15px 20px; */
     max-height: 50px;
 }
 
 .hide-presentations p{
     font-size: 15px;
+    padding: 4px;
 }
 
 .show-presentations {
     width: 250px;
     margin-left: 10px;
     font-size: 12px;
-    padding: 15px 20px;
+    padding: 5px 10px;
     max-height: 250px;
+    overflow-x: hidden;
 }
 
 .show-presentations p {
-    padding: 8px;
+    padding: 0px;
     font-size: 15px;
 }
 
 .show-presentations li {
-    margin: 2px;
-    padding: 4px;
+    margin: 0px;
+    margin-top: 2px;
+    padding: 0px !important;
     font-size: 13px !important;
 }
 
