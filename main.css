@@ -8,25 +8,32 @@ main {
     border-top: 2px solid rgba(48, 48, 48, 0.957);
     width: 100%;
 }
-.h1-div{
+
+.h1-div {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
 }
+
 .page-title {
-    color: transparent; /* Gör den befintliga texten osynlig */
-    background-image: url('gold.jpg'); /* Ange sökvägen till din bild */
-    background-clip: text; /* Använd text som klipplats för bakgrundsbilden */
-    -webkit-background-clip: text; /* För äldre webbläsare som stöder det */
-    padding: 5px 10px; /* Lägg till lite utrymme runt texten för estetik */
-    border-radius: 5px; /* Runda hörnen för en mjukare look */
+    color: transparent;
+    /* Gör den befintliga texten osynlig */
+    background-image: url('gold.jpg');
+    /* Ange sökvägen till din bild */
+    background-clip: text;
+    /* Använd text som klipplats för bakgrundsbilden */
+    -webkit-background-clip: text;
+    /* För äldre webbläsare som stöder det */
+    padding: 5px 10px;
+    /* Lägg till lite utrymme runt texten för estetik */
+    border-radius: 5px;
+    /* Runda hörnen för en mjukare look */
     font-weight: lighter;
     font-size: 25px;
-    font-family: "Roboto", sans-serif !important; /* Använd en sans-serif font-family för en modern stil */
+    font-family: "Roboto", sans-serif !important;
+    /* Använd en sans-serif font-family för en modern stil */
 }
-
-
 
 .input-container {
     margin-top: 50px;
@@ -270,22 +277,24 @@ input[type="number"]::-webkit-outer-spin-button {
     max-height: auto;
 }
 
-.present-news-div{
+.present-news-div {
     background-image: url('stock1.png');
     filter: brightness(0.7);
 }
-.present-currencies-div{
+
+.present-currencies-div {
     background-image: url('stock2.png');
     filter: brightness(0.7);
 }
-.present-marketstatus-div{
+
+.present-marketstatus-div {
     background-image: url('stock3.png');
     filter: brightness(0.7);
 }
 
 .present-news-div,
 .present-currencies-div,
-.present-marketstatus-div{
+.present-marketstatus-div {
     align-items: center;
     justify-content: center;
     width: 450px;
@@ -312,22 +321,26 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .present-news-div p,
 .present-currencies-div p,
-.present-marketstatus-div p{
+.present-marketstatus-div p {
     padding: 10px;
     font-size: 25px;
 }
 
-#news-list, #marketstatus-list, #currencies-list {
+#news-list,
+#marketstatus-list,
+#currencies-list {
     /* display: flex;
     flex-direction: column; */
     display: block;
     justify-content: space-evenly;
-    align-items: flex-start; 
+    align-items: flex-start;
     flex-grow: 1;
     overflow: auto;
 }
 
-#news-list li, #marketstatus-list li, #currencies-list li {
+#news-list li,
+#marketstatus-list li,
+#currencies-list li {
     background-color: rgba(26, 25, 28, 0.5);
     border-radius: 8px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -339,16 +352,45 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 25px;
 }
 
-.news-links, .marketStatusLinks{
+.news-links,
+.marketStatusLinks {
     color: white;
 }
+
 .chart-div {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
+    max-height: 300px;
+    margin-top: 20px;
+    /* Lägg till en margin-top för att skapa avstånd från element ovanför */
+    margin-bottom: 20px;
+    /* Lägg till en margin-bottom för att skapa avstånd från element nedanför */
+    background-color: rgba(53, 53, 53, 0.2);
+    /* Bakgrundsfärg med 20% opacitet (eller den önskade effekten) */
+    /* padding: 5px 10px; */
+    /* Lägg till lite utrymme runt texten för estetik */
+    border-radius: 5px;
+    /* Runda hörnen för en mjukare look */
+    font-weight: lighter;
+    font-size: 25px;
+    font-family: "Roboto", sans-serif;
+    /* Använd en sans-serif font-family för en modern stil */
+}
+
+.canvasjs-chart-canvas {
+    width: 100% !important;
+    height: 300px;
+    position: absolute;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    cursor: default;
 }
 
 #chartContainer {
-    height: 300px !important;
-    max-width: calc(100% - 10px);
+    height: 300px;
+    /* Ange den önskade höjden för chartContainer */
+    position: relative !important;
+    width: calc(100% - 20px);
 }
