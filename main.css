@@ -234,7 +234,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .exclamation-weakest-popup-div {
     position: absolute;
     /* vertikala positionen: */
-    top: 460px;
+    top: 520px;
     /* horisontella positionen */
     left: 50%;
     transform: translate(-50%, -50%);
@@ -242,7 +242,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .exclamation-strongest-popup-div {
     position: absolute;
-    top: 460px;
+    top: 520px;
     left: 200px;
     transform: translate(-50%, -50%);
 }

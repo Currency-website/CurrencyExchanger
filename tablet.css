@@ -2,15 +2,23 @@
   width: 100%;
 }
 
+.page-title {
+  text-align: center;
+  font-size: 15px;
+}
+.input-container {
+  margin-top: 20px;
+}
+
 .exclamation-weakest-popup-div {
-  top: 470px;
+  top: 500px;
   /* Justera detta värde för att ändra vertikal position */
   left: 480px;
   /* Justera detta värde för att ändra horisontell position */
 }
 
 .exclamation-strongest-popup-div {
-  top: 470px;
+  top: 500px;
   /* Justera detta värde för att ändra vertikal position */
   left: 140px;
   /* Justera detta värde för att ändra horisontell position */
