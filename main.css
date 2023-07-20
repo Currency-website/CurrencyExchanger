@@ -13,7 +13,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 1.2em;
 }
 
 .page-title {
@@ -25,12 +25,12 @@ main {
     /* Använd text som klipplats för bakgrundsbilden */
     -webkit-background-clip: text;
     /* För äldre webbläsare som stöder det */
-    padding: 5px 10px;
+    padding: 0.3em 0.6em;
     /* Lägg till lite utrymme runt texten för estetik */
     border-radius: 5px;
     /* Runda hörnen för en mjukare look */
     font-weight: lighter;
-    font-size: 20px;
+    font-size: 1.2em;
     line-height: 1em;
     font-family: "Roboto", sans-serif !important;
     text-align: center;
@@ -38,7 +38,7 @@ main {
 }
 
 .input-container {
-    margin-top: 35px;
+    margin-top: 1.5em;
 }
 
 .dropdown-container,
@@ -71,8 +71,8 @@ main {
     justify-content: center;
     line-height: 1em;
     max-width: 100%;
-    min-width: 140px;
-    padding: 19px 24px;
+    min-width: 6em;
+    padding: 1.0em 1.2em;
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
@@ -114,8 +114,8 @@ input:focus {
     opacity: 0.8;
     border-radius: 8px;
     max-width: 100%;
-    min-width: 140px;
-    padding: 19px 24px;
+    min-width: 6em;
+    padding: 1.0em 1.2em;
     font-size: 20px;
     justify-content: center;
     line-height: 1em;
@@ -138,14 +138,13 @@ input[type="number"]::-webkit-outer-spin-button {
     position: absolute;
     display: block;
     background-color: #f1f1f1;
-    /* min-width: 200px; */
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    max-height: calc(300px);
+    max-height: calc(10em);
     overflow-y: scroll;
     margin-top: 60px;
     max-width: 100%;
-    min-width: 140px;
-    padding: 19px 24px;
+    min-width: 14.5em;
+    padding: 1.0em 1.2em;
     font-size: 20px;
     justify-content: center;
     line-height: 1em;
@@ -176,10 +175,10 @@ input[type="number"]::-webkit-outer-spin-button {
     position: relative;
     text-decoration: none;
     display: block;
-    width: 100%;
+    max-width: 100%;
     color: #f1f1f1;
     text-align: center;
-    min-width: 235px;
+    width: 100%;
 }
 
 .show-dropdown a:hover {
