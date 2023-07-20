@@ -27,7 +27,7 @@
 }
 
 .input-container {
-    margin-top: 20px !important;
+    margin-top: 0.6em !important;
 }
 
 .input-to,
@@ -225,4 +225,14 @@ footer a,
 p,
 b {
     font-size: 10px;
+}
+
+.three-div-container {
+    flex-direction: column; /* Ändra layouten till kolumn vid mindre skärmar */
+    align-items: center;
+}
+.present-news-div,
+.present-currencies-div,
+.present-marketstatus-div {
+    width: 30em; /* Ta upp hela bredden på mindre skärmar */
 }
