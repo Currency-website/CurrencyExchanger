@@ -47,6 +47,14 @@
   font-size: 18px;
 }
 
+.canvasjs-chart-canvas {
+  width: 100% !important;
+  height: auto;
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  cursor: default;
+}
 
 #chartContainer {
   height: 200px !important;
