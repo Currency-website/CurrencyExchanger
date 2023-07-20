@@ -3,9 +3,28 @@ import config from "./config.js";
 let news = [];
 
 export async function initNews() {
-    await get5LatestNewsFromApi();
-    await renderNews();
+    const lastUpdatedTime = localStorage.getItem('lastUpdatedNews');
+    const currentTime = Date.now();
+    const twelveHours = 12 * 60 * 60 * 1000;
+
+    if (lastUpdatedTime && currentTime - parseInt(lastUpdatedTime) < twelveHours) {
+        const storedNews = localStorage.getItem('news');
+        if (storedNews) {
+            news = JSON.parse(storedNews);
+            await renderNews();
+        }
+    } else {
+        await get5LatestNewsFromApi();
+        await renderNews();
+    }
+
+    // // Sätt en timer för att göra nya API-anrop var 12:e timme (43200000 millisekunder)
+    // setInterval(async () => {
+    //     await get5LatestNewsFromApi();
+    //     await renderNews();
+    // }, twelveHours);
 }
+
 
 async function renderNews() {
     const newsUl = document.querySelector("#news-list");
@@ -28,6 +47,8 @@ async function get5LatestNewsFromApi() {
     const apiUrl = `https://gnews.io/api/v4/search?q=inflation%20OR%20stockmarket%20OR%20crypto%20OR%20currency&lang=en&country=sv&max=10&apikey=${config.API_KEY_GNEWS}`;
 
     try {
+        news = [];
+
         const response = await fetch(apiUrl);
         const data = await response.json();
 
@@ -49,8 +70,6 @@ async function get5LatestNewsFromApi() {
 
             localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
             localStorage.setItem('news', JSON.stringify(news));
-
-            await renderNews(); // Uppdatera nyhetslistan efter att nyheterna har hämtats och sparats
         }
     } catch (error) {
         console.log(error);
