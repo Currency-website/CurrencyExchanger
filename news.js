@@ -27,43 +27,30 @@ async function renderNews() {
 async function get5LatestNewsFromApi() {
     const apiUrl = `https://gnews.io/api/v4/search?q=inflation%20OR%20stockmarket%20OR%20crypto%20OR%20currency&lang=en&country=sv&max=10&apikey=${config.API_KEY_GNEWS}`;
 
-    const storedlastUpdatedNews = localStorage.getItem('lastUpdatedNews');
-    const storedNews = localStorage.getItem('news');
-
     try {
-        if (
-            storedlastUpdatedNews &&
-            Date.now() - parseInt(storedlastUpdatedNews) < 24 * 60 * 60 * 1000 &&
-            storedNews
-        ) {
-            news = JSON.parse(storedNews);
+        const response = await fetch(apiUrl);
+        const data = await response.json();
 
-        } else {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
+        let save5latestNews = [];
 
-            // news = data.articles;
+        let counter = 0;
 
-            let save5latestNews = [];
-
-            let counter = 0;
-
-            if (data.articles) {
-                for (const article of data.articles) {
-                    if (counter === 5) {
-                        break;
-                    }
-                    save5latestNews.push(article);
-                    counter++;
+        if (data.articles) {
+            for (const article of data.articles) {
+                if (counter === 5) {
+                    break;
                 }
-                news = save5latestNews;
-
-                const lastUpdatesNews = Date.now();
-
-                localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
-                localStorage.setItem('news', JSON.stringify(news));
+                save5latestNews.push(article);
+                counter++;
             }
+            news = save5latestNews;
 
+            const lastUpdatesNews = Date.now();
+
+            localStorage.setItem('lastUpdatedNews', lastUpdatesNews.toString());
+            localStorage.setItem('news', JSON.stringify(news));
+
+            await renderNews(); // Uppdatera nyhetslistan efter att nyheterna har hämtats och sparats
         }
     } catch (error) {
         console.log(error);
