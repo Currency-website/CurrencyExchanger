@@ -30,8 +30,10 @@ main {
     border-radius: 5px;
     /* Runda hörnen för en mjukare look */
     font-weight: lighter;
-    font-size: 25px;
+    font-size: 20px;
+    line-height: 1em;
     font-family: "Roboto", sans-serif !important;
+    text-align: center;
     /* Använd en sans-serif font-family för en modern stil */
 }
 
