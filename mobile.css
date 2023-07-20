@@ -210,8 +210,14 @@
     font-size: 12px !important;
 }
 
+.chart-div{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 #chartContainer {
-    height: 100px !important;
+    margin: 5px;
+    height: 120px !important;
     max-width: 100%;
 }
 
