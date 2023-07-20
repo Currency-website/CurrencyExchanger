@@ -331,5 +331,5 @@ input[type="number"]::-webkit-outer-spin-button {
 
 #chartContainer {
     height: 300px !important;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 10px);
 }
