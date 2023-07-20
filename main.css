@@ -6,6 +6,7 @@ main {
     flex-direction: column;
     height: auto;
     border-top: 2px solid rgba(48, 48, 48, 0.957);
+    width: 100%;
 }
 
 .input-container {
@@ -322,16 +323,13 @@ input[type="number"]::-webkit-outer-spin-button {
 .news-links, .marketStatusLinks{
     color: white;
 }
-
-/* .chart-div {
+.chart-div {
     display: flex;
     justify-content: center;
     align-content: center;
-} */
+}
 
-#chartContainer{
-    /* height: 250px !important;
-    width: 100%; */
-    margin-bottom: 20px !important;
-    margin-top: 20px !important;
+#chartContainer {
+    height: 300px !important;
+    max-width: calc(100% - 40px);
 }
