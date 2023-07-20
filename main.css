@@ -8,6 +8,25 @@ main {
     border-top: 2px solid rgba(48, 48, 48, 0.957);
     width: 100%;
 }
+.h1-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.page-title {
+    color: transparent; /* Gör den befintliga texten osynlig */
+    background-image: url('gold.jpg'); /* Ange sökvägen till din bild */
+    background-clip: text; /* Använd text som klipplats för bakgrundsbilden */
+    -webkit-background-clip: text; /* För äldre webbläsare som stöder det */
+    padding: 5px 10px; /* Lägg till lite utrymme runt texten för estetik */
+    border-radius: 5px; /* Runda hörnen för en mjukare look */
+    font-weight: lighter;
+    font-size: 25px;
+    font-family: "Roboto", sans-serif !important; /* Använd en sans-serif font-family för en modern stil */
+}
+
+
 
 .input-container {
     margin-top: 50px;
