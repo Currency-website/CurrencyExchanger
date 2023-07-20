@@ -22,7 +22,7 @@
     margin-top: 10px;
 }
 .page-title {
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
 }
 
@@ -163,7 +163,6 @@
 }
 
 .three-div-container {
-    padding: 5px;
     margin-bottom: 15px;
     margin-top: 15px;
 }
@@ -179,7 +178,6 @@
     max-width: 250px;
     margin-left: 5px;
     font-size: 10px;
-    /* padding: 15px 20px; */
    max-height: 50px;
 }
 
