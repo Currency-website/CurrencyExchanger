@@ -30,13 +30,15 @@ main {
     border-radius: 5px;
     /* Runda hörnen för en mjukare look */
     font-weight: lighter;
-    font-size: 25px;
+    font-size: 20px;
+    line-height: 1em;
     font-family: "Roboto", sans-serif !important;
+    text-align: center;
     /* Använd en sans-serif font-family för en modern stil */
 }
 
 .input-container {
-    margin-top: 50px;
+    margin-top: 35px;
 }
 
 .dropdown-container,
@@ -307,7 +309,7 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: column;
     font-family: Phantomsans, sans-serif;
     font-size: 20px;
-    line-height: 1em;
+    line-height: 1.2em;
     padding: 19px 24px;
     text-decoration: none;
     user-select: none;
