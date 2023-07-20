@@ -58,7 +58,7 @@ async function renderSwedenOpenHours() {
     let marketOpenHours = document.createElement("li");
     let marketHolidaysTitle = document.createElement("li");
 
-    marketStatusLi.textContent = `Stockholmsbörsen just nu: ${isStockExchangeOpenNow.result}`;
+    marketStatusLi.textContent = `Just nu: ${isStockExchangeOpenNow.result}`;
     marketOpenHours.textContent = `Öppettider: vardagar 9-17:30`;
 
     marketStatusUl.appendChild(marketStatusLi);
