@@ -1,4 +1,5 @@
 import config from './config.js';
+import { currencyFlagsToCurrencyName } from './staticArrays.js';
 
 let currencyNames = [];
 let cryptoCurrencyNames = [];
@@ -15,6 +16,7 @@ export async function initCurrencyExchanger() {
     const inputElementFrom = document.querySelector('#input-from');
     inputElementFrom.value = 100;
     await getAllCurrenciesAndNames();
+    console.log(currencyNames);
 }
 
 export async function addEventListenersForCurrencyExchanger() {
@@ -517,15 +519,14 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
             optionElement.setAttribute("data-currency-code", currencyName);
 
             optionElement.value = currencyName;
-            // optionElement.text = currencyName;
 
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === currencyName);
 
-
-            if (currencyName === "SEK") {
+            if (currencyEntry) {
                 const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 flagImage.classList.add("flag-icon");
-                flagImage.innerHTML = `<use xlink:href="Flags/${currencyName}.svg#flag-icons-se"></use>`;
-                
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
                 optionElement.appendChild(flagImage);
             }
 
@@ -558,7 +559,18 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", currencyName);
             optionElement.value = currencyName;
-            optionElement.text = currencyName;
+
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === currencyName);
+
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(currencyName));
 
             dropdownDiv.prepend(optionElement);
 
