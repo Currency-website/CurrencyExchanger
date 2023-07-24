@@ -531,7 +531,6 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
             }
 
             optionElement.appendChild(document.createTextNode(currencyName));
-            dropdownDiv.appendChild(optionElement);
 
             dropdownDiv.appendChild(optionElement);
 
@@ -542,7 +541,19 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            optionElement.text = code;
+            
+            
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
+
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(code));
 
             dropdownDiv.appendChild(optionElement);
 
@@ -580,8 +591,18 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            optionElement.text = code;
+            
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
 
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(code));
             dropdownDiv.prepend(optionElement);
 
         });
