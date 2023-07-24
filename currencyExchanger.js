@@ -365,15 +365,15 @@ async function getAllCurrenciesAndNames() {
             const currencyRates = data.data;
             const foundCurrencyNames = Object.keys(currencyRates);
 
-            for (const name of foundCurrencyNames){
-                if (name == "ADA" || name == "AVAX" || name == "BNB" || name == "BTC" 
-                || name == "DAI" || name == "DOT" || name == "ETH" || name == "MATIC" 
-                || name == "LTC" || name == "SOL" || name == "XRP"|| name == "BUSD"
-                || name == "USDT" || name =="ARB"){
+            for (const name of foundCurrencyNames) {
+                if (name == "ADA" || name == "AVAX" || name == "BNB" || name == "BTC"
+                    || name == "DAI" || name == "DOT" || name == "ETH" || name == "MATIC"
+                    || name == "LTC" || name == "SOL" || name == "XRP" || name == "BUSD"
+                    || name == "USDT" || name == "ARB") {
 
                     cryptoCurrencyNames.push(name);
                 }
-                else{
+                else {
                     currencyNames.push(name);
                 }
             }
@@ -469,9 +469,8 @@ async function getAllCurrencysWithBase(currencyCode, isCrypto = false) {
         for (const currencyCode in currencyRates) {
             if (currencyRates.hasOwnProperty(currencyCode)) {
                 //om det inte är krypto - ta bara med om currencyCode matchar namnen i currencyNames
-                if (!isCrypto || isCrypto === undefined ){
-                    if(currencyNames.includes(currencyCode))
-                    {
+                if (!isCrypto || isCrypto === undefined) {
+                    if (currencyNames.includes(currencyCode)) {
                         const currency = {
                             code: currencyCode,
                             rate: currencyRates[currencyCode].value
@@ -516,8 +515,22 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
         currencyNames.forEach(currencyName => {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", currencyName);
+
             optionElement.value = currencyName;
-            optionElement.text = currencyName;
+            // optionElement.text = currencyName;
+
+
+
+            if (currencyName === "SEK") {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyName}.svg#flag-icons-se"></use>`;
+                
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(currencyName));
+            dropdownDiv.appendChild(optionElement);
 
             dropdownDiv.appendChild(optionElement);
 

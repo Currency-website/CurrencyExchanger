@@ -134,6 +134,12 @@ input[type="number"]::-webkit-outer-spin-button {
     display: none;
 }
 
+.flag-icon{
+    max-height: 1em;
+    max-width: 1em;
+    margin-right: 1em;
+}
+
 .show-dropdown {
     position: absolute;
     display: block;
