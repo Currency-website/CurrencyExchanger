@@ -1,4 +1,5 @@
 import config from './config.js';
+import { currencyFlagsToCurrencyName } from './staticArrays.js';
 
 let currencyNames = [];
 let cryptoCurrencyNames = [];
@@ -15,6 +16,7 @@ export async function initCurrencyExchanger() {
     const inputElementFrom = document.querySelector('#input-from');
     inputElementFrom.value = 100;
     await getAllCurrenciesAndNames();
+    console.log(currencyNames);
 }
 
 export async function addEventListenersForCurrencyExchanger() {
@@ -365,15 +367,15 @@ async function getAllCurrenciesAndNames() {
             const currencyRates = data.data;
             const foundCurrencyNames = Object.keys(currencyRates);
 
-            for (const name of foundCurrencyNames){
-                if (name == "ADA" || name == "AVAX" || name == "BNB" || name == "BTC" 
-                || name == "DAI" || name == "DOT" || name == "ETH" || name == "MATIC" 
-                || name == "LTC" || name == "SOL" || name == "XRP"|| name == "BUSD"
-                || name == "USDT" || name =="ARB"){
+            for (const name of foundCurrencyNames) {
+                if (name == "ADA" || name == "AVAX" || name == "BNB" || name == "BTC"
+                    || name == "DAI" || name == "DOT" || name == "ETH" || name == "MATIC"
+                    || name == "LTC" || name == "SOL" || name == "XRP" || name == "BUSD"
+                    || name == "USDT" || name == "ARB") {
 
                     cryptoCurrencyNames.push(name);
                 }
-                else{
+                else {
                     currencyNames.push(name);
                 }
             }
@@ -469,9 +471,8 @@ async function getAllCurrencysWithBase(currencyCode, isCrypto = false) {
         for (const currencyCode in currencyRates) {
             if (currencyRates.hasOwnProperty(currencyCode)) {
                 //om det inte är krypto - ta bara med om currencyCode matchar namnen i currencyNames
-                if (!isCrypto || isCrypto === undefined ){
-                    if(currencyNames.includes(currencyCode))
-                    {
+                if (!isCrypto || isCrypto === undefined) {
+                    if (currencyNames.includes(currencyCode)) {
                         const currency = {
                             code: currencyCode,
                             rate: currencyRates[currencyCode].value
@@ -516,8 +517,20 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
         currencyNames.forEach(currencyName => {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", currencyName);
+
             optionElement.value = currencyName;
-            optionElement.text = currencyName;
+
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === currencyName);
+
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(currencyName));
 
             dropdownDiv.appendChild(optionElement);
 
@@ -528,7 +541,19 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            optionElement.text = code;
+            
+            
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
+
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(code));
 
             dropdownDiv.appendChild(optionElement);
 
@@ -545,7 +570,18 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", currencyName);
             optionElement.value = currencyName;
-            optionElement.text = currencyName;
+
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === currencyName);
+
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(currencyName));
 
             dropdownDiv.prepend(optionElement);
 
@@ -555,8 +591,18 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            optionElement.text = code;
+            
+            const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
 
+            if (currencyEntry) {
+                const flagImage = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                flagImage.classList.add("flag-icon");
+                flagImage.innerHTML = `<use xlink:href="Flags/${currencyEntry.flag}.svg#flag-icons-${currencyEntry.flag}"></use>`;
+
+                optionElement.appendChild(flagImage);
+            }
+
+            optionElement.appendChild(document.createTextNode(code));
             dropdownDiv.prepend(optionElement);
 
         });
