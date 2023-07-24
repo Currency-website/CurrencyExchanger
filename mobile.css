@@ -90,17 +90,20 @@
 
 .show-dropdown {
     border-radius: 8px;
-    padding: 12px 16px;
+    padding-top: 1em;
     font-size: 15px;
     line-height: 1em;
     max-height: calc(200px);
-    min-width: 50px;
+    min-width: 4em;
 }
 
 .show-dropdown a {
-    min-width: 50px;
+    min-width: auto;
+    max-width: 4em;
+    white-space: nowrap;
     font-size: 15px;
 }
+
 
 .dropdown-input-to,
 .dropdown-input-from {
