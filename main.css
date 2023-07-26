@@ -71,8 +71,8 @@ main {
     justify-content: center;
     line-height: 1em;
     max-width: 100%;
-    min-width: 6em;
-    padding: 1.0em 1.2em;
+    min-width: 4em;
+    padding: 1.0em 0em;
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
@@ -80,6 +80,21 @@ main {
     white-space: nowrap;
     cursor: pointer;
     text-align: center;
+    display: flex;
+}
+
+.input-from-container, .input-to-container{
+    display: flex;
+    align-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    border-radius: 8px;
+    background-image: linear-gradient(144deg, #201926, #433b81 50%, #2d53bd);
+}
+
+
+.searchdiv {
+    background-color: #44a863;
 }
 
 .input-div {
@@ -105,7 +120,7 @@ input:focus {
 
 .dropdown-div-from,
 .dropdown-div-to {
-    padding: 5px 35px 55px;
+    padding: 0.3125em 2.1875em 3.125em;
     z-index: 1;
 }
 
@@ -114,8 +129,8 @@ input:focus {
     opacity: 0.8;
     border-radius: 8px;
     max-width: 100%;
-    min-width: 6em;
-    padding: 1.0em 1.2em;
+    min-width: 4em;
+    /* padding: 1.0em 1.2em; */
     font-size: 20px;
     justify-content: center;
     line-height: 1em;
@@ -140,6 +155,13 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-right: 1em;
 }
 
+.fa-search{
+    max-height: 2em;
+    max-width: 2em;
+    margin-right: 1em;
+    padding: 1em 1em;
+    color: #FFFFFF;
+}
 .show-dropdown {
     position: absolute;
     display: block;
@@ -289,7 +311,7 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-bottom: 20px;
-  }
+}
 
 .present-news-div {
     background-image: url('stock1.png');

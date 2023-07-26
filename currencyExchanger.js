@@ -130,6 +130,15 @@ function searchInDropdownFrom() {
     const dropdownInputFrom = document.querySelector('.dropdown-input-from');
     const formElement = document.querySelector('main');
 
+    const searchIconFrom = document.querySelector("#search-icon-from");
+    const inputFrom = document.querySelector(".dropdown-input-from");
+    searchIconFrom.addEventListener("click", function () {
+        inputFrom.disabled = false; // Aktivera input-fältet
+        inputFrom.value = ""; // Töm input-fältet
+        inputFrom.removeAttribute("disabled");
+        inputFrom.focus();
+    });
+
     formElement.addEventListener('submit', async (event) => {
         event.preventDefault();
     });
@@ -157,6 +166,15 @@ function searchInDropdownTo() {
     const dropdownChoicesTo = document.querySelector('#dropdown-choices-to');
     const dropdownInputTo = document.querySelector('.dropdown-input-to');
     const formElement = document.querySelector('main');
+
+    const searchIconTo = document.querySelector("#search-icon-to");
+    const inputTo = document.querySelector(".dropdown-input-to");
+    searchIconTo.addEventListener("click", function () {
+        inputTo.disabled = false; // Aktivera input-fältet
+        inputTo.value = ""; // Töm input-fältet
+        inputTo.removeAttribute("disabled");
+        inputTo.focus();
+    });
 
     formElement.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -495,16 +513,40 @@ function renderButtons() {
     const dropdownDivFrom = document.querySelector(".dropdown-div-from");
     const dropdownDivTo = document.querySelector(".dropdown-div-to");
 
+    const fromInputContainer = document.createElement("div");
+    fromInputContainer.classList.add("input-from-container");
+
+    const fromSearchIcon = document.createElement("i");
+    fromSearchIcon.classList.add("fas", "fa-search");
+    fromSearchIcon.setAttribute("id", "search-icon-from");
+
     const fromInput = document.createElement('input');
     fromInput.classList.add("dropdown-input-from");
     fromInput.value = "SEK";
+    //sätt att man inte kan fylla i något som default förrän man trycker på sök
+    fromInput.setAttribute("disabled", "disabled");
+
+    fromInputContainer.appendChild(fromInput);
+    fromInputContainer.appendChild(fromSearchIcon);
+
+    const toInputContainer = document.createElement("div");
+    toInputContainer.classList.add("input-to-container");
+
+    const toSearchIcon = document.createElement("i");
+    toSearchIcon.classList.add("fas", "fa-search");
+    toSearchIcon.setAttribute("id", "search-icon-to");
 
     const toInput = document.createElement('input');
     toInput.classList.add("dropdown-input-to");
     toInput.value = "USD";
 
-    dropdownDivFrom.appendChild(fromInput);
-    dropdownDivTo.appendChild(toInput);
+    toInput.setAttribute("disabled", "disabled");
+
+    toInputContainer.appendChild(toInput);
+    toInputContainer.appendChild(toSearchIcon);
+
+    dropdownDivFrom.appendChild(fromInputContainer);
+    dropdownDivTo.appendChild(toInputContainer);
 
 }
 
@@ -541,8 +583,8 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            
-            
+
+
             const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
 
             if (currencyEntry) {
@@ -591,7 +633,7 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            
+
             const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
 
             if (currencyEntry) {
