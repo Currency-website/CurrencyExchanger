@@ -495,16 +495,34 @@ function renderButtons() {
     const dropdownDivFrom = document.querySelector(".dropdown-div-from");
     const dropdownDivTo = document.querySelector(".dropdown-div-to");
 
+    const fromInputContainer = document.createElement("div");
+    fromInputContainer.classList.add("input-from-container");
+
+    const fromSearchIcon = document.createElement("i");
+    fromSearchIcon.classList.add("fas", "fa-search");    
+
     const fromInput = document.createElement('input');
     fromInput.classList.add("dropdown-input-from");
     fromInput.value = "SEK";
+
+    fromInputContainer.appendChild(fromInput);
+    fromInputContainer.appendChild(fromSearchIcon);
+
+    const toInputContainer = document.createElement("div");
+    toInputContainer.classList.add("input-to-container");
+
+    const toSearchIcon = document.createElement("i");
+    toSearchIcon.classList.add("fas", "fa-search");    
 
     const toInput = document.createElement('input');
     toInput.classList.add("dropdown-input-to");
     toInput.value = "USD";
 
-    dropdownDivFrom.appendChild(fromInput);
-    dropdownDivTo.appendChild(toInput);
+    toInputContainer.appendChild(toInput);
+    toInputContainer.appendChild(toSearchIcon);
+
+    dropdownDivFrom.appendChild(fromInputContainer);
+    dropdownDivTo.appendChild(toInputContainer);
 
 }
 
@@ -541,8 +559,8 @@ function renderDropdownElementsFromButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            
-            
+
+
             const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
 
             if (currencyEntry) {
@@ -591,7 +609,7 @@ function renderDropdownElementsToButton(listOfSpecificCodes = null) {
             const optionElement = document.createElement("a");
             optionElement.setAttribute("data-currency-code", code);
             optionElement.value = code;
-            
+
             const currencyEntry = currencyFlagsToCurrencyName.find(entry => entry.code === code);
 
             if (currencyEntry) {
