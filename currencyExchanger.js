@@ -48,21 +48,35 @@ function addEventListenerForShowingDropdown() {
     const dropdownInputFrom = document.querySelector('.dropdown-input-from');
     const dropdownInputTo = document.querySelector('.dropdown-input-to');
 
+    const fromInputContainer = document.querySelector(".input-from-container");
+
     let isDropdownOpen = false; // Håller reda på om dropdownen är öppen
 
-    dropdownInputFrom.addEventListener('click', () => {
-        dropdownInputFrom.value = "";
-        renderDropdownElementsFromButton();
-        dropdownChoicesFrom.classList.add('show-dropdown');
-        isDropdownOpen = true;
+    fromInputContainer.addEventListener('mousedown', (event) => {
+        // Förhindra att input-fältet får fokus och därmed förhindra att det går att skriva
+        event.preventDefault();
+
+        // Öppna dropdown om den är stängd
+        if (!isDropdownOpen) {
+            renderDropdownElementsFromButton();
+            dropdownChoicesFrom.classList.add('show-dropdown');
+            isDropdownOpen = true;
+        }
     });
 
-    dropdownInputTo.addEventListener('click', () => {
-        dropdownInputTo.value = "";
-        renderDropdownElementsToButton();
-        dropdownChoicesTo.classList.add('show-dropdown');
-        isDropdownOpen = true;
+    const toInputContainer = document.querySelector(".input-to-container");
+    toInputContainer.addEventListener('mousedown', (event) => {
+        // Förhindra att input-fältet får fokus och därmed förhindra att det går att skriva
+        event.preventDefault();
+
+        // Öppna dropdown om den är stängd
+        if (!isDropdownOpen) {
+            renderDropdownElementsToButton();
+            dropdownChoicesTo.classList.add('show-dropdown');
+            isDropdownOpen = true;
+        }
     });
+
 
     dropdownInputFrom.addEventListener('blur', (event) => {
         if (!isMouseOverDropdown(event)) {
@@ -106,7 +120,7 @@ function addEventListenerForWhenChoosingCurrencyFrom() {
     dropdownChoicesFrom.addEventListener('click', (event) => {
         const chosenCurrency = event.target.getAttribute("data-currency-code"); // Hämta vald valutakod från attribut
         const dropdownInputFrom = document.querySelector('.dropdown-input-from');
-        dropdownInputFrom.value = chosenCurrency;
+        dropdownInputFrom.value = chosenCurrency ?? "SEK";
         dropdownChoicesFrom.classList.remove('show-dropdown'); // Ta bort klassen efter valet
     });
 }
@@ -524,7 +538,7 @@ function renderButtons() {
     fromInput.classList.add("dropdown-input-from");
     fromInput.value = "SEK";
     //sätt att man inte kan fylla i något som default förrän man trycker på sök
-    fromInput.setAttribute("disabled", "disabled");
+    fromInput.disabled = true;
 
     fromInputContainer.appendChild(fromInput);
     fromInputContainer.appendChild(fromSearchIcon);
@@ -540,7 +554,7 @@ function renderButtons() {
     toInput.classList.add("dropdown-input-to");
     toInput.value = "USD";
 
-    toInput.setAttribute("disabled", "disabled");
+    toInput.disabled = true;
 
     toInputContainer.appendChild(toInput);
     toInputContainer.appendChild(toSearchIcon);
