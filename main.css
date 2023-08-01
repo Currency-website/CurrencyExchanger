@@ -67,7 +67,7 @@ main {
     color: #FFFFFF;
     display: flex;
     font-family: Phantomsans, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     justify-content: center;
     line-height: 1em;
     max-width: 100%;
@@ -131,7 +131,7 @@ input:focus {
     max-width: 100%;
     min-width: 4em;
     /* padding: 1.0em 1.2em; */
-    font-size: 20px;
+    font-size: 18px;
     justify-content: center;
     line-height: 1em;
     text-decoration: none;
@@ -173,7 +173,7 @@ input[type="number"]::-webkit-outer-spin-button {
     max-width: 100%;
     min-width: 14.5em;
     padding: 1.0em 1.2em;
-    font-size: 20px;
+    font-size: 18px;
     justify-content: center;
     line-height: 1em;
     border-radius: 8px;
@@ -230,20 +230,20 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: space-between;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 1em;
+    border-radius: 1em;
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 2em;
 }
 
 .currency-stats h2 {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 .currency-stats p {
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .strongest-currency,
@@ -342,25 +342,25 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
     flex-direction: column;
     font-family: Phantomsans, sans-serif;
-    font-size: 20px;
-    line-height: 1.2em;
-    padding: 19px 24px;
-    margin: 10px;
+    font-size: 10px;
+    /* line-height: 1.8em; */
+    padding: 0.8em 1em;
+    margin: 0.5em;
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     text-align: center;
     overflow: auto;
-    max-height: 300px;
-    max-width: 500px;
+    max-height: 30em;
+    max-width: 35em;
 }
 
 .present-news-div p,
 .present-currencies-div p,
 .present-marketstatus-div p {
     padding: 10px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #news-list,
@@ -386,7 +386,7 @@ input[type="number"]::-webkit-outer-spin-button {
     list-style: none;
     margin: 10px;
     padding: 10px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .news-links,
@@ -399,10 +399,10 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
     justify-content: center;
     align-content: center;
-    max-height: 300px;
-    margin-top: 20px;
+    max-height: 10em;
+    margin-top: 1em;
     /* Lägg till en margin-top för att skapa avstånd från element ovanför */
-    margin-bottom: 20px;
+    margin-bottom: 2em;
     /* Lägg till en margin-bottom för att skapa avstånd från element nedanför */
     background-color: rgba(53, 53, 53, 0.2);
     /* Bakgrundsfärg med 20% opacitet (eller den önskade effekten) */
@@ -418,15 +418,17 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .canvasjs-chart-canvas {
     width: 100% !important;
-    height: 300px;
+    max-height: 10em;
     position: absolute;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     cursor: default;
+    
 }
 
+  
 #chartContainer {
-    height: 300px;
+    max-height: 10em;
     /* Ange den önskade höjden för chartContainer */
     position: relative !important;
     width: calc(100% - 20px);

@@ -2,15 +2,16 @@ import config from './config.js';
 
 export async function initChartRendering() {
     await renderChart();
-    // const downloadbtn = document.querySelector(".download-btn");
-    // downloadbtn.addEventListener("click", fetchDataAndSaveToFile);
+  
+    // await fetchDataAndSaveToFile();
 }
 
 async function fetchDataAndSaveToFile() {
     const todaysDate = new Date();
     const sixMonthsAgoDate = new Date(todaysDate.getFullYear(), todaysDate.getMonth() - 6, todaysDate.getDate());
+    const ontMonthAgo = new Date(todaysDate.getFullYear(), todaysDate.getMonth() - 1, todaysDate.getDate());
   
-    const currentDate = new Date(sixMonthsAgoDate);
+     const currentDate = new Date(ontMonthAgo);
     const data = [];
   
     while (currentDate <= todaysDate) {
@@ -166,14 +167,15 @@ async function renderChart() {
           includeZero: false
         },
         data: [{
-          type: "line", // Ändra typen till "line"
+          type: "line",
+          color: "rgb(174, 217, 224)", // Ändra typen till "line"
           dataPoints: dataset.map(data => ({
             x: data.x,
             y: data.y // Använd hela objektet som y-värdet
           }))
         }]
       });
-  
+
       chart.render();
     }
     catch (error) {
