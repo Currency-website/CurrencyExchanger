@@ -908,5 +908,100 @@
         "date": "2023-07-12",
         "currencyCode": "SEK",
         "value": 10.3711264067
+    },
+    {
+        "date": "2023-07-13",
+        "currencyCode": "SEK",
+        "value": 10.2042053054
+    },
+    {
+        "date": "2023-07-14",
+        "currencyCode": "SEK",
+        "value": 10.1325541807
+    },
+    {
+        "date": "2023-07-15",
+        "currencyCode": "SEK",
+        "value": 10.151126765
+    },
+    {
+        "date": "2023-07-16",
+        "currencyCode": "SEK",
+        "value": 10.2376460343
+    },
+    {
+        "date": "2023-07-17",
+        "currencyCode": "SEK",
+        "value": 10.2457468093
+    },
+    {
+        "date": "2023-07-18",
+        "currencyCode": "SEK",
+        "value": 10.2080414645
+    },
+    {
+        "date": "2023-07-19",
+        "currencyCode": "SEK",
+        "value": 10.2746564171
+    },
+    {
+        "date": "2023-07-20",
+        "currencyCode": "SEK",
+        "value": 10.3494167631
+    },
+    {
+        "date": "2023-07-21",
+        "currencyCode": "SEK",
+        "value": 10.2148411389
+    },
+    {
+        "date": "2023-07-22",
+        "currencyCode": "SEK",
+        "value": 10.396405447
+    },
+    {
+        "date": "2023-07-23",
+        "currencyCode": "SEK",
+        "value": 10.4224160435
+    },
+    {
+        "date": "2023-07-24",
+        "currencyCode": "SEK",
+        "value": 10.4089766056
+    },
+    {
+        "date": "2023-07-25",
+        "currencyCode": "SEK",
+        "value": 10.3739165162
+    },
+    {
+        "date": "2023-07-26",
+        "currencyCode": "SEK",
+        "value": 10.4048419447
+    },
+    {
+        "date": "2023-07-27",
+        "currencyCode": "SEK",
+        "value": 10.5099811213
+    },
+    {
+        "date": "2023-07-28",
+        "currencyCode": "SEK",
+        "value": 10.5464162636
+    },
+    {
+        "date": "2023-07-29",
+        "currencyCode": "SEK",
+        "value": 10.5464165415
+    },
+    {
+        "date": "2023-07-30",
+        "currencyCode": "SEK",
+        "value": 10.5327265445
+    },
+    {
+        "date": "2023-07-31",
+        "currencyCode": "SEK",
+        "value": 10.5186218667
     }
 ]

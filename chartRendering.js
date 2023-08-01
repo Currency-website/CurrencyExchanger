@@ -2,15 +2,16 @@ import config from './config.js';
 
 export async function initChartRendering() {
     await renderChart();
-    // const downloadbtn = document.querySelector(".download-btn");
-    // downloadbtn.addEventListener("click", fetchDataAndSaveToFile);
+  
+    // await fetchDataAndSaveToFile();
 }
 
 async function fetchDataAndSaveToFile() {
     const todaysDate = new Date();
     const sixMonthsAgoDate = new Date(todaysDate.getFullYear(), todaysDate.getMonth() - 6, todaysDate.getDate());
+    const ontMonthAgo = new Date(todaysDate.getFullYear(), todaysDate.getMonth() - 1, todaysDate.getDate());
   
-    const currentDate = new Date(sixMonthsAgoDate);
+     const currentDate = new Date(ontMonthAgo);
     const data = [];
   
     while (currentDate <= todaysDate) {
