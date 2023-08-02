@@ -3,6 +3,7 @@ import { currencyFlagsToCurrencyName } from './staticArrays.js';
 
 let currencyNames = [];
 let cryptoCurrencyNames = [];
+let rawMaterialsCurrencyNames = [];
 let currencys = [];
 let lastUpdatedCurrencies = null;
 
@@ -40,6 +41,17 @@ export async function addEventListenersForCurrencyExchanger() {
     await showTheStrongestAndWeakestCurrencys("USD");
     await calculateExchange();
     await addEventListenerForWhenSubmittingValue();
+
+    const revertArrowsBtn = document.querySelector(".arrows-convert-btn");
+
+    revertArrowsBtn.addEventListener("click", async function() {
+      // Kör funktionen revertFromAndToCurrencys när klickhändelsen inträffar
+      revertFromAndToCurrencys();
+      
+      // Kör calculateExchange() asynkront efter revertFromAndToCurrencys är klar
+      await calculateExchange();
+    });
+    
 }
 
 function addEventListenerForShowingDropdown() {
@@ -133,6 +145,20 @@ function addEventListenerForWhenChoosingCurrencyTo() {
         dropdownInputto.value = chosenCurrency;
         dropdownChoicesTo.classList.remove('show-dropdown'); // Ta bort klassen efter valet
     });
+}
+
+function revertFromAndToCurrencys() {
+    const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+    const fromValue = dropdownInputFrom.value;
+
+    const dropdownInputTo = document.querySelector('.dropdown-input-to');
+    const toValue = dropdownInputTo.value;
+
+    dropdownInputFrom.value = "";
+    dropdownInputFrom.value = toValue;
+
+    dropdownInputTo.value = "";
+    dropdownInputTo.value = fromValue;
 }
 
 function validateCurrencyName(currencyName) {
@@ -354,7 +380,6 @@ async function showTheStrongestAndWeakestCurrencys(baseCode = null) {
     weakestNameP.textContent = strongestAndWeakestCurrencys.weakest.code;
     weakestRateP.textContent = strongestAndWeakestCurrencys.weakest.rate;
 }
-
 async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     let strongest;
     let weakest;
@@ -367,13 +392,13 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     for (const currency of allCurrencys) {
         if (!strongest || currency.rate < strongest.rate) {
             strongest = currency;
-        }
-        else if (!weakest || currency.rate > weakest.rate) {
+        } else if (!weakest || currency.rate > weakest.rate) {
             weakest = currency;
         }
     }
     return { strongest, weakest };
 }
+
 
 async function getAllCurrenciesAndNames() {
     const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
@@ -406,6 +431,9 @@ async function getAllCurrenciesAndNames() {
                     || name == "USDT" || name == "ARB") {
 
                     cryptoCurrencyNames.push(name);
+                }
+                else if (name == "XAG" || name == "XAU" || name == "XPD" || name == "XPT") {
+                    rawMaterialsCurrencyNames.push(name);
                 }
                 else {
                     currencyNames.push(name);

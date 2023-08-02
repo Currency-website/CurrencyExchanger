@@ -116,12 +116,30 @@ input:focus {
     font-size: 30px;
     opacity: 0.6;
     color: #ffffff;
+    padding: 0em 0.3em 0em;
 }
 
 .dropdown-div-from,
 .dropdown-div-to {
     padding: 0.3125em 2.1875em 3.125em;
     z-index: 1;
+}
+
+.arrows-convert-div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.3125em 0em 3.125em;
+    z-index: 1;
+}
+.arrows-convert-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 20px;
 }
 
 #input-from,

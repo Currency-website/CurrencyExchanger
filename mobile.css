@@ -31,7 +31,7 @@
     margin-top: 0.6em !important;
   }
   
-  .input-to,
+  /* .input-to,
   .input-from,
   .dropdown-input-from,
   .dropdown-input-to {
@@ -39,9 +39,9 @@
     font-size: 0.9375em;
     line-height: 0.8em;
     max-width: 100%;
-    min-width: 5em;
     padding: 0.625em 0.9375em;
-  }
+  } */
+
   
   .input-container input {
     padding: 1.25em;
@@ -79,6 +79,11 @@
     font-size: 0.9375em;
     line-height: 1em;
   }
+
+  #input-from,
+  #input-to{
+    min-width: 9.125em !important;
+  }
   
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 3;
@@ -95,7 +100,7 @@
 
 .show-dropdown a {
     min-width: auto;
-    max-width: 4em;
+    max-width: 6em;
     white-space: nowrap;
     font-size: 15px;
 }
@@ -103,16 +108,30 @@
   
   .dropdown-input-to,
   .dropdown-input-from {
-    width: 6.25em;
+    width: 6.5em;
   }
   
+
+  .arrows-convert-div{
+    padding: 0.3125em 0.25em 1.2em;
+}
+.arrows-convert-btn{
+  font-size: 15px;
+}
+
+.arrow-div {
+  padding: 0em 0em 0em;
+  font-size: 18px;
+}
+
+
   .dropdown-input-to,
   .dropdown-input-from a {
-    width: 6.25em;
+    width: 6.5em;
   }
   
   .dropdown-wrapper {
-    width: 2.5em;
+    width: 3em;
   }
   
   .input-container {
@@ -148,16 +167,16 @@
   }
   
   .exclamation-weakest-popup-div {
-    top: 25.625em;
+    top: 65.625em;
     /* Justera detta värde för att ändra vertikal position */
-    left: 15em;
+    left: 45em;
     /* Justera detta värde för att ändra horisontell position */
   }
   
   .exclamation-strongest-popup-div {
-    top: 25.625em;
+    top: 65.625em;
     /* Justera detta värde för att ändra vertikal position */
-    left: 8.75em;
+    left: 15.75em;
     /* Justera detta värde för att ändra horisontell position */
   }
   
