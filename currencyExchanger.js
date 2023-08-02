@@ -3,6 +3,7 @@ import { currencyFlagsToCurrencyName } from './staticArrays.js';
 
 let currencyNames = [];
 let cryptoCurrencyNames = [];
+let rawMaterialsCurrencyNames = [];
 let currencys = [];
 let lastUpdatedCurrencies = null;
 
@@ -354,7 +355,6 @@ async function showTheStrongestAndWeakestCurrencys(baseCode = null) {
     weakestNameP.textContent = strongestAndWeakestCurrencys.weakest.code;
     weakestRateP.textContent = strongestAndWeakestCurrencys.weakest.rate;
 }
-
 async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     let strongest;
     let weakest;
@@ -367,13 +367,13 @@ async function getTheStrongestAndWeakestCurrency(baseCode = null) {
     for (const currency of allCurrencys) {
         if (!strongest || currency.rate < strongest.rate) {
             strongest = currency;
-        }
-        else if (!weakest || currency.rate > weakest.rate) {
+        } else if (!weakest || currency.rate > weakest.rate) {
             weakest = currency;
         }
     }
     return { strongest, weakest };
 }
+
 
 async function getAllCurrenciesAndNames() {
     const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${config.API_KEY}`;
@@ -406,6 +406,9 @@ async function getAllCurrenciesAndNames() {
                     || name == "USDT" || name == "ARB") {
 
                     cryptoCurrencyNames.push(name);
+                }
+                else if(name == "XAG" || name == "XAU" || name == "XPD" || name == "XPT"){
+                    rawMaterialsCurrencyNames.push(name);
                 }
                 else {
                     currencyNames.push(name);
