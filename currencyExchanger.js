@@ -41,6 +41,17 @@ export async function addEventListenersForCurrencyExchanger() {
     await showTheStrongestAndWeakestCurrencys("USD");
     await calculateExchange();
     await addEventListenerForWhenSubmittingValue();
+
+    const revertArrowsBtn = document.querySelector(".arrows-convert-btn");
+
+    revertArrowsBtn.addEventListener("click", async function() {
+      // Kör funktionen revertFromAndToCurrencys när klickhändelsen inträffar
+      revertFromAndToCurrencys();
+      
+      // Kör calculateExchange() asynkront efter revertFromAndToCurrencys är klar
+      await calculateExchange();
+    });
+    
 }
 
 function addEventListenerForShowingDropdown() {
@@ -134,6 +145,20 @@ function addEventListenerForWhenChoosingCurrencyTo() {
         dropdownInputto.value = chosenCurrency;
         dropdownChoicesTo.classList.remove('show-dropdown'); // Ta bort klassen efter valet
     });
+}
+
+function revertFromAndToCurrencys() {
+    const dropdownInputFrom = document.querySelector('.dropdown-input-from');
+    const fromValue = dropdownInputFrom.value;
+
+    const dropdownInputTo = document.querySelector('.dropdown-input-to');
+    const toValue = dropdownInputTo.value;
+
+    dropdownInputFrom.value = "";
+    dropdownInputFrom.value = toValue;
+
+    dropdownInputTo.value = "";
+    dropdownInputTo.value = fromValue;
 }
 
 function validateCurrencyName(currencyName) {
@@ -407,7 +432,7 @@ async function getAllCurrenciesAndNames() {
 
                     cryptoCurrencyNames.push(name);
                 }
-                else if(name == "XAG" || name == "XAU" || name == "XPD" || name == "XPT"){
+                else if (name == "XAG" || name == "XAU" || name == "XPD" || name == "XPT") {
                     rawMaterialsCurrencyNames.push(name);
                 }
                 else {
